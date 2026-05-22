@@ -10,13 +10,28 @@ find_comfyui_dir() {
     printf '%s\n' "${COMFYUI_DIR}"
     return 0
   fi
-  for candidate in /workspace/ComfyUI /workspace/comfyui /opt/ComfyUI /opt/comfyui /ComfyUI; do
+
+  for candidate in \
+    /opt/ComfyUI \
+    /workspace/ComfyUI \
+    /workspace/comfyui \
+    /comfyui \
+    /ComfyUI \
+    /app/ComfyUI; do
     if [[ -f "${candidate}/main.py" ]]; then
       printf '%s\n' "${candidate}"
       return 0
     fi
   done
-  find / -maxdepth 4 -name main.py -path "*/ComfyUI/main.py" -print -quit 2>/dev/null | xargs -r dirname
+
+  local found_main
+  found_main="$(find /opt /workspace /app /comfyui /ComfyUI -maxdepth 4 -type f -name main.py 2>/dev/null | head -n 1 || true)"
+  if [[ -n "${found_main}" ]]; then
+    dirname "${found_main}"
+    return 0
+  fi
+
+  return 1
 }
 
 COMFYUI_DIR="$(find_comfyui_dir)" || {
