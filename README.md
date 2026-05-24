@@ -1,6 +1,6 @@
 # RunPod Anima ComfyUI
 
-RunPod ComfyUI template for Anima / WAI-ANIMA image generation with the trained Siren Anima LoRAs.
+RunPod ComfyUI template for Anima / WAI-ANIMA image generation with reusable LoRA downloads.
 
 This image bakes only ComfyUI startup glue and downloader scripts. Large model files are downloaded into `/workspace/comfyui/models` at Pod startup so a persistent RunPod volume can reuse them.
 
@@ -58,6 +58,14 @@ Startup downloads:
 /workspace/comfyui/models/vae/qwen_image_vae.safetensors
 /workspace/comfyui/models/loras/anima/siren_anima_step-3500.safetensors
 /workspace/comfyui/models/loras/anima/siren_anima_step-4000.safetensors
+```
+
+Additional LoRAs can be added at Pod startup without rebuilding the Docker image. Put a small manifest in `EXTRA_MODEL_MANIFEST_JSON` or host it somewhere and set `EXTRA_MODEL_MANIFEST_URL`.
+
+Example for a future Velvet LoRA:
+
+```text
+EXTRA_MODEL_MANIFEST_JSON={"models":[{"name":"Velvet Anima LoRA","enabled":true,"required":false,"method":"curl","url":"https://huggingface.co/uwgm/nikke-loras/resolve/main/YOUR_VELVET_LORA.safetensors","path":"models/loras/anima/velvet_anima.safetensors","headers":{"Authorization":"Bearer ${HF_TOKEN}"},"min_bytes":1048576}]}
 ```
 
 ## ComfyUI

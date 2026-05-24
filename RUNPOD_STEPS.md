@@ -57,6 +57,12 @@ CIVITAI_TOKEN={{ RUNPOD_SECRET_CIVITAI_TOKEN }}
 COMFYUI_ARGS=--reserve-vram 3
 ```
 
+Optional extra LoRA manifest:
+
+```text
+EXTRA_MODEL_MANIFEST_JSON={"models":[{"name":"Velvet Anima LoRA","enabled":true,"required":false,"method":"curl","url":"https://huggingface.co/uwgm/nikke-loras/resolve/main/YOUR_VELVET_LORA.safetensors","path":"models/loras/anima/velvet_anima.safetensors","headers":{"Authorization":"Bearer ${HF_TOKEN}"},"min_bytes":1048576}]}
+```
+
 ## 4. Open ComfyUI
 
 Use RunPod Connect port `8188`.

@@ -48,6 +48,7 @@ WORKSPACE_DIR="${WORKSPACE_DIR:-/workspace/comfyui}"
 MODEL_ROOT="${MODEL_ROOT:-${WORKSPACE_DIR}}"
 CONFIG_DIR="${CONFIG_DIR:-/workspace/config}"
 MODEL_MANIFEST="${MODEL_MANIFEST:-${CONFIG_DIR}/anima-image-models.json}"
+EXTRA_MODEL_MANIFEST="${EXTRA_MODEL_MANIFEST:-${CONFIG_DIR}/extra-anima-image-models.json}"
 PORT="${PORT:-8188}"
 LISTEN="${LISTEN:-0.0.0.0}"
 
@@ -110,10 +111,35 @@ elif [[ ! -f "${MODEL_MANIFEST}" && -f /opt/runpod-anima-image/config/anima-imag
   cp /opt/runpod-anima-image/config/anima-image-models.json "${MODEL_MANIFEST}"
 fi
 
-if [[ "${DOWNLOAD_MODELS:-1}" == "1" && -f "${MODEL_MANIFEST}" ]]; then
-  "${PYTHON_BIN}" /opt/runpod-anima-image/scripts/download_models.py \
-    --manifest "${MODEL_MANIFEST}" \
-    --root "${MODEL_ROOT}"
+if [[ -n "${EXTRA_MODEL_MANIFEST_JSON:-}" ]]; then
+  printf '%s' "${EXTRA_MODEL_MANIFEST_JSON}" > "${EXTRA_MODEL_MANIFEST}"
+elif [[ -n "${EXTRA_MODEL_MANIFEST_URL:-}" ]]; then
+  "${PYTHON_BIN}" - "${EXTRA_MODEL_MANIFEST_URL}" "${EXTRA_MODEL_MANIFEST}" <<'PY'
+import pathlib
+import sys
+import urllib.request
+
+url, output = sys.argv[1], pathlib.Path(sys.argv[2])
+output.parent.mkdir(parents=True, exist_ok=True)
+request = urllib.request.Request(url, headers={"User-Agent": "runpod-anima-image-template"})
+with urllib.request.urlopen(request, timeout=60) as response:
+    output.write_bytes(response.read())
+PY
+fi
+
+if [[ "${DOWNLOAD_MODELS:-1}" == "1" ]]; then
+  if [[ -f "${MODEL_MANIFEST}" ]]; then
+    "${PYTHON_BIN}" /opt/runpod-anima-image/scripts/download_models.py \
+      --manifest "${MODEL_MANIFEST}" \
+      --root "${MODEL_ROOT}"
+  else
+    echo "No base model manifest found at ${MODEL_MANIFEST}."
+  fi
+  if [[ -f "${EXTRA_MODEL_MANIFEST}" ]]; then
+    "${PYTHON_BIN}" /opt/runpod-anima-image/scripts/download_models.py \
+      --manifest "${EXTRA_MODEL_MANIFEST}" \
+      --root "${MODEL_ROOT}"
+  fi
 else
   echo "Skipping model downloads."
 fi
