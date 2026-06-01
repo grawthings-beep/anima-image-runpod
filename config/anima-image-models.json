@@ -35,36 +35,36 @@
       "min_bytes": 10485760
     },
     {
-      "name": "Siren Anima LoRA step 3500",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/step-3500.safetensors",
-      "path": "models/loras/anima/siren_anima_step-3500.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576
-    },
-    {
-      "name": "Siren Anima LoRA step 4000",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/step-4000.safetensors",
-      "path": "models/loras/anima/siren_anima_step-4000.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576
-    },
-    {
       "name": "Mint Anima LoRA (trigger: m1nt)",
       "enabled": true,
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_lora.safetensors",
       "path": "models/loras/anima/mint_anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Eleg Anima LoRA (trigger: elegg)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/elegg_anima.safetensors",
+      "path": "models/loras/anima/elegg_anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Skin texture detail LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/%40skintextureV1%20(1).safetensors",
+      "path": "models/loras/anima/skintextureV1.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
