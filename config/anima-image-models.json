@@ -11,6 +11,18 @@
       "min_bytes": 104857600
     },
     {
+      "name": "BAS Better Anime Style Anima Base v1.0",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/BASBetterAnimeStyleAnimaBase_baseV10.safetensors",
+      "path": "models/diffusion_models/BASBetterAnimeStyleAnimaBase_baseV10.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1073741824
+    },
+    {
       "name": "Anima Qwen text encoder",
       "enabled": true,
       "required": true,
