@@ -1,14 +1,16 @@
 {
   "models": [
     {
-      "name": "WAI-ANIMA checkpoint",
+      "name": "WAI-ANIMA checkpoint v1.0",
       "enabled": true,
       "required": true,
       "method": "curl",
-      "requires_env": ["CIVITAI_TOKEN"],
-      "url": "https://civitai.red/api/download/models/2859702?type=Model&format=SafeTensor&token=${CIVITAI_TOKEN}",
-      "path": "models/diffusion_models/wai_anima_2859702.safetensors",
-      "min_bytes": 104857600
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/waiANIMA_v10Base10.safetensors",
+      "path": "models/diffusion_models/waiANIMA_v10Base10.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1073741824
     },
     {
       "name": "BAS Better Anime Style Anima Base v1.0",
@@ -45,6 +47,18 @@
         "Authorization": "Bearer ${HF_TOKEN}"
       },
       "min_bytes": 10485760
+    },
+    {
+      "name": "Anima Turbo LoRA v0.2 (speed / step-reduction)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima-turbo-lora-v0.2.safetensors",
+      "path": "models/loras/anima-turbo-lora-v0.2.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
     },
     {
       "name": "Mint Anima LoRA (trigger: m1nt)",
