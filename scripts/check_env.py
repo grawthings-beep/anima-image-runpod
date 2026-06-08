@@ -28,11 +28,22 @@ def main():
     print(f"comfyui_dir: {comfyui_dir} exists={comfyui_dir.exists()}")
     for path in [
         model_root / "models" / "diffusion_models",
+        model_root / "models" / "llm_gguf",
         model_root / "models" / "text_encoders",
         model_root / "models" / "vae",
         model_root / "models" / "loras" / "anima",
     ]:
         print(f"path: {path} exists={path.exists()}")
+
+    try:
+        import llama_cpp
+
+        print(f"llama_cpp: {getattr(llama_cpp, '__version__', 'unknown')}")
+    except Exception as exc:
+        print(f"llama_cpp_check_error: {exc}")
+
+    node_path = comfyui_dir / "custom_nodes" / "ComfyUI-AnimaSceneBuilder"
+    print(f"custom_node: {node_path} exists={node_path.exists()}")
 
 
 if __name__ == "__main__":

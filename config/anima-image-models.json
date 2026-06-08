@@ -49,6 +49,18 @@
       "min_bytes": 10485760
     },
     {
+      "name": "Qwen3 4B GGUF scene prompt model",
+      "enabled": true,
+      "required": true,
+      "method": "curl",
+      "url": "https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/main/Qwen3-4B-Q4_K_M.gguf?download=true",
+      "path": "models/llm_gguf/Qwen3-4B-Q4_K_M.gguf",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 2147483648
+    },
+    {
       "name": "Anima Turbo LoRA v0.2 (speed / step-reduction)",
       "enabled": true,
       "required": false,

@@ -47,13 +47,20 @@ PYTHON_BIN="$(find_python_bin)" || {
 WORKSPACE_DIR="${WORKSPACE_DIR:-/workspace/comfyui}"
 MODEL_ROOT="${MODEL_ROOT:-${WORKSPACE_DIR}}"
 CONFIG_DIR="${CONFIG_DIR:-/workspace/config}"
+USER_DIR="${USER_DIR:-${WORKSPACE_DIR}/user}"
 MODEL_MANIFEST="${MODEL_MANIFEST:-${CONFIG_DIR}/anima-image-models.json}"
 EXTRA_MODEL_MANIFEST="${EXTRA_MODEL_MANIFEST:-${CONFIG_DIR}/extra-anima-image-models.json}"
 PORT="${PORT:-8188}"
 LISTEN="${LISTEN:-0.0.0.0}"
+ANIMA_LLM_MODEL_DIR="${ANIMA_LLM_MODEL_DIR:-${MODEL_ROOT}/models/llm_gguf}"
+ANIMA_SCENE_LOG_DIR="${ANIMA_SCENE_LOG_DIR:-${WORKSPACE_DIR}/output/anima_auto_scene/logs}"
+
+export ANIMA_LLM_MODEL_DIR
+export ANIMA_SCENE_LOG_DIR
 
 mkdir -p "${WORKSPACE_DIR}/input" \
          "${WORKSPACE_DIR}/output" \
+         "${USER_DIR}/default/workflows" \
          "${MODEL_ROOT}/models/checkpoints" \
          "${MODEL_ROOT}/models/clip" \
          "${MODEL_ROOT}/models/clip_vision" \
@@ -62,12 +69,39 @@ mkdir -p "${WORKSPACE_DIR}/input" \
          "${MODEL_ROOT}/models/diffusion_models" \
          "${MODEL_ROOT}/models/embeddings" \
          "${MODEL_ROOT}/models/loras/anima" \
+         "${MODEL_ROOT}/models/llm_gguf" \
          "${MODEL_ROOT}/models/text_encoders" \
          "${MODEL_ROOT}/models/unet" \
          "${MODEL_ROOT}/models/upscale_models" \
          "${MODEL_ROOT}/models/vae" \
          "${MODEL_ROOT}/models/vae_approx" \
+         "${ANIMA_SCENE_LOG_DIR}" \
          "${CONFIG_DIR}"
+
+install_bundled_assets() {
+  local source_node="/opt/runpod-anima-image/custom_nodes/ComfyUI-AnimaSceneBuilder"
+  local target_node="${COMFYUI_DIR}/custom_nodes/ComfyUI-AnimaSceneBuilder"
+  local source_workflow="/opt/runpod-anima-image/workflows/anima_auto_scene.json"
+  local target_workflow="${USER_DIR}/default/workflows/anima_auto_scene.json"
+
+  if [[ -d "${source_node}" ]]; then
+    rm -rf "${target_node}"
+    mkdir -p "$(dirname "${target_node}")"
+    cp -a "${source_node}" "${target_node}"
+    echo "Installed custom node: ${target_node}"
+  fi
+
+  if [[ -f "${source_workflow}" ]]; then
+    if [[ "${OVERWRITE_BUNDLED_WORKFLOW:-0}" == "1" || ! -f "${target_workflow}" ]]; then
+      cp "${source_workflow}" "${target_workflow}"
+      echo "Installed workflow: ${target_workflow}"
+    else
+      echo "Keeping existing workflow: ${target_workflow}"
+    fi
+  fi
+}
+
+install_bundled_assets
 
 write_extra_model_paths() {
   local target="$1"
@@ -153,6 +187,7 @@ exec "${PYTHON_BIN}" main.py \
   --listen "${LISTEN}" \
   --port "${PORT}" \
   --enable-cors-header "${COMFYUI_CORS_ORIGIN:-*}" \
+  --user-directory "${USER_DIR}" \
   --input-directory "${WORKSPACE_DIR}/input" \
   --output-directory "${WORKSPACE_DIR}/output" \
   ${COMFYUI_ARGS:-}
