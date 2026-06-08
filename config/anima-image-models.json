@@ -97,11 +97,11 @@
       "min_bytes": 1048576
     },
     {
-      "name": "Anisstar Anima LoRA v2 (trigger: an1sstar)",
+      "name": "Anisstar Anima LoRA v3 pruned (trigger: an1sstar)",
       "enabled": true,
       "required": false,
       "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_anisstar%20(1).safetensors",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_anisstar%20(2).safetensors",
       "path": "models/loras/anima/anima_anisstar_v2.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
@@ -187,6 +187,18 @@
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_mast.safetensors",
       "path": "models/loras/anima/anima_mast.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Moran Anima LoRA (trigger: m0ran)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_moran.safetensors",
+      "path": "models/loras/anima/anima_moran.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
