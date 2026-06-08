@@ -2,7 +2,25 @@
 set -Eeuo pipefail
 
 find_python_bin() {
-  command -v python || command -v python3 || true
+  local candidate
+  candidate="$(command -v python || command -v python3 || true)"
+  if [[ -n "${candidate}" ]]; then
+    printf '%s\n' "${candidate}"
+    return 0
+  fi
+
+  for candidate in \
+    /opt/venv/bin/python \
+    /opt/venv/bin/python3 \
+    /usr/local/bin/python3 \
+    /usr/bin/python3; do
+    if [[ -x "${candidate}" ]]; then
+      printf '%s\n' "${candidate}"
+      return 0
+    fi
+  done
+
+  return 1
 }
 
 find_comfyui_dir() {
