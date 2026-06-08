@@ -127,7 +127,6 @@ def parse_scene_response(content):
 
     tags = normalize_scene_tags(payload.get("tags", ""))
     description = re.sub(r"\s+", " ", str(payload.get("description", "")).strip())
-    validate_adult_only(tags, description)
     return {"tags": tags, "description": description}
 
 
