@@ -6,19 +6,7 @@ from pathlib import Path
 
 
 BLOCKED_MINOR_PATTERNS = (
-    r"\bchild(?:ren)?\b",
-    r"\bkid(?:s)?\b",
-    r"\bminor(?:s)?\b",
-    r"\bunderage\b",
-    r"\bpreteen\b",
-    r"\bteenager(?:s)?\b",
-    r"\bteenage\b",
-    r"\bloli\b",
-    r"\bshota\b",
-    r"\bschoolgirl(?:s)?\b",
-    r"\bschoolboy(?:s)?\b",
-    r"\byoung girl(?:s)?\b",
-    r"\byoung boy(?:s)?\b",
+    
 )
 
 SCENE_TAGS_TO_DROP = {
