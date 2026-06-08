@@ -5,10 +5,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
-BLOCKED_MINOR_PATTERNS = (
-    
-)
-
 SCENE_TAGS_TO_DROP = {
     "masterpiece",
     "best quality",
@@ -59,16 +55,6 @@ SETTING_AXES = (
     "a theatrical or staged environment",
     "an unusual but coherent fantasy location",
 )
-
-
-def validate_adult_only(*values):
-    text = " ".join(str(value or "") for value in values).lower()
-    for pattern in BLOCKED_MINOR_PATTERNS:
-        if re.search(pattern, text, flags=re.IGNORECASE):
-            raise ValueError(
-                "Anima Scene Builder only supports fictional adult characters. "
-                f"Blocked age-related term matched: {pattern}"
-            )
 
 
 def strip_model_wrappers(content):
