@@ -1,0 +1,147 @@
+[1mdiff --git a/custom_nodes/ComfyUI-AnimaSceneBuilder/tests/test_scene_core.py b/custom_nodes/ComfyUI-AnimaSceneBuilder/tests/test_scene_core.py[m
+[1mdeleted file mode 100644[m
+[1mindex 315e447..0000000[m
+[1m--- a/custom_nodes/ComfyUI-AnimaSceneBuilder/tests/test_scene_core.py[m
+[1m+++ /dev/null[m
+[36m@@ -1,59 +0,0 @@[m
+[31m-import json[m
+[31m-import tempfile[m
+[31m-import unittest[m
+[31m-from pathlib import Path[m
+[31m-[m
+[31m-from scene_core import ([m
+[31m-    append_jsonl_log,[m
+[31m-    build_full_prompt,[m
+[31m-    normalize_scene_tags,[m
+[31m-    parse_scene_response,[m
+[31m-    validate_adult_only,[m
+[31m-)[m
+[31m-[m
+[31m-[m
+[31m-class SceneCoreTests(unittest.TestCase):[m
+[31m-    def test_parses_json_and_normalizes_anima_tags(self):[m
+[31m-        scene = parse_scene_response([m
+[31m-            """```json[m
+[31m-            {[m
+[31m-              "tags": "from_below, dynamic_pose, masterpiece, score_7",[m
+[31m-              "description": "An adult character turns toward the camera."[m
+[31m-            }[m
+[31m-            ```"""[m
+[31m-        )[m
+[31m-        self.assertEqual(scene["tags"], "from below, dynamic pose")[m
+[31m-        self.assertIn("turns toward the camera", scene["description"])[m
+[31m-[m
+[31m-    def test_builds_fixed_then_scene_prompt(self):[m
+[31m-        prompt = build_full_prompt([m
+[31m-            "masterpiece, best quality",[m
+[31m-            "1girl, fixed character",[m
+[31m-            {[m
+[31m-                "tags": "full body, low angle",[m
+[31m-                "description": "An adult character stands near a window.",[m
+[31m-            },[m
+[31m-            "tags + natural language",[m
+[31m-        )[m
+[31m-        self.assertTrue(prompt.startswith("masterpiece, best quality, 1girl"))[m
+[31m-        self.assertTrue(prompt.endswith("stands near a window."))[m
+[31m-[m
+[31m-    def test_blocks_minor_terms(self):[m
+[31m-        with self.assertRaises(ValueError):[m
+[31m-            validate_adult_only("underage character")[m
+[31m-[m
+[31m-    def test_log_is_jsonl(self):[m
+[31m-        with tempfile.TemporaryDirectory() as directory:[m
+[31m-            path = append_jsonl_log(directory, {"seed": 123, "full_prompt": "test"})[m
+[31m-            payload = json.loads(Path(path).read_text(encoding="utf-8"))[m
+[31m-            self.assertEqual(payload["seed"], 123)[m
+[31m-[m
+[31m-    def test_deduplicates_tags(self):[m
+[31m-        self.assertEqual([m
+[31m-            normalize_scene_tags("low_angle, low angle, rim_lighting"),[m
+[31m-            "low angle, rim lighting",[m
+[31m-        )[m
+[31m-[m
+[31m-[m
+[31m-if __name__ == "__main__":[m
+[31m-    unittest.main()[m
+[1mdiff --git a/scripts/validate_repo.py b/scripts/validate_repo.py[m
+[1mdeleted file mode 100644[m
+[1mindex 86de0f5..0000000[m
+[1m--- a/scripts/validate_repo.py[m
+[1m+++ /dev/null[m
+[36m@@ -1,76 +0,0 @@[m
+[31m-#!/usr/bin/env python3[m
+[31m-import json[m
+[31m-import pathlib[m
+[31m-import py_compile[m
+[31m-import sys[m
+[31m-import unittest[m
+[31m-[m
+[31m-[m
+[31m-ROOT = pathlib.Path(__file__).resolve().parents[1][m
+[31m-NODE_ROOT = ROOT / "custom_nodes" / "ComfyUI-AnimaSceneBuilder"[m
+[31m-[m
+[31m-[m
+[31m-def validate_manifest():[m
+[31m-    manifest = json.loads([m
+[31m-        (ROOT / "config" / "anima-image-models.json").read_text(encoding="utf-8")[m
+[31m-    )[m
+[31m-    paths = {entry["path"] for entry in manifest["models"]}[m
+[31m-    required = {[m
+[31m-        "models/diffusion_models/waiANIMA_v10Base10.safetensors",[m
+[31m-        "models/text_encoders/qwen_3_06b_base.safetensors",[m
+[31m-        "models/vae/qwen_image_vae.safetensors",[m
+[31m-        "models/llm_gguf/Qwen3-4B-Q4_K_M.gguf",[m
+[31m-        "models/loras/anima-turbo-lora-v0.2.safetensors",[m
+[31m-        "models/loras/anima/anima_rapi.safetensors",[m
+[31m-        "models/loras/anima/skintextureV1.safetensors",[m
+[31m-    }[m
+[31m-    missing = required - paths[m
+[31m-    if missing:[m
+[31m-        raise AssertionError(f"Manifest is missing required files: {sorted(missing)}")[m
+[31m-[m
+[31m-[m
+[31m-def validate_workflow():[m
+[31m-    workflow = json.loads([m
+[31m-        (ROOT / "workflows" / "anima_auto_scene.json").read_text(encoding="utf-8")[m
+[31m-    )[m
+[31m-    nodes = {node["id"]: node for node in workflow["nodes"]}[m
+[31m-[m
+[31m-    assert nodes[11]["type"] == "AnimaLocalSceneEncode"[m
+[31m-    assert nodes[11]["widgets_values"][0] == "Qwen3-4B-Q4_K_M.gguf"[m
+[31m-    assert nodes[44]["widgets_values"][0] == "waiANIMA_v10Base10.safetensors"[m
+[31m-    assert nodes[46]["widgets_values"][0] == "anima/anima_rapi.safetensors"[m
+[31m-    assert nodes[47]["widgets_values"][0] == "anima-turbo-lora-v0.2.safetensors"[m
+[31m-    assert nodes[48]["widgets_values"][0] == "anima/skintextureV1.safetensors"[m
+[31m-    assert nodes[49]["type"] == "SaveImage"[m
+[31m-    assert nodes[49]["widgets_values"][0] == "anima_auto_scene/anima"[m
+[31m-[m
+[31m-[m
+[31m-def validate_python():[m
+[31m-    for path in ([m
+[31m-        NODE_ROOT / "__init__.py",[m
+[31m-        NODE_ROOT / "scene_core.py",[m
+[31m-        NODE_ROOT / "anima_scene_nodes.py",[m
+[31m-        ROOT / "scripts" / "download_models.py",[m
+[31m-        ROOT / "scripts" / "check_env.py",[m
+[31m-    ):[m
+[31m-        py_compile.compile(str(path), doraise=True)[m
+[31m-[m
+[31m-[m
+[31m-def run_unit_tests():[m
+[31m-    sys.path.insert(0, str(NODE_ROOT))[m
+[31m-    suite = unittest.defaultTestLoader.discover(str(NODE_ROOT / "tests"))[m
+[31m-    result = unittest.TextTestRunner(verbosity=2).run(suite)[m
+[31m-    if not result.wasSuccessful():[m
+[31m-        raise RuntimeError("Unit tests failed")[m
+[31m-[m
+[31m-[m
+[31m-def main():[m
+[31m-    validate_manifest()[m
+[31m-    validate_workflow()[m
+[31m-    validate_python()[m
+[31m-    run_unit_tests()[m
+[31m-    print("Repository validation passed.")[m
+[31m-[m
+[31m-[m
+[31m-if __name__ == "__main__":[m
+[31m-    main()[m
