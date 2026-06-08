@@ -9,48 +9,17 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PIP_NO_CACHE_DIR=1
 
-ARG LLAMA_CPP_PYTHON_VERSION=0.3.23
-
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         aria2 \
-        build-essential \
         ca-certificates \
-        cmake \
         curl \
         git \
-        libopenblas-dev \
-        ninja-build \
     && rm -rf /var/lib/apt/lists/*
 
 COPY config/ /opt/runpod-anima-image/config/
 COPY scripts/ /opt/runpod-anima-image/scripts/
-COPY custom_nodes/ /opt/runpod-anima-image/custom_nodes/
-COPY workflows/ /opt/runpod-anima-image/workflows/
 RUN chmod +x /opt/runpod-anima-image/scripts/*.sh
-
-# The prompt LLM runs on CPU by default so image generation keeps all GPU VRAM.
-RUN set -eux; \
-    PYTHON_BIN="$(command -v python || command -v python3 || true)"; \
-    if [ -z "${PYTHON_BIN}" ]; then \
-      for candidate in \
-        /opt/venv/bin/python \
-        /opt/venv/bin/python3 \
-        /usr/local/bin/python3 \
-        /usr/bin/python3; do \
-        if [ -x "${candidate}" ]; then \
-          PYTHON_BIN="${candidate}"; \
-          break; \
-        fi; \
-      done; \
-    fi; \
-    test -n "${PYTHON_BIN}"; \
-    echo "Installing llama-cpp-python with ${PYTHON_BIN}"; \
-    CMAKE_ARGS="-DGGML_BLAS=ON -DGGML_BLAS_VENDOR=OpenBLAS" \
-      "${PYTHON_BIN}" -m pip install \
-        "llama-cpp-python==${LLAMA_CPP_PYTHON_VERSION}" \
-        --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu; \
-    "${PYTHON_BIN}" -c "from llama_cpp import Llama; print('llama-cpp-python ready')"
 
 EXPOSE 8188
 

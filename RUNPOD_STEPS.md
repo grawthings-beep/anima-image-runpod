@@ -50,12 +50,8 @@ PORT=8188
 LISTEN=0.0.0.0
 WORKSPACE_DIR=/workspace/comfyui
 MODEL_ROOT=/workspace/comfyui
-USER_DIR=/workspace/comfyui/user
 DOWNLOAD_MODELS=1
 RUN_DEP_CHECK=0
-ANIMA_LLM_MODEL_DIR=/workspace/comfyui/models/llm_gguf
-ANIMA_SCENE_LOG_DIR=/workspace/comfyui/output/anima_auto_scene/logs
-OVERWRITE_BUNDLED_WORKFLOW=0
 HF_TOKEN={{ RUNPOD_SECRET_HF_TOKEN }}
 CIVITAI_TOKEN={{ RUNPOD_SECRET_CIVITAI_TOKEN }}
 COMFYUI_ARGS=--reserve-vram 3
@@ -71,14 +67,4 @@ EXTRA_MODEL_MANIFEST_JSON={"models":[{"name":"Velvet Anima LoRA","enabled":true,
 
 Use RunPod Connect port `8188`.
 
-The first boot downloads the image models, LoRAs, and the local Qwen3 GGUF
-scene-prompt model. Later boots reuse `/workspace/comfyui/models`.
-
-Load `anima_auto_scene.json` from the ComfyUI workflow menu. Fill in
-`character_tags` once, then each queue run generates a new scene prompt.
-
-Images and prompt logs are saved together:
-
-```text
-/workspace/comfyui/output/anima_auto_scene/
-```
+The first boot downloads the model files. Later boots reuse `/workspace/comfyui/models`.
