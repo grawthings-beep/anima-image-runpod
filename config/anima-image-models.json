@@ -203,6 +203,30 @@
         "Authorization": "Bearer ${HF_TOKEN}"
       },
       "min_bytes": 1048576
+    },
+    {
+      "name": "Snow White Anima LoRA (trigger: sn0white)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_snowwhite.safetensors",
+      "path": "models/loras/anima/anima_snowwhite.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Blanc Anima LoRA (trigger: bl4nc)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_blanc.safetensors",
+      "path": "models/loras/anima/anima_blanc.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
     }
   ]
 }
