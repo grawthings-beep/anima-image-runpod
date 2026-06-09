@@ -227,6 +227,18 @@
         "Authorization": "Bearer ${HF_TOKEN}"
       },
       "min_bytes": 1048576
+    },
+    {
+      "name": "Privaty Anima LoRA (trigger: pr1vaty)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_privaty.safetensors",
+      "path": "models/loras/anima/anima_privaty.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
     }
   ]
 }
