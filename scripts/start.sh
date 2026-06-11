@@ -44,6 +44,19 @@ PYTHON_BIN="$(find_python_bin)" || {
   exit 2
 }
 
+# --- Install / refresh the Anima Variation Batch custom node ---
+if [[ "${INSTALL_ANIMA_NODE:-1}" == "1" ]]; then
+  ANIMA_NODE_REPO="${ANIMA_NODE_REPO:-https://github.com/grawthings-beep/comfyui-anima-variation-batch.git}"
+  ANIMA_NODE_DIR="${COMFYUI_DIR}/custom_nodes/ComfyUI-AnimaVariationBatch"
+  if [[ -d "${ANIMA_NODE_DIR}/.git" ]]; then
+    echo "Updating Anima Variation Batch node..."
+    git -C "${ANIMA_NODE_DIR}" fetch --depth 1 origin main && git -C "${ANIMA_NODE_DIR}" reset --hard origin/main || echo "WARN: node update failed; keeping existing copy."
+  else
+    echo "Installing Anima Variation Batch node..."
+    git clone --depth 1 "${ANIMA_NODE_REPO}" "${ANIMA_NODE_DIR}" || echo "WARN: node clone failed."
+  fi
+fi
+
 WORKSPACE_DIR="${WORKSPACE_DIR:-/workspace/comfyui}"
 MODEL_ROOT="${MODEL_ROOT:-${WORKSPACE_DIR}}"
 CONFIG_DIR="${CONFIG_DIR:-/workspace/config}"
