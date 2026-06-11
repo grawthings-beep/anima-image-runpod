@@ -239,6 +239,18 @@
         "Authorization": "Bearer ${HF_TOKEN}"
       },
       "min_bytes": 1048576
+    },
+    {
+      "name": "Label Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_label.safetensors",
+      "path": "models/loras/anima/anima_label.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
     }
   ]
 }
