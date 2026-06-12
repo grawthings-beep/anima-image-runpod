@@ -25,6 +25,18 @@
       "min_bytes": 1073741824
     },
     {
+      "name": "Nova 3D CGAM v1.0 Anima checkpoint",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/nova3DCGAM_v10.safetensors",
+      "path": "models/diffusion_models/nova3DCGAM_v10.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1073741824
+    },
+    {
       "name": "Anima Qwen text encoder",
       "enabled": true,
       "required": true,
