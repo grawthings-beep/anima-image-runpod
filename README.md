@@ -72,6 +72,10 @@ EXTRA_MODEL_MANIFEST_JSON={"models":[{"name":"Velvet Anima LoRA","enabled":true,
 
 Open RunPod Connect for port `8188`.
 
+The container installs the custom variation node on every startup and places
+`anima_variation_batch_workflow.json` in ComfyUI's normal Workflows list.
+Restart an existing Pod once after this image update to receive it.
+
 Use the official Anima ComfyUI workflow or any native Anima/Qwen Image workflow, then select:
 
 ```text

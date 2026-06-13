@@ -55,6 +55,17 @@ if [[ "${INSTALL_ANIMA_NODE:-1}" == "1" ]]; then
     echo "Installing Anima Variation Batch node..."
     git clone --depth 1 "${ANIMA_NODE_REPO}" "${ANIMA_NODE_DIR}" || echo "WARN: node clone failed."
   fi
+
+  ANIMA_WORKFLOW_SOURCE="${ANIMA_NODE_DIR}/example_workflows/anima_variation_batch_workflow.json"
+  COMFYUI_WORKFLOW_DIR="${COMFYUI_WORKFLOW_DIR:-${COMFYUI_DIR}/user/default/workflows}"
+  if [[ -f "${ANIMA_WORKFLOW_SOURCE}" ]]; then
+    mkdir -p "${COMFYUI_WORKFLOW_DIR}"
+    cp "${ANIMA_WORKFLOW_SOURCE}" \
+       "${COMFYUI_WORKFLOW_DIR}/anima_variation_batch_workflow.json"
+    echo "Installed Anima Variation Batch workflow in ${COMFYUI_WORKFLOW_DIR}."
+  else
+    echo "WARN: Anima Variation Batch workflow was not found at ${ANIMA_WORKFLOW_SOURCE}."
+  fi
 fi
 
 WORKSPACE_DIR="${WORKSPACE_DIR:-/workspace/comfyui}"
