@@ -1,0 +1,31 @@
+name: Deploy Manga Composer Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "cloudflare/manga-composer/**"
+      - ".github/workflows/deploy-manga-composer-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ensure Pages project exists
+        uses: cloudflare/wrangler-action@v3
+        continue-on-error: true
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages project create anima-manga-composer --production-branch main
+      - name: Deploy Pages app
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy cloudflare/manga-composer --project-name anima-manga-composer

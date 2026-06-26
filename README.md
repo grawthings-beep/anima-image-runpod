@@ -98,3 +98,22 @@ CFG: 4-5
 - Anima official model card: https://huggingface.co/circlestone-labs/Anima
 - WAI-ANIMA model page: https://civitai.red/models/2544636/wai-anima?modelVersionId=2859702
 - ComfyUI Anima workflow: https://www.comfy.org/ja/workflows/image_anima_preview/
+
+## Cloudflare Manga Composer
+
+This repository also includes a static Cloudflare Pages app for manga layout and lettering:
+
+```text
+cloudflare/manga-composer
+```
+
+It handles panel frames, speech bubbles, Japanese text, SFX text, layout JSON import/export, and PNG export in the browser. GPU image generation stays on RunPod/ComfyUI.
+
+To deploy it through GitHub Actions, create these repository secrets:
+
+```text
+CLOUDFLARE_API_TOKEN
+CLOUDFLARE_ACCOUNT_ID
+```
+
+Then run the `Deploy Manga Composer Pages` workflow, or push changes under `cloudflare/manga-composer` to `main`.
