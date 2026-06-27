@@ -61,6 +61,15 @@
       "min_bytes": 10485760
     },
     {
+      "name": "Qwen Image Union Control LoRA (Canny / depth / pose)",
+      "enabled": true,
+      "required": true,
+      "method": "curl",
+      "url": "https://huggingface.co/Comfy-Org/Qwen-Image-DiffSynth-ControlNets/resolve/main/split_files/loras/qwen_image_union_diffsynth_lora.safetensors",
+      "path": "models/loras/qwen_image_union_diffsynth_lora.safetensors",
+      "min_bytes": 104857600
+    },
+    {
       "name": "Anima Turbo LoRA v0.2 (speed / step-reduction)",
       "enabled": true,
       "required": true,

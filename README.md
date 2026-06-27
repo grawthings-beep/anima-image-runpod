@@ -60,9 +60,10 @@ network or disk is the bottleneck.
 Startup downloads:
 
 ```text
-/workspace/comfyui/models/diffusion_models/wai_anima_2859702.safetensors
+/workspace/comfyui/models/diffusion_models/waiANIMA_v10Base10.safetensors
 /workspace/comfyui/models/text_encoders/qwen_3_06b_base.safetensors
 /workspace/comfyui/models/vae/qwen_image_vae.safetensors
+/workspace/comfyui/models/loras/qwen_image_union_diffsynth_lora.safetensors
 /workspace/comfyui/models/loras/anima-turbo-lora-v0.2.safetensors
 /workspace/comfyui/models/loras/anima/*.safetensors
 ```
@@ -84,6 +85,7 @@ and copies every JSON file from its `example_workflows` directory into ComfyUI's
 normal Workflows list, including:
 
 ```text
+ANIMA_Control_Canny.json
 ANIMA_EasyMultiAngle.json
 anima_easy_multiangle_batch_workflow.json
 anima_variation_batch_workflow.json
@@ -94,10 +96,11 @@ Restart an existing Pod once after this image update to receive them.
 Use the official Anima ComfyUI workflow or any native Anima/Qwen Image workflow, then select:
 
 ```text
-Diffusion model: wai_anima_2859702.safetensors
+Diffusion model: waiANIMA_v10Base10.safetensors
 Text encoder: qwen_3_06b_base.safetensors
 VAE: qwen_image_vae.safetensors
-LoRA: anima/siren_anima_step-4000.safetensors
+Control LoRA: qwen_image_union_diffsynth_lora.safetensors
+Speed LoRA: anima-turbo-lora-v0.2.safetensors
 ```
 
 Suggested settings from the Anima model card:

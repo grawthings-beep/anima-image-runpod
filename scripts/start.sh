@@ -91,6 +91,7 @@ mkdir -p "${WORKSPACE_DIR}/input" \
          "${MODEL_ROOT}/models/controlnet" \
          "${MODEL_ROOT}/models/diffusion_models" \
          "${MODEL_ROOT}/models/embeddings" \
+         "${MODEL_ROOT}/models/model_patches" \
          "${MODEL_ROOT}/models/loras/anima" \
          "${MODEL_ROOT}/models/text_encoders" \
          "${MODEL_ROOT}/models/unet" \
@@ -111,6 +112,7 @@ workspace:
   controlnet: models/controlnet/
   diffusion_models: models/diffusion_models/
   embeddings: models/embeddings/
+  model_patches: models/model_patches/
   loras: models/loras/
   text_encoders: models/text_encoders/
   unet: models/unet/
