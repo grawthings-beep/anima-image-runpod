@@ -14,7 +14,7 @@
     },
     {
       "name": "BAS Better Anime Style Anima Base v1.0",
-      "enabled": true,
+      "enabled": false,
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/BASBetterAnimeStyleAnimaBase_baseV10.safetensors",
@@ -26,7 +26,7 @@
     },
     {
       "name": "Nova 3D CGAM v1.0 Anima checkpoint",
-      "enabled": true,
+      "enabled": false,
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/nova3DCGAM_v10.safetensors",

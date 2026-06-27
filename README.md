@@ -50,9 +50,10 @@ COMFYUI_ARGS=--reserve-vram 3
 
 Keep tokens in RunPod Secrets. Do not paste raw tokens into a public template.
 
-`DOWNLOAD_OPTIONAL_MODELS=1` downloads the full bundled set, including optional
-character LoRAs and extra checkpoints. Downloads run in parallel; increase or
-decrease `MODEL_DOWNLOAD_JOBS` if the network or disk is the bottleneck.
+The default manifest keeps the diffusion model set focused on WAI-ANIMA, while
+still downloading the bundled character LoRAs and the Anima Turbo LoRA.
+Downloads run in parallel; increase or decrease `MODEL_DOWNLOAD_JOBS` if the
+network or disk is the bottleneck.
 
 ## Model Layout
 
@@ -62,8 +63,8 @@ Startup downloads:
 /workspace/comfyui/models/diffusion_models/wai_anima_2859702.safetensors
 /workspace/comfyui/models/text_encoders/qwen_3_06b_base.safetensors
 /workspace/comfyui/models/vae/qwen_image_vae.safetensors
-/workspace/comfyui/models/loras/anima/siren_anima_step-3500.safetensors
-/workspace/comfyui/models/loras/anima/siren_anima_step-4000.safetensors
+/workspace/comfyui/models/loras/anima-turbo-lora-v0.2.safetensors
+/workspace/comfyui/models/loras/anima/*.safetensors
 ```
 
 Additional LoRAs can be added at Pod startup without rebuilding the Docker image. Put a small manifest in `EXTRA_MODEL_MANIFEST_JSON` or host it somewhere and set `EXTRA_MODEL_MANIFEST_URL`.
