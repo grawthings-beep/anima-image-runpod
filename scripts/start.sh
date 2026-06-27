@@ -56,15 +56,21 @@ if [[ "${INSTALL_ANIMA_NODE:-1}" == "1" ]]; then
     git clone --depth 1 "${ANIMA_NODE_REPO}" "${ANIMA_NODE_DIR}" || echo "WARN: node clone failed."
   fi
 
-  ANIMA_WORKFLOW_SOURCE="${ANIMA_NODE_DIR}/example_workflows/anima_variation_batch_workflow.json"
   COMFYUI_WORKFLOW_DIR="${COMFYUI_WORKFLOW_DIR:-${COMFYUI_DIR}/user/default/workflows}"
-  if [[ -f "${ANIMA_WORKFLOW_SOURCE}" ]]; then
+  ANIMA_WORKFLOW_SOURCE_DIR="${ANIMA_NODE_DIR}/example_workflows"
+  if [[ -d "${ANIMA_WORKFLOW_SOURCE_DIR}" ]]; then
     mkdir -p "${COMFYUI_WORKFLOW_DIR}"
-    cp "${ANIMA_WORKFLOW_SOURCE}" \
-       "${COMFYUI_WORKFLOW_DIR}/anima_variation_batch_workflow.json"
-    echo "Installed Anima Variation Batch workflow in ${COMFYUI_WORKFLOW_DIR}."
+    shopt -s nullglob
+    anima_workflow_sources=("${ANIMA_WORKFLOW_SOURCE_DIR}"/*.json)
+    if (( ${#anima_workflow_sources[@]} > 0 )); then
+      cp "${anima_workflow_sources[@]}" "${COMFYUI_WORKFLOW_DIR}/"
+      echo "Installed ${#anima_workflow_sources[@]} Anima workflow(s) in ${COMFYUI_WORKFLOW_DIR}."
+    else
+      echo "WARN: no Anima workflow JSON files were found in ${ANIMA_WORKFLOW_SOURCE_DIR}."
+    fi
+    shopt -u nullglob
   else
-    echo "WARN: Anima Variation Batch workflow was not found at ${ANIMA_WORKFLOW_SOURCE}."
+    echo "WARN: Anima workflow directory was not found at ${ANIMA_WORKFLOW_SOURCE_DIR}."
   fi
 fi
 
