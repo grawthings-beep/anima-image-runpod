@@ -40,6 +40,8 @@ LISTEN=0.0.0.0
 WORKSPACE_DIR=/workspace/comfyui
 MODEL_ROOT=/workspace/comfyui
 DOWNLOAD_MODELS=1
+DOWNLOAD_OPTIONAL_MODELS=1
+MODEL_DOWNLOAD_JOBS=4
 RUN_DEP_CHECK=0
 HF_TOKEN={{ RUNPOD_SECRET_HF_TOKEN }}
 CIVITAI_TOKEN={{ RUNPOD_SECRET_CIVITAI_TOKEN }}
@@ -47,6 +49,10 @@ COMFYUI_ARGS=--reserve-vram 3
 ```
 
 Keep tokens in RunPod Secrets. Do not paste raw tokens into a public template.
+
+`DOWNLOAD_OPTIONAL_MODELS=1` downloads the full bundled set, including optional
+character LoRAs and extra checkpoints. Downloads run in parallel; increase or
+decrease `MODEL_DOWNLOAD_JOBS` if the network or disk is the bottleneck.
 
 ## Model Layout
 

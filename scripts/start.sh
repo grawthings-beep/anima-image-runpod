@@ -158,17 +158,24 @@ PY
 fi
 
 if [[ "${DOWNLOAD_MODELS:-1}" == "1" ]]; then
+  download_model_args=()
+  if [[ "${DOWNLOAD_OPTIONAL_MODELS:-1}" != "1" ]]; then
+    download_model_args+=(--required-only)
+    echo "Skipping optional model downloads. Set DOWNLOAD_OPTIONAL_MODELS=1 to fetch optional LoRAs/checkpoints at startup."
+  fi
   if [[ -f "${MODEL_MANIFEST}" ]]; then
     "${PYTHON_BIN}" /opt/runpod-anima-image/scripts/download_models.py \
       --manifest "${MODEL_MANIFEST}" \
-      --root "${MODEL_ROOT}"
+      --root "${MODEL_ROOT}" \
+      "${download_model_args[@]}"
   else
     echo "No base model manifest found at ${MODEL_MANIFEST}."
   fi
   if [[ -f "${EXTRA_MODEL_MANIFEST}" ]]; then
     "${PYTHON_BIN}" /opt/runpod-anima-image/scripts/download_models.py \
       --manifest "${EXTRA_MODEL_MANIFEST}" \
-      --root "${MODEL_ROOT}"
+      --root "${MODEL_ROOT}" \
+      "${download_model_args[@]}"
   fi
 else
   echo "Skipping model downloads."

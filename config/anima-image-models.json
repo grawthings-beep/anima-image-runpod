@@ -63,7 +63,7 @@
     {
       "name": "Anima Turbo LoRA v0.2 (speed / step-reduction)",
       "enabled": true,
-      "required": false,
+      "required": true,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima-turbo-lora-v0.2.safetensors",
       "path": "models/loras/anima-turbo-lora-v0.2.safetensors",

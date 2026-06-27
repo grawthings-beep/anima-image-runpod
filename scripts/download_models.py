@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import concurrent.futures
 import hashlib
 import json
 import os
@@ -198,14 +199,46 @@ def main():
     parser.add_argument("--manifest", required=True)
     parser.add_argument("--root", required=True)
     parser.add_argument("--no-aria2", action="store_true")
+    parser.add_argument(
+        "--required-only",
+        action="store_true",
+        help="skip optional manifest entries even when they are enabled",
+    )
     parser.add_argument("--connections", type=int, default=int(os.environ.get("ARIA2_CONNECTIONS", "16")))
     parser.add_argument("--splits", type=int, default=int(os.environ.get("ARIA2_SPLITS", "16")))
+    parser.add_argument("--jobs", type=int, default=int(os.environ.get("MODEL_DOWNLOAD_JOBS", "4")))
     args = parser.parse_args()
 
     manifest = json.loads(pathlib.Path(args.manifest).read_text(encoding="utf-8"))
     root = pathlib.Path(args.root)
+    entries = []
     for entry in manifest.get("models", []):
-        download(entry, root, not args.no_aria2, args.connections, args.splits)
+        if args.required_only and not bool(entry.get("required", True)):
+            print(f"SKIP optional: {entry.get('name') or entry.get('path')}")
+            continue
+        entries.append(entry)
+
+    jobs = max(1, args.jobs)
+    if jobs == 1 or len(entries) <= 1:
+        for entry in entries:
+            download(entry, root, not args.no_aria2, args.connections, args.splits)
+        return
+
+    print(f"Downloading {len(entries)} model(s) with {jobs} parallel job(s).")
+    with concurrent.futures.ThreadPoolExecutor(max_workers=jobs) as executor:
+        futures = [
+            executor.submit(
+                download,
+                entry,
+                root,
+                not args.no_aria2,
+                args.connections,
+                args.splits,
+            )
+            for entry in entries
+        ]
+        for future in concurrent.futures.as_completed(futures):
+            future.result()
 
 
 if __name__ == "__main__":
