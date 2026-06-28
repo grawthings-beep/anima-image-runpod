@@ -42,6 +42,8 @@ MODEL_ROOT=/workspace/comfyui
 DOWNLOAD_MODELS=1
 DOWNLOAD_OPTIONAL_MODELS=1
 MODEL_DOWNLOAD_JOBS=4
+INSTALL_CONTROLNET_AUX=1
+INSTALL_OPENPOSE_EDITOR=1
 RUN_DEP_CHECK=0
 HF_TOKEN={{ RUNPOD_SECRET_HF_TOKEN }}
 CIVITAI_TOKEN={{ RUNPOD_SECRET_CIVITAI_TOKEN }}
@@ -55,6 +57,10 @@ still downloading the bundled character LoRAs and the Anima Turbo LoRA.
 Downloads run in parallel; increase or decrease `MODEL_DOWNLOAD_JOBS` if the
 network or disk is the bottleneck.
 
+`INSTALL_CONTROLNET_AUX=1` installs DWPose/OpenPose preprocessors for pose
+reference extraction. `INSTALL_OPENPOSE_EDITOR=1` installs the lightweight
+OpenPose Editor node so skeletons can be edited directly in ComfyUI.
+
 ## Model Layout
 
 Startup downloads:
@@ -66,6 +72,12 @@ Startup downloads:
 /workspace/comfyui/models/loras/qwen_image_union_diffsynth_lora.safetensors
 /workspace/comfyui/models/loras/anima-turbo-lora-v0.2.safetensors
 /workspace/comfyui/models/loras/anima/*.safetensors
+```
+
+DWPose preprocessor models are cached under:
+
+```text
+/workspace/comfyui/models/controlnet_aux
 ```
 
 Additional LoRAs can be added at Pod startup without rebuilding the Docker image. Put a small manifest in `EXTRA_MODEL_MANIFEST_JSON` or host it somewhere and set `EXTRA_MODEL_MANIFEST_URL`.
@@ -87,6 +99,10 @@ normal Workflows list, including:
 ```text
 ANIMA_Control_Canny.json
 ANIMA_EasyMultiAngle.json
+ANIMA_DiffMaker_img2img.json
+ANIMA_RePose_img2img.json
+ANIMA_RePose_OpenPoseEditor_img2img.json
+ANIMA_RePose_DWPose_img2img.json
 anima_easy_multiangle_batch_workflow.json
 anima_variation_batch_workflow.json
 ```
@@ -101,6 +117,14 @@ Text encoder: qwen_3_06b_base.safetensors
 VAE: qwen_image_vae.safetensors
 Control LoRA: qwen_image_union_diffsynth_lora.safetensors
 Speed LoRA: anima-turbo-lora-v0.2.safetensors
+```
+
+For pose changes, use:
+
+```text
+ANIMA_RePose_OpenPoseEditor_img2img.json: freely edit a skeleton in ComfyUI
+ANIMA_RePose_DWPose_img2img.json: extract a skeleton from a reference photo
+ANIMA_RePose_img2img.json: use an already-prepared pose/control image
 ```
 
 Suggested settings from the Anima model card:

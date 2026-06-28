@@ -44,6 +44,32 @@ PYTHON_BIN="$(find_python_bin)" || {
   exit 2
 }
 
+sync_git_repo() {
+  local repo="$1"
+  local ref="$2"
+  local dir="$3"
+  local label="$4"
+
+  mkdir -p "$(dirname "${dir}")"
+  if [[ -d "${dir}/.git" ]]; then
+    echo "Updating ${label}..."
+    git -C "${dir}" fetch --depth 1 origin "${ref}" && \
+      git -C "${dir}" reset --hard "origin/${ref}" || {
+        echo "WARN: ${label} update failed; keeping existing copy."
+        return 1
+      }
+  elif [[ -e "${dir}" ]]; then
+    echo "WARN: ${label} directory exists but is not a git checkout: ${dir}"
+    return 1
+  else
+    echo "Installing ${label}..."
+    git clone --depth 1 --branch "${ref}" "${repo}" "${dir}" || {
+      echo "WARN: ${label} clone failed."
+      return 1
+    }
+  fi
+}
+
 # --- Install / refresh the Anima Variation Batch custom node ---
 if [[ "${INSTALL_ANIMA_NODE:-1}" == "1" ]]; then
   ANIMA_NODE_REPO="${ANIMA_NODE_REPO:-https://github.com/grawthings-beep/comfyui-anima-variation-batch.git}"
@@ -89,6 +115,7 @@ mkdir -p "${WORKSPACE_DIR}/input" \
          "${MODEL_ROOT}/models/clip_vision" \
          "${MODEL_ROOT}/models/configs" \
          "${MODEL_ROOT}/models/controlnet" \
+         "${MODEL_ROOT}/models/controlnet_aux" \
          "${MODEL_ROOT}/models/diffusion_models" \
          "${MODEL_ROOT}/models/embeddings" \
          "${MODEL_ROOT}/models/model_patches" \
@@ -99,6 +126,29 @@ mkdir -p "${WORKSPACE_DIR}/input" \
          "${MODEL_ROOT}/models/vae" \
          "${MODEL_ROOT}/models/vae_approx" \
          "${CONFIG_DIR}"
+
+export AUX_ANNOTATOR_CKPTS_PATH="${AUX_ANNOTATOR_CKPTS_PATH:-${MODEL_ROOT}/models/controlnet_aux}"
+
+# --- Install / refresh pose-control helper nodes ---
+if [[ "${INSTALL_CONTROLNET_AUX:-1}" == "1" ]]; then
+  CONTROLNET_AUX_REPO="${CONTROLNET_AUX_REPO:-https://github.com/Fannovel16/comfyui_controlnet_aux.git}"
+  CONTROLNET_AUX_REF="${CONTROLNET_AUX_REF:-main}"
+  CONTROLNET_AUX_DIR="${COMFYUI_DIR}/custom_nodes/comfyui_controlnet_aux"
+  if sync_git_repo "${CONTROLNET_AUX_REPO}" "${CONTROLNET_AUX_REF}" "${CONTROLNET_AUX_DIR}" "ControlNet Auxiliary Preprocessors"; then
+    if [[ "${INSTALL_CONTROLNET_AUX_REQUIREMENTS:-1}" == "1" && -f "${CONTROLNET_AUX_DIR}/requirements.txt" ]]; then
+      echo "Installing ControlNet Auxiliary Preprocessors requirements..."
+      "${PYTHON_BIN}" -m pip install --no-cache-dir -r "${CONTROLNET_AUX_DIR}/requirements.txt" || \
+        echo "WARN: ControlNet Auxiliary Preprocessors requirements install failed."
+    fi
+  fi
+fi
+
+if [[ "${INSTALL_OPENPOSE_EDITOR:-1}" == "1" ]]; then
+  OPENPOSE_EDITOR_REPO="${OPENPOSE_EDITOR_REPO:-https://github.com/space-nuko/ComfyUI-OpenPose-Editor.git}"
+  OPENPOSE_EDITOR_REF="${OPENPOSE_EDITOR_REF:-master}"
+  OPENPOSE_EDITOR_DIR="${COMFYUI_DIR}/custom_nodes/ComfyUI-OpenPose-Editor"
+  sync_git_repo "${OPENPOSE_EDITOR_REPO}" "${OPENPOSE_EDITOR_REF}" "${OPENPOSE_EDITOR_DIR}" "OpenPose Editor" || true
+fi
 
 write_extra_model_paths() {
   local target="$1"
