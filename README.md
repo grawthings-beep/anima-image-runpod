@@ -42,6 +42,8 @@ MODEL_ROOT=/workspace/comfyui
 DOWNLOAD_MODELS=1
 DOWNLOAD_OPTIONAL_MODELS=1
 MODEL_DOWNLOAD_JOBS=4
+INSTALL_EASY_USE=1
+INSTALL_RGTHREE=1
 INSTALL_CONTROLNET_AUX=1
 INSTALL_OPENPOSE_EDITOR=1
 RUN_DEP_CHECK=0
@@ -60,6 +62,8 @@ network or disk is the bottleneck.
 `INSTALL_CONTROLNET_AUX=1` installs DWPose/OpenPose preprocessors for pose
 reference extraction. `INSTALL_OPENPOSE_EDITOR=1` installs the lightweight
 OpenPose Editor node so skeletons can be edited directly in ComfyUI.
+`INSTALL_EASY_USE=1` and `INSTALL_RGTHREE=1` install the custom nodes required
+by the note-style `ANIMA_EasyMultiAngle.json` workflow.
 
 ## Model Layout
 
@@ -106,6 +110,11 @@ ANIMA_RePose_DWPose_img2img.json
 anima_easy_multiangle_batch_workflow.json
 anima_variation_batch_workflow.json
 ```
+
+`ANIMA_EasyMultiAngle.json` matches the public note.com Easy MultiAngle setup:
+Easy-Use's `easy multiAngle` prompt is passed through `RegexExtract` with
+`^([^\(]*).*`, joined to the character prompt, and sampled with rgthree's
+Power Lora Loader.
 
 Restart an existing Pod once after this image update to receive them.
 

@@ -150,6 +150,26 @@ if [[ "${INSTALL_OPENPOSE_EDITOR:-1}" == "1" ]]; then
   sync_git_repo "${OPENPOSE_EDITOR_REPO}" "${OPENPOSE_EDITOR_REF}" "${OPENPOSE_EDITOR_DIR}" "OpenPose Editor" || true
 fi
 
+if [[ "${INSTALL_EASY_USE:-1}" == "1" ]]; then
+  EASY_USE_REPO="${EASY_USE_REPO:-https://github.com/yolain/ComfyUI-Easy-Use.git}"
+  EASY_USE_REF="${EASY_USE_REF:-main}"
+  EASY_USE_DIR="${COMFYUI_DIR}/custom_nodes/ComfyUI-Easy-Use"
+  if sync_git_repo "${EASY_USE_REPO}" "${EASY_USE_REF}" "${EASY_USE_DIR}" "ComfyUI-Easy-Use"; then
+    if [[ "${INSTALL_EASY_USE_REQUIREMENTS:-1}" == "1" && -f "${EASY_USE_DIR}/requirements.txt" ]]; then
+      echo "Installing ComfyUI-Easy-Use requirements..."
+      "${PYTHON_BIN}" -m pip install --no-cache-dir -r "${EASY_USE_DIR}/requirements.txt" || \
+        echo "WARN: ComfyUI-Easy-Use requirements install failed."
+    fi
+  fi
+fi
+
+if [[ "${INSTALL_RGTHREE:-1}" == "1" ]]; then
+  RGTHREE_REPO="${RGTHREE_REPO:-https://github.com/rgthree/rgthree-comfy.git}"
+  RGTHREE_REF="${RGTHREE_REF:-main}"
+  RGTHREE_DIR="${COMFYUI_DIR}/custom_nodes/rgthree-comfy"
+  sync_git_repo "${RGTHREE_REPO}" "${RGTHREE_REF}" "${RGTHREE_DIR}" "rgthree-comfy" || true
+fi
+
 write_extra_model_paths() {
   local target="$1"
   cat > "${target}" <<YAML
