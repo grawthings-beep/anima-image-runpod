@@ -71,6 +71,7 @@ Startup downloads:
 
 ```text
 /workspace/comfyui/models/diffusion_models/waiANIMA_v10Base10.safetensors
+/workspace/comfyui/models/diffusion_models/nova3DCGAM_v10.safetensors
 /workspace/comfyui/models/text_encoders/qwen_3_06b_base.safetensors
 /workspace/comfyui/models/vae/qwen_image_vae.safetensors
 /workspace/comfyui/models/loras/qwen_image_union_diffsynth_lora.safetensors
