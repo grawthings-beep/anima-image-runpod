@@ -70,6 +70,56 @@ sync_git_repo() {
   fi
 }
 
+repair_torchaudio_cuda_mismatch() {
+  if [[ "${FIX_TORCHAUDIO_CUDA:-1}" != "1" ]]; then
+    return 0
+  fi
+
+  local torch_cuda torch_cuda_tag
+  torch_cuda="$("${PYTHON_BIN}" - <<'PY'
+try:
+    import torch
+except Exception:
+    print("")
+else:
+    print(torch.version.cuda or "")
+PY
+)"
+
+  if [[ -z "${torch_cuda}" ]]; then
+    echo "Skipping TorchAudio CUDA repair: torch CUDA version could not be detected."
+    return 0
+  fi
+
+  if "${PYTHON_BIN}" - <<'PY'
+try:
+    import torch
+    import torchaudio
+except Exception as exc:
+    print(f"torchaudio_check_error: {exc}")
+    raise SystemExit(1)
+print(f"torch={torch.__version__} cuda={torch.version.cuda} torchaudio={torchaudio.__version__}")
+PY
+  then
+    return 0
+  fi
+
+  torch_cuda_tag="cu${torch_cuda//./}"
+  echo "Repairing TorchAudio for PyTorch CUDA ${torch_cuda} using ${torch_cuda_tag} wheels..."
+  "${PYTHON_BIN}" -m pip install --no-cache-dir --force-reinstall --no-deps \
+    --index-url "https://download.pytorch.org/whl/${torch_cuda_tag}" \
+    torchaudio || {
+      echo "WARN: TorchAudio CUDA repair failed."
+      return 0
+    }
+
+  "${PYTHON_BIN}" - <<'PY' || echo "WARN: TorchAudio still failed to import after repair."
+import torch
+import torchaudio
+print(f"torch={torch.__version__} cuda={torch.version.cuda} torchaudio={torchaudio.__version__}")
+PY
+}
+
 # --- Install / refresh the Anima Variation Batch custom node ---
 if [[ "${INSTALL_ANIMA_NODE:-1}" == "1" ]]; then
   ANIMA_NODE_REPO="${ANIMA_NODE_REPO:-https://github.com/grawthings-beep/comfyui-anima-variation-batch.git}"
@@ -169,6 +219,8 @@ if [[ "${INSTALL_RGTHREE:-1}" == "1" ]]; then
   RGTHREE_DIR="${COMFYUI_DIR}/custom_nodes/rgthree-comfy"
   sync_git_repo "${RGTHREE_REPO}" "${RGTHREE_REF}" "${RGTHREE_DIR}" "rgthree-comfy" || true
 fi
+
+repair_torchaudio_cuda_mismatch
 
 write_extra_model_paths() {
   local target="$1"

@@ -46,6 +46,7 @@ INSTALL_EASY_USE=1
 INSTALL_RGTHREE=1
 INSTALL_CONTROLNET_AUX=1
 INSTALL_OPENPOSE_EDITOR=1
+FIX_TORCHAUDIO_CUDA=1
 RUN_DEP_CHECK=0
 HF_TOKEN={{ RUNPOD_SECRET_HF_TOKEN }}
 CIVITAI_TOKEN={{ RUNPOD_SECRET_CIVITAI_TOKEN }}
@@ -64,6 +65,9 @@ reference extraction. `INSTALL_OPENPOSE_EDITOR=1` installs the lightweight
 OpenPose Editor node so skeletons can be edited directly in ComfyUI.
 `INSTALL_EASY_USE=1` and `INSTALL_RGTHREE=1` install the custom nodes required
 by the note-style `ANIMA_EasyMultiAngle.json` workflow.
+`FIX_TORCHAUDIO_CUDA=1` repairs a TorchAudio CUDA wheel mismatch before ComfyUI
+starts. Leave it enabled if logs show PyTorch and TorchAudio were compiled with
+different CUDA versions.
 
 ## Model Layout
 
