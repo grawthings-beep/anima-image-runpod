@@ -242,7 +242,7 @@
       "enabled": true,
       "required": false,
       "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_marciana.safetensors",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_marciana%20(1).safetensors",
       "path": "models/loras/anima/anima_marciana.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
