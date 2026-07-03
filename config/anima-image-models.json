@@ -14,7 +14,7 @@
     },
     {
       "name": "BAS Better Anime Style Anima Base v1.0",
-      "enabled": false,
+      "enabled": true,
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/BASBetterAnimeStyleAnimaBase_baseV10.safetensors",
