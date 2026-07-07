@@ -179,8 +179,11 @@ mkdir -p "${WORKSPACE_DIR}/input" \
 
 export AUX_ANNOTATOR_CKPTS_PATH="${AUX_ANNOTATOR_CKPTS_PATH:-${MODEL_ROOT}/models/controlnet_aux}"
 
-# --- Install / refresh pose-control helper nodes ---
-if [[ "${INSTALL_CONTROLNET_AUX:-1}" == "1" ]]; then
+# --- Optional helper custom nodes ---
+# The bundled Anima workflows no longer need ControlNet Aux, OpenPose Editor,
+# Easy-Use, or rgthree. Keep these opt-in so startup does not spend time
+# installing large preprocessor dependencies.
+if [[ "${INSTALL_CONTROLNET_AUX:-0}" == "1" ]]; then
   CONTROLNET_AUX_REPO="${CONTROLNET_AUX_REPO:-https://github.com/Fannovel16/comfyui_controlnet_aux.git}"
   CONTROLNET_AUX_REF="${CONTROLNET_AUX_REF:-main}"
   CONTROLNET_AUX_DIR="${COMFYUI_DIR}/custom_nodes/comfyui_controlnet_aux"
@@ -193,14 +196,14 @@ if [[ "${INSTALL_CONTROLNET_AUX:-1}" == "1" ]]; then
   fi
 fi
 
-if [[ "${INSTALL_OPENPOSE_EDITOR:-1}" == "1" ]]; then
+if [[ "${INSTALL_OPENPOSE_EDITOR:-0}" == "1" ]]; then
   OPENPOSE_EDITOR_REPO="${OPENPOSE_EDITOR_REPO:-https://github.com/space-nuko/ComfyUI-OpenPose-Editor.git}"
   OPENPOSE_EDITOR_REF="${OPENPOSE_EDITOR_REF:-master}"
   OPENPOSE_EDITOR_DIR="${COMFYUI_DIR}/custom_nodes/ComfyUI-OpenPose-Editor"
   sync_git_repo "${OPENPOSE_EDITOR_REPO}" "${OPENPOSE_EDITOR_REF}" "${OPENPOSE_EDITOR_DIR}" "OpenPose Editor" || true
 fi
 
-if [[ "${INSTALL_EASY_USE:-1}" == "1" ]]; then
+if [[ "${INSTALL_EASY_USE:-0}" == "1" ]]; then
   EASY_USE_REPO="${EASY_USE_REPO:-https://github.com/yolain/ComfyUI-Easy-Use.git}"
   EASY_USE_REF="${EASY_USE_REF:-main}"
   EASY_USE_DIR="${COMFYUI_DIR}/custom_nodes/ComfyUI-Easy-Use"
@@ -213,7 +216,7 @@ if [[ "${INSTALL_EASY_USE:-1}" == "1" ]]; then
   fi
 fi
 
-if [[ "${INSTALL_RGTHREE:-1}" == "1" ]]; then
+if [[ "${INSTALL_RGTHREE:-0}" == "1" ]]; then
   RGTHREE_REPO="${RGTHREE_REPO:-https://github.com/rgthree/rgthree-comfy.git}"
   RGTHREE_REF="${RGTHREE_REF:-main}"
   RGTHREE_DIR="${COMFYUI_DIR}/custom_nodes/rgthree-comfy"
