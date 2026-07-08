@@ -214,6 +214,18 @@
       "min_bytes": 1048576
     },
     {
+      "name": "Bikini Cinderella Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_bikinicinderella.safetensors",
+      "path": "models/loras/anima/anima_bikinicinderella.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
       "name": "Mast Anima LoRA (trigger: m4st)",
       "enabled": true,
       "required": false,
