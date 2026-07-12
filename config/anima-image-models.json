@@ -262,6 +262,18 @@
       "min_bytes": 1048576
     },
     {
+      "name": "Marciana Anima LoRA (3) (trigger: m4rciana)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_marciana%20(3).safetensors",
+      "path": "models/loras/anima/anima_marciana_3.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
       "name": "Snow White Anima LoRA (trigger: sn0white)",
       "enabled": true,
       "required": false,
