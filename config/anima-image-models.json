@@ -106,6 +106,18 @@
       "min_bytes": 1048576
     },
     {
+      "name": "Eris Anima LoRA (trigger: 3r1s)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_eris.safetensors",
+      "path": "models/loras/anima/anima_eris.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
       "name": "Noir Anima LoRA (trigger: n0ir)",
       "enabled": true,
       "required": false,
