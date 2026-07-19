@@ -254,8 +254,20 @@
       "enabled": true,
       "required": false,
       "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_moran.safetensors",
-      "path": "models/loras/anima/anima_moran.safetensors",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_moran%20(1).safetensors",
+      "path": "models/loras/anima/anima_moran_1.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Laplace Anima LoRA (trigger: l4place)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_laplace.safetensors",
+      "path": "models/loras/anima/anima_laplace.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
