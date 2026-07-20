@@ -106,6 +106,18 @@
       "min_bytes": 1048576
     },
     {
+      "name": "Swimsuit Elegg Anima LoRA (trigger: swimsuitelegg)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_swimsuit_elegg.safetensors",
+      "path": "models/loras/anima/anima_swimsuit_elegg.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
       "name": "Eris Anima LoRA (trigger: 3r1s)",
       "enabled": true,
       "required": false,
@@ -244,6 +256,18 @@
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_mast.safetensors",
       "path": "models/loras/anima/anima_mast.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Maxwell Anima LoRA (trigger: m4xwell)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_maxwell.safetensors",
+      "path": "models/loras/anima/anima_maxwell.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
