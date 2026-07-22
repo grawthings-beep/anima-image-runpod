@@ -142,6 +142,18 @@
       "min_bytes": 1048576
     },
     {
+      "name": "Anis Anima LoRA (trigger: an1s)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_anis.safetensors",
+      "path": "models/loras/anima/anima_anis.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
       "name": "Anisstar Anima LoRA v3 pruned (trigger: an1sstar)",
       "enabled": true,
       "required": false,
