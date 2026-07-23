@@ -87,23 +87,29 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_lora.safetensors",
-      "path": "models/loras/anima/mint_anima.safetensors",
+      "path": "models/loras/anima/Mint - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/mint_anima.safetensors"
+      ]
     },
     {
-      "name": "Eleg Anima LoRA (trigger: elegg)",
+      "name": "Elegg Anima LoRA (trigger: elegg)",
       "enabled": true,
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/elegg_anima.safetensors",
-      "path": "models/loras/anima/elegg_anima.safetensors",
+      "path": "models/loras/anima/Elegg - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/elegg_anima.safetensors"
+      ]
     },
     {
       "name": "Swimsuit Elegg Anima LoRA (trigger: swimsuitelegg)",
@@ -111,11 +117,14 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_swimsuit_elegg.safetensors",
-      "path": "models/loras/anima/anima_swimsuit_elegg.safetensors",
+      "path": "models/loras/anima/Swimsuit Elegg - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_swimsuit_elegg.safetensors"
+      ]
     },
     {
       "name": "Eris Anima LoRA (trigger: 3r1s)",
@@ -123,11 +132,14 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_eris.safetensors",
-      "path": "models/loras/anima/anima_eris.safetensors",
+      "path": "models/loras/anima/Eris - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_eris.safetensors"
+      ]
     },
     {
       "name": "Noir Anima LoRA (trigger: n0ir)",
@@ -135,11 +147,14 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_noir.safetensors",
-      "path": "models/loras/anima/anima_noir.safetensors",
+      "path": "models/loras/anima/Noir - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_noir.safetensors"
+      ]
     },
     {
       "name": "Anis Anima LoRA (trigger: an1s)",
@@ -147,23 +162,29 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_anis.safetensors",
-      "path": "models/loras/anima/anima_anis.safetensors",
+      "path": "models/loras/anima/Anis - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_anis.safetensors"
+      ]
     },
     {
-      "name": "Anisstar Anima LoRA v3 pruned (trigger: an1sstar)",
+      "name": "Anis Star Anima LoRA v2 pruned (trigger: an1sstar)",
       "enabled": true,
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_anisstar%20(2).safetensors",
-      "path": "models/loras/anima/anima_anisstar_v2.safetensors",
+      "path": "models/loras/anima/Anis Star - Anima v2.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_anisstar_v2.safetensors"
+      ]
     },
     {
       "name": "Anis Star 3 Anima LoRA (trigger: an1sstar3)",
@@ -171,23 +192,29 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_anisstar3.safetensors",
-      "path": "models/loras/anima/anima_anisstar3.safetensors",
+      "path": "models/loras/anima/Anis Star 3 - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_anisstar3.safetensors"
+      ]
     },
     {
-      "name": "Skin texture detail LoRA",
+      "name": "Skin Texture Detail LoRA",
       "enabled": true,
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/%40skintextureV1%20(1).safetensors",
-      "path": "models/loras/anima/skintextureV1.safetensors",
+      "path": "models/loras/anima/Skin Texture Detail.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/skintextureV1.safetensors"
+      ]
     },
     {
       "name": "Rapi Anima LoRA (trigger: r4pi)",
@@ -195,7 +222,22 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_rapi.safetensors",
-      "path": "models/loras/anima/anima_rapi.safetensors",
+      "path": "models/loras/anima/Rapi - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_rapi.safetensors"
+      ]
+    },
+    {
+      "name": "Swimsuit Rapi Anima LoRA (trigger: swimsuitrapi)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_swimsuitrapi.safetensors",
+      "path": "models/loras/anima/Swimsuit Rapi - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
@@ -207,11 +249,14 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_ain.safetensors",
-      "path": "models/loras/anima/anima_ain.safetensors",
+      "path": "models/loras/anima/Ain - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_ain.safetensors"
+      ]
     },
     {
       "name": "Prika Anima LoRA (trigger: pr1ka)",
@@ -219,11 +264,14 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_prika.safetensors",
-      "path": "models/loras/anima/anima_prika.safetensors",
+      "path": "models/loras/anima/Prika - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_prika.safetensors"
+      ]
     },
     {
       "name": "Siren Anima LoRA (trigger: s1ren)",
@@ -231,11 +279,14 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_siren.safetensors",
-      "path": "models/loras/anima/anima_siren.safetensors",
+      "path": "models/loras/anima/Siren - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_siren.safetensors"
+      ]
     },
     {
       "name": "Cinderella Anima LoRA (trigger: c1nde)",
@@ -243,19 +294,37 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/c1nde_anima.safetensors",
-      "path": "models/loras/anima/c1nde_anima.safetensors",
+      "path": "models/loras/anima/Cinderella - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/c1nde_anima.safetensors"
+      ]
     },
     {
-      "name": "Bikini Cinderella Anima LoRA",
+      "name": "Bikini Cinderella Anima LoRA (trigger: bikinicinderella)",
       "enabled": true,
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_bikinicinderella.safetensors",
-      "path": "models/loras/anima/anima_bikinicinderella.safetensors",
+      "path": "models/loras/anima/Bikini Cinderella - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_bikinicinderella.safetensors"
+      ]
+    },
+    {
+      "name": "White Cinderella Anima LoRA (trigger: whitecinderella)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_whitecinderella.safetensors",
+      "path": "models/loras/anima/White Cinderella - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
@@ -267,11 +336,14 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_mast.safetensors",
-      "path": "models/loras/anima/anima_mast.safetensors",
+      "path": "models/loras/anima/Mast - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_mast.safetensors"
+      ]
     },
     {
       "name": "Maxwell Anima LoRA (trigger: m4xwell)",
@@ -279,11 +351,14 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_maxwell.safetensors",
-      "path": "models/loras/anima/anima_maxwell.safetensors",
+      "path": "models/loras/anima/Maxwell - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_maxwell.safetensors"
+      ]
     },
     {
       "name": "Moran Anima LoRA (trigger: m0ran)",
@@ -291,11 +366,14 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_moran%20(1).safetensors",
-      "path": "models/loras/anima/anima_moran_1.safetensors",
+      "path": "models/loras/anima/Moran - Anima v1.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_moran_1.safetensors"
+      ]
     },
     {
       "name": "Laplace Anima LoRA (trigger: l4place)",
@@ -303,23 +381,29 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_laplace.safetensors",
-      "path": "models/loras/anima/anima_laplace.safetensors",
+      "path": "models/loras/anima/Laplace - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_laplace.safetensors"
+      ]
     },
     {
-      "name": "Marciana Anima LoRA (trigger: m4rc14na)",
+      "name": "Marciana Anima LoRA (trigger: m4rciana)",
       "enabled": true,
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_marciana.safetensors",
-      "path": "models/loras/anima/anima_marciana.safetensors",
+      "path": "models/loras/anima/Marciana - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_marciana.safetensors"
+      ]
     },
     {
       "name": "Marciana Anima LoRA (3) (trigger: m4rciana)",
@@ -327,11 +411,14 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_marciana%20(3).safetensors",
-      "path": "models/loras/anima/anima_marciana_3.safetensors",
+      "path": "models/loras/anima/Marciana - Anima v3.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_marciana_3.safetensors"
+      ]
     },
     {
       "name": "Snow White Anima LoRA (trigger: sn0white)",
@@ -339,11 +426,14 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_snowwhite%20(1).safetensors",
-      "path": "models/loras/anima/anima_snowwhite_1.safetensors",
+      "path": "models/loras/anima/Snow White - Anima v1.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_snowwhite_1.safetensors"
+      ]
     },
     {
       "name": "Blanc Anima LoRA (trigger: bl4nc)",
@@ -351,11 +441,14 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_blanc.safetensors",
-      "path": "models/loras/anima/anima_blanc.safetensors",
+      "path": "models/loras/anima/Blanc - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_blanc.safetensors"
+      ]
     },
     {
       "name": "Privaty Anima LoRA (trigger: pr1vaty)",
@@ -363,23 +456,29 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_privaty.safetensors",
-      "path": "models/loras/anima/anima_privaty.safetensors",
+      "path": "models/loras/anima/Privaty - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_privaty.safetensors"
+      ]
     },
     {
-      "name": "Label Anima LoRA",
+      "name": "Label Anima LoRA (trigger: l4bel)",
       "enabled": true,
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_label.safetensors",
-      "path": "models/loras/anima/anima_label.safetensors",
+      "path": "models/loras/anima/Label - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_label.safetensors"
+      ]
     },
     {
       "name": "Ark Ranger Black Anima LoRA (trigger: 4rkblack)",
@@ -387,11 +486,14 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_arkrangerblack.safetensors",
-      "path": "models/loras/anima/anima_arkrangerblack.safetensors",
+      "path": "models/loras/anima/Ark Ranger Black - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_arkrangerblack.safetensors"
+      ]
     },
     {
       "name": "Little Mermaid Anima LoRA (trigger: l1m3rma1d)",
@@ -399,11 +501,14 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_littlemermaid.safetensors",
-      "path": "models/loras/anima/anima_littlemermaid.safetensors",
+      "path": "models/loras/anima/Little Mermaid - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_littlemermaid.safetensors"
+      ]
     },
     {
       "name": "Pixel AnimaB CAME LoRA (trigger: CAME)",
@@ -411,11 +516,14 @@
       "required": false,
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/pixel-AnimaB_V10-V1-CAME.safetensors",
-      "path": "models/loras/anima/pixel-AnimaB_V10-V1-CAME.safetensors",
+      "path": "models/loras/anima/CAME - Pixel AnimaB V10.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/pixel-AnimaB_V10-V1-CAME.safetensors"
+      ]
     }
   ]
 }

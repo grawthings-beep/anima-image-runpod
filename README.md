@@ -87,6 +87,11 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/*.safetensors
 ```
 
+Character LoRAs in `models/loras/anima/` use character-first filenames such as
+`Rapi - Anima.safetensors`, so ComfyUI's LoRA selector is easier to scan. When
+a renamed LoRA is present, the startup downloader removes its older manifest
+filename such as `anima_rapi.safetensors`.
+
 Additional LoRAs can be added at Pod startup without rebuilding the Docker image. Put a small manifest in `EXTRA_MODEL_MANIFEST_JSON` or host it somewhere and set `EXTRA_MODEL_MANIFEST_URL`.
 
 Example for a future Velvet LoRA:

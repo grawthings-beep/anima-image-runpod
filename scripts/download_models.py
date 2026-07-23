@@ -128,6 +128,26 @@ def run_urllib(url, output, headers):
     tmp.replace(output)
 
 
+def cleanup_legacy_paths(entry, root, output, name):
+    if not output.exists():
+        return
+
+    root = root.resolve()
+    output = output.resolve()
+    for value in entry.get("legacy_paths", []):
+        legacy = (root / value).resolve()
+        if legacy == output:
+            continue
+        try:
+            legacy.relative_to(root)
+        except ValueError:
+            print(f"WARN: refusing legacy path outside root: {legacy}", file=sys.stderr)
+            continue
+        if legacy.is_file():
+            legacy.unlink()
+            print(f"REMOVE legacy: {name} -> {legacy}")
+
+
 def download(entry, root, use_aria2, connections, splits):
     entry = expand(entry)
     if not entry.get("enabled", True):
@@ -165,6 +185,7 @@ def download(entry, root, use_aria2, connections, splits):
             output.unlink()
         else:
             print(f"SKIP existing: {name}")
+            cleanup_legacy_paths(entry, root, output, name)
             return
 
     headers = cleaned_headers(entry.get("headers"))
@@ -183,6 +204,7 @@ def download(entry, root, use_aria2, connections, splits):
             raise RuntimeError(f"downloaded file is too small: {output} ({output.stat().st_size} bytes)")
         if expected_sha and sha256_file(output) != expected_sha:
             raise RuntimeError(f"sha256 mismatch: {output}")
+        cleanup_legacy_paths(entry, root, output, name)
     except Exception as exc:
         tmp = output.with_suffix(output.suffix + ".tmp")
         if tmp.exists():
