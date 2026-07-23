@@ -361,6 +361,18 @@
       ]
     },
     {
+      "name": "Old Maxwell Anima LoRA (trigger: oldmaxwell)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_oldmaxwell.safetensors",
+      "path": "models/loras/anima/Old Maxwell - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
       "name": "Moran Anima LoRA (trigger: m0ran)",
       "enabled": true,
       "required": false,
