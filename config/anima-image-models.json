@@ -550,12 +550,36 @@
       ]
     },
     {
-      "name": "Latex Turn Anima Base v1 LoRA (trigger: latexturn)",
+      "name": "T-Rex Studio Style Anima v1 LoRA (trigger: trex studio style)",
       "enabled": true,
       "required": false,
       "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/latexturn_anima_base_v1.safetensors",
-      "path": "models/loras/anima/Latex Turn - Anima Base v1.safetensors",
+      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/T-Rex_Studio_Style_Anima_V1.safetensors",
+      "path": "models/loras/anima/T-Rex Studio Style - Anima v1.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Togawagatame Anima v1 LoRA (trigger: togawagatame)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/togawagatame_anima_v1.safetensors",
+      "path": "models/loras/anima/Togawagatame - Anima v1.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Diving Anima v40 LoRA (trigger: diving)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/divingAnima_v40.safetensors",
+      "path": "models/loras/anima/Diving - Anima v40.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
