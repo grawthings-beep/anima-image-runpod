@@ -170,6 +170,7 @@ mkdir -p "${WORKSPACE_DIR}/input" \
          "${MODEL_ROOT}/models/embeddings" \
          "${MODEL_ROOT}/models/model_patches" \
          "${MODEL_ROOT}/models/loras/anima" \
+         "${MODEL_ROOT}/models/loras/anima_pose" \
          "${MODEL_ROOT}/models/text_encoders" \
          "${MODEL_ROOT}/models/unet" \
          "${MODEL_ROOT}/models/upscale_models" \

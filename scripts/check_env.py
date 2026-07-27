@@ -32,6 +32,7 @@ def main():
         model_root / "models" / "vae",
         model_root / "models" / "loras",
         model_root / "models" / "loras" / "anima",
+        model_root / "models" / "loras" / "anima_pose",
         model_root / "models" / "model_patches",
     ]:
         print(f"path: {path} exists={path.exists()}")
