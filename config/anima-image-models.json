@@ -550,6 +550,51 @@
       ]
     },
     {
+      "name": "Hisako Kotobuki AnimaXL LoRA (trigger: hisako_kotobuki)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/hisako_kotobuki_animaXL.safetensors",
+      "path": "models/loras/anima/Hisako Kotobuki - AnimaXL.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/hisako_kotobuki_animaXL.safetensors"
+      ]
+    },
+    {
+      "name": "Arisu Terui AnimaXL LoRA (trigger: arisu_terui)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/arisu_terui_animaXL.safetensors",
+      "path": "models/loras/anima/Arisu Terui - AnimaXL.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/arisu_terui_animaXL.safetensors"
+      ]
+    },
+    {
+      "name": "Komaro Michinoku AnimaXL LoRA (trigger: komaro_michinoku)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/komaro_michinoku_animaXL.safetensors",
+      "path": "models/loras/anima/Komaro Michinoku - AnimaXL.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/komaro_michinoku_animaXL.safetensors"
+      ]
+    },
+    {
       "name": "Pixel AnimaB CAME LoRA (trigger: CAME)",
       "enabled": true,
       "required": false,
@@ -619,174 +664,6 @@
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/03_FemalePOV_Anima.safetensors",
       "path": "models/loras/anima_pose/03 Female POV - Anima.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576
-    },
-    {
-      "name": "Jack-O Challenge Pose Anima pose LoRA (trigger: jacko challenge pose)",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/04_JackO_Challenge_Pose_Anima.safetensors",
-      "path": "models/loras/anima_pose/04 Jack-O Challenge Pose - Anima.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576
-    },
-    {
-      "name": "Cowgirl Position Anima pose LoRA (trigger: cowgirl position)",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/05_Cowgirl_Position_Anima.safetensors",
-      "path": "models/loras/anima_pose/05 Cowgirl Position - Anima.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576
-    },
-    {
-      "name": "Prone Bone POV Anima pose LoRA (trigger: prone bone pov)",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/06_ProneBone_POV_Anima.safetensors",
-      "path": "models/loras/anima_pose/06 Prone Bone POV - Anima.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576
-    },
-    {
-      "name": "Spooning POV Anima pose LoRA (trigger: spooning pov)",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/07_Spooning_POV_Anima.safetensors",
-      "path": "models/loras/anima_pose/07 Spooning POV - Anima.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576
-    },
-    {
-      "name": "Standing Carry Ekiben Anima pose LoRA (trigger: standing carry ekiben)",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/08_StandingCarry_Ekiben_Anima.safetensors",
-      "path": "models/loras/anima_pose/08 Standing Carry Ekiben - Anima.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576
-    },
-    {
-      "name": "Thigh Grab Lifting Sex Anima pose LoRA (trigger: thigh grab lifting sex)",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/09_ThighGrab_LiftingSex_Anima.safetensors",
-      "path": "models/loras/anima_pose/09 Thigh Grab Lifting Sex - Anima.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576
-    },
-    {
-      "name": "Standing Split Stool Sex Anima pose LoRA (trigger: standing split stool sex)",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/10_Standing_SplitStool_Sex_Anima.safetensors",
-      "path": "models/loras/anima_pose/10 Standing Split Stool Sex - Anima.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576
-    },
-    {
-      "name": "Sixty Nine 69 Anima pose LoRA (trigger: sixty nine 69)",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/11_SixtyNine_69_Anima.safetensors",
-      "path": "models/loras/anima_pose/11 Sixty Nine 69 - Anima.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576
-    },
-    {
-      "name": "Deepthroat Anima pose LoRA (trigger: deepthroat)",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/12_Deepthroat_Anima.safetensors",
-      "path": "models/loras/anima_pose/12 Deepthroat - Anima.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576
-    },
-    {
-      "name": "Deeper Penetration Deepthroat Anima pose LoRA (trigger: deeper penetration deepthroat)",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/13_DeeperPenetration_Deepthroat_Anima.safetensors",
-      "path": "models/loras/anima_pose/13 Deeper Penetration Deepthroat - Anima.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576
-    },
-    {
-      "name": "Rough Sex Fucked Silly Anima pose LoRA (trigger: rough sex fucked silly)",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/14_RoughSex_FuckedSilly_Anima.safetensors",
-      "path": "models/loras/anima_pose/14 Rough Sex Fucked Silly - Anima.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576
-    },
-    {
-      "name": "Lifting Ass Fucking Blowjob Anima pose LoRA (trigger: lifting ass fucking blowjob)",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/15_LiftingAss_FuckingBlowjob_Anima.safetensors",
-      "path": "models/loras/anima_pose/15 Lifting Ass Fucking Blowjob - Anima.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576
-    },
-    {
-      "name": "Hentai Comic Hardcore Anima pose LoRA (trigger: hentai comic hardcore)",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/16_HentaiComic_HardCore_Anima.safetensors",
-      "path": "models/loras/anima_pose/16 Hentai Comic Hardcore - Anima.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576
-    },
-    {
-      "name": "IrnArt Poses Missionary Anima pose LoRA (trigger: irnart poses missionary)",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/17_IrnArt_Poses_Missionary_Anima.safetensors",
-      "path": "models/loras/anima_pose/17 IrnArt Poses Missionary - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
