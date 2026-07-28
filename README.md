@@ -43,6 +43,7 @@ DOWNLOAD_MODELS=1
 DOWNLOAD_OPTIONAL_MODELS=1
 MODEL_DOWNLOAD_JOBS=4
 CUDA_PREFLIGHT=1
+CUDA_NORMALIZE_VISIBLE_DEVICES=1
 CUDA_STARTUP_ATTEMPTS=12
 CUDA_STARTUP_DELAY_SECONDS=5
 INSTALL_EASY_USE=0
@@ -69,6 +70,12 @@ downloads or optional node setup. It retries for about one minute by default,
 which covers normal GPU initialization delays without repeating the expensive
 startup work. If every attempt fails, fully stop and restart the Pod or choose
 another GPU host.
+
+The image is based on RunPod ComfyUI's pinned CUDA 12.8 build for RTX 50-series
+support. `CUDA_NORMALIZE_VISIBLE_DEVICES=1` also repairs a stale or invalid
+single-GPU visibility value before PyTorch initializes CUDA. Startup logs print
+the GPU driver and PyTorch CUDA build so host-side GPU failures can be
+distinguished from image compatibility problems.
 
 The default startup does not install ControlNet Aux, OpenPose Editor, Easy-Use,
 or rgthree. The bundled Anima workflows use the Anima custom node plus ComfyUI

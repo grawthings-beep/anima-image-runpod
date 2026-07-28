@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.7
 
 # Anima is natively supported in recent ComfyUI builds.
-ARG BASE_IMAGE=runpod/comfyui:latest
+ARG BASE_IMAGE=runpod/comfyui:1.4.4-cuda12.8
 FROM ${BASE_IMAGE}
 
 ENV DEBIAN_FRONTEND=noninteractive \

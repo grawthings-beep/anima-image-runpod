@@ -44,6 +44,42 @@ PYTHON_BIN="$(find_python_bin)" || {
   exit 2
 }
 
+normalize_cuda_visibility() {
+  if [[ "${CUDA_NORMALIZE_VISIBLE_DEVICES:-1}" != "1" ]]; then
+    return 0
+  fi
+  if ! command -v nvidia-smi >/dev/null 2>&1; then
+    return 0
+  fi
+
+  local gpu_count current
+  gpu_count="$( (nvidia-smi -L 2>/dev/null || true) | sed -n 's/^GPU [0-9][0-9]*: .*/x/p' | wc -l | tr -d '[:space:]')"
+  if [[ "${gpu_count}" != "1" ]]; then
+    return 0
+  fi
+
+  current="${CUDA_VISIBLE_DEVICES-}"
+  if [[ "${current}" != "0" ]]; then
+    export CUDA_VISIBLE_DEVICES=0
+    echo "Using CUDA_VISIBLE_DEVICES=0 for the single GPU exposed by RunPod (was: ${current:-unset})."
+  fi
+}
+
+print_cuda_diagnostics() {
+  echo "CUDA environment: CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES-unset} NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES-unset}"
+  if command -v nvidia-smi >/dev/null 2>&1; then
+    nvidia-smi --query-gpu=name,driver_version,pci.bus_id --format=csv,noheader 2>&1 || true
+  fi
+  "${PYTHON_BIN}" - <<'PY' || true
+try:
+    import torch
+except Exception as exc:
+    print(f"PyTorch import failed: {type(exc).__name__}: {exc}")
+else:
+    print(f"PyTorch build: torch={torch.__version__} cuda={torch.version.cuda}")
+PY
+}
+
 check_cuda_once() {
   "${PYTHON_BIN}" - <<'PY'
 import torch
@@ -82,6 +118,9 @@ wait_for_cuda() {
     echo "WARN: invalid CUDA_STARTUP_DELAY_SECONDS=${delay}; using 5."
     delay=5
   fi
+
+  normalize_cuda_visibility
+  print_cuda_diagnostics
 
   local attempt
   for ((attempt = 1; attempt <= attempts; attempt++)); do
