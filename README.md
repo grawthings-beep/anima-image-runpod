@@ -42,6 +42,9 @@ MODEL_ROOT=/workspace/comfyui
 DOWNLOAD_MODELS=1
 DOWNLOAD_OPTIONAL_MODELS=1
 MODEL_DOWNLOAD_JOBS=4
+CUDA_PREFLIGHT=1
+CUDA_STARTUP_ATTEMPTS=12
+CUDA_STARTUP_DELAY_SECONDS=5
 INSTALL_EASY_USE=0
 INSTALL_RGTHREE=0
 INSTALL_CONTROLNET_AUX=0
@@ -60,6 +63,12 @@ still downloading the bundled character LoRAs, separated pose/action LoRAs, and
 the Anima Turbo LoRA.
 Downloads run in parallel; increase or decrease `MODEL_DOWNLOAD_JOBS` if the
 network or disk is the bottleneck.
+
+`CUDA_PREFLIGHT=1` verifies that PyTorch can read GPU memory before any model
+downloads or optional node setup. It retries for about one minute by default,
+which covers normal GPU initialization delays without repeating the expensive
+startup work. If every attempt fails, fully stop and restart the Pod or choose
+another GPU host.
 
 The default startup does not install ControlNet Aux, OpenPose Editor, Easy-Use,
 or rgthree. The bundled Anima workflows use the Anima custom node plus ComfyUI

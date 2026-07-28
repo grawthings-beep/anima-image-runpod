@@ -44,6 +44,63 @@ PYTHON_BIN="$(find_python_bin)" || {
   exit 2
 }
 
+check_cuda_once() {
+  "${PYTHON_BIN}" - <<'PY'
+import torch
+
+try:
+    if not torch.cuda.is_available():
+        raise RuntimeError("torch.cuda.is_available() returned false")
+    device = torch.cuda.current_device()
+    free_bytes, total_bytes = torch.cuda.mem_get_info(device)
+    name = torch.cuda.get_device_name(device)
+except Exception as exc:
+    print(f"CUDA unavailable: {type(exc).__name__}: {exc}")
+    raise SystemExit(1)
+
+gib = 1024 ** 3
+print(
+    f"CUDA ready: device={device} name={name} "
+    f"free={free_bytes / gib:.1f}GiB total={total_bytes / gib:.1f}GiB"
+)
+PY
+}
+
+wait_for_cuda() {
+  if [[ "${CUDA_PREFLIGHT:-1}" != "1" ]]; then
+    echo "Skipping CUDA preflight."
+    return 0
+  fi
+
+  local attempts="${CUDA_STARTUP_ATTEMPTS:-12}"
+  local delay="${CUDA_STARTUP_DELAY_SECONDS:-5}"
+  if ! [[ "${attempts}" =~ ^[1-9][0-9]*$ ]]; then
+    echo "WARN: invalid CUDA_STARTUP_ATTEMPTS=${attempts}; using 12."
+    attempts=12
+  fi
+  if ! [[ "${delay}" =~ ^[0-9]+$ ]]; then
+    echo "WARN: invalid CUDA_STARTUP_DELAY_SECONDS=${delay}; using 5."
+    delay=5
+  fi
+
+  local attempt
+  for ((attempt = 1; attempt <= attempts; attempt++)); do
+    echo "CUDA preflight ${attempt}/${attempts}..."
+    if check_cuda_once; then
+      return 0
+    fi
+    if command -v nvidia-smi >/dev/null 2>&1; then
+      nvidia-smi -L 2>&1 || true
+    fi
+    if (( attempt < attempts )); then
+      sleep "${delay}"
+    fi
+  done
+
+  echo "ERROR: CUDA never became usable. Fully stop and restart the Pod; if it persists, redeploy it on another GPU host." >&2
+  return 75
+}
+
 sync_git_repo() {
   local repo="$1"
   local ref="$2"
@@ -120,6 +177,8 @@ print(f"torch={torch.__version__} cuda={torch.version.cuda} torchaudio={torchaud
 PY
 }
 
+wait_for_cuda
+
 # --- Install / refresh the Anima Variation Batch custom node ---
 if [[ "${INSTALL_ANIMA_NODE:-1}" == "1" ]]; then
   ANIMA_NODE_REPO="${ANIMA_NODE_REPO:-https://github.com/grawthings-beep/comfyui-anima-variation-batch.git}"
@@ -147,6 +206,12 @@ if [[ "${INSTALL_ANIMA_NODE:-1}" == "1" ]]; then
     shopt -u nullglob
   else
     echo "WARN: Anima workflow directory was not found at ${ANIMA_WORKFLOW_SOURCE_DIR}."
+  fi
+
+  LEGACY_POSE_DEPTH_WORKFLOW="${COMFYUI_WORKFLOW_DIR}/anima_hiresfix_esrgan_pose_depth.json"
+  if [[ -f "${LEGACY_POSE_DEPTH_WORKFLOW}" ]]; then
+    rm -f "${LEGACY_POSE_DEPTH_WORKFLOW}"
+    echo "Removed retired workflow: ${LEGACY_POSE_DEPTH_WORKFLOW}"
   fi
 fi
 
