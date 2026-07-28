@@ -550,47 +550,23 @@
       ]
     },
     {
-      "name": "Hisako Kotobuki AnimaXL LoRA (trigger: hisako_kotobuki)",
+      "name": "Kotobuki Hisako Anima LoRA (trigger: kotobukihisako)",
       "enabled": true,
       "required": false,
       "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/hisako_kotobuki_animaXL.safetensors",
-      "path": "models/loras/anima/Hisako Kotobuki - AnimaXL.safetensors",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_kotobukihisako.safetensors",
+      "path": "models/loras/anima/Kotobuki Hisako - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
       "min_bytes": 1048576,
       "legacy_paths": [
-        "models/loras/anima/hisako_kotobuki_animaXL.safetensors"
-      ]
-    },
-    {
-      "name": "Arisu Terui AnimaXL LoRA (trigger: arisu_terui)",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/arisu_terui_animaXL.safetensors",
-      "path": "models/loras/anima/Arisu Terui - AnimaXL.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576,
-      "legacy_paths": [
-        "models/loras/anima/arisu_terui_animaXL.safetensors"
-      ]
-    },
-    {
-      "name": "Komaro Michinoku AnimaXL LoRA (trigger: komaro_michinoku)",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/komaro_michinoku_animaXL.safetensors",
-      "path": "models/loras/anima/Komaro Michinoku - AnimaXL.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1048576,
-      "legacy_paths": [
+        "models/loras/anima/anima_kotobukihisako.safetensors",
+        "models/loras/anima/Hisako Kotobuki - AnimaXL.safetensors",
+        "models/loras/anima/hisako_kotobuki_animaXL.safetensors",
+        "models/loras/anima/Arisu Terui - AnimaXL.safetensors",
+        "models/loras/anima/arisu_terui_animaXL.safetensors",
+        "models/loras/anima/Komaro Michinoku - AnimaXL.safetensors",
         "models/loras/anima/komaro_michinoku_animaXL.safetensors"
       ]
     },
