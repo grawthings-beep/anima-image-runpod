@@ -30,6 +30,7 @@ def main():
         model_root / "models" / "diffusion_models",
         model_root / "models" / "text_encoders",
         model_root / "models" / "vae",
+        model_root / "models" / "upscale_models",
         model_root / "models" / "loras",
         model_root / "models" / "loras" / "anima",
         model_root / "models" / "loras" / "anima_pose",

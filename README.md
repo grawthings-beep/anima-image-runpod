@@ -84,6 +84,7 @@ Startup downloads:
 /workspace/comfyui/models/diffusion_models/nova3DCGAM_v10.safetensors
 /workspace/comfyui/models/text_encoders/qwen_3_06b_base.safetensors
 /workspace/comfyui/models/vae/qwen_image_vae.safetensors
+/workspace/comfyui/models/upscale_models/4x-AnimeSharp.pth
 /workspace/comfyui/models/loras/qwen_image_union_diffsynth_lora.safetensors
 /workspace/comfyui/models/loras/anima-turbo-lora-v0.2.safetensors
 /workspace/comfyui/models/loras/anima/*.safetensors
@@ -121,9 +122,17 @@ normal Workflows list, currently:
 anima_hiresfix_esrgan_2pass.json
 anima_hiresfix_esrgan_pose_depth.json
 anima_hiresfix_latent_2pass.json
+anima_two_character_regional_hiresfix.json
 ```
 
 Restart an existing Pod once after this image update to receive them.
+
+`anima_two_character_regional_hiresfix.json` uses current ComfyUI core regional
+conditioning and model-only LoRA hooks, so it does not require another helper
+node pack. Character A and B each get a soft spatial mask and an independent
+character LoRA while sharing one diffusion trajectory for more natural contact,
+lighting, and composition. The same regional conditioning is applied again
+after the AnimeSharp 1.5x upscale and VAE re-encode.
 
 Use the official Anima ComfyUI workflow or any native Anima/Qwen Image workflow, then select:
 
@@ -131,6 +140,7 @@ Use the official Anima ComfyUI workflow or any native Anima/Qwen Image workflow,
 Diffusion model: waiANIMA_v10Base10.safetensors
 Text encoder: qwen_3_06b_base.safetensors
 VAE: qwen_image_vae.safetensors
+Upscale model: 4x-AnimeSharp.pth
 Control LoRA: qwen_image_union_diffsynth_lora.safetensors
 Speed LoRA: anima-turbo-lora-v0.2.safetensors
 ```

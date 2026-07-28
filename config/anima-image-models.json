@@ -76,6 +76,15 @@
       "min_bytes": 10485760
     },
     {
+      "name": "4x AnimeSharp ESRGAN upscaler",
+      "enabled": true,
+      "required": true,
+      "method": "curl",
+      "url": "https://huggingface.co/Kim2091/AnimeSharp/resolve/main/4x-AnimeSharp.pth",
+      "path": "models/upscale_models/4x-AnimeSharp.pth",
+      "min_bytes": 60000000
+    },
+    {
       "name": "Qwen Image Union Control LoRA (Canny / depth / pose)",
       "enabled": true,
       "required": true,
