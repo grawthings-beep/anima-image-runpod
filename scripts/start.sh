@@ -208,11 +208,15 @@ if [[ "${INSTALL_ANIMA_NODE:-1}" == "1" ]]; then
     echo "WARN: Anima workflow directory was not found at ${ANIMA_WORKFLOW_SOURCE_DIR}."
   fi
 
-  LEGACY_POSE_DEPTH_WORKFLOW="${COMFYUI_WORKFLOW_DIR}/anima_hiresfix_esrgan_pose_depth.json"
-  if [[ -f "${LEGACY_POSE_DEPTH_WORKFLOW}" ]]; then
-    rm -f "${LEGACY_POSE_DEPTH_WORKFLOW}"
-    echo "Removed retired workflow: ${LEGACY_POSE_DEPTH_WORKFLOW}"
-  fi
+  for retired_workflow in \
+    "anima_hiresfix_esrgan_pose_depth.json" \
+    "anima_two_character_regional_hiresfix.json"; do
+    retired_workflow_path="${COMFYUI_WORKFLOW_DIR}/${retired_workflow}"
+    if [[ -f "${retired_workflow_path}" ]]; then
+      rm -f "${retired_workflow_path}"
+      echo "Removed retired workflow: ${retired_workflow_path}"
+    fi
+  done
 fi
 
 WORKSPACE_DIR="${WORKSPACE_DIR:-/workspace/comfyui}"

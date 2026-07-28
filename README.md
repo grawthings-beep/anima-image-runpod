@@ -129,19 +129,23 @@ normal Workflows list, currently:
 
 ```text
 anima_hiresfix_esrgan_2pass.json
-anima_hiresfix_esrgan_pose_depth.json
 anima_hiresfix_latent_2pass.json
-anima_two_character_regional_hiresfix.json
+anima_two_character_inpaint_hiresfix.json
 ```
 
 Restart an existing Pod once after this image update to receive them.
 
-`anima_two_character_regional_hiresfix.json` uses current ComfyUI core regional
-conditioning and model-only LoRA hooks, so it does not require another helper
-node pack. Character A and B each get a soft spatial mask and an independent
-character LoRA while sharing one diffusion trajectory for more natural contact,
-lighting, and composition. The same regional conditioning is applied again
-after the AnimeSharp 1.5x upscale and VAE re-encode.
+`anima_two_character_inpaint_hiresfix.json` first builds the complete
+interaction with Character A's LoRA and a temporary second character. Copy that
+base image into the included Load Image node, paint Character B with ComfyUI's
+Mask Editor, then enable the red final Save node. Character B's LoRA is applied
+only to the masked inpaint sampler. The result is composited over the untouched
+base pixels, upscaled with AnimeSharp, resized to an exact 1160x1536, and
+finished with a low-denoise Turbo pass.
+
+The workflow uses current ComfyUI core inpaint nodes and the bundled readable
+character selector. It does not require ControlNet Aux, OpenPose, or another
+inpaint node pack.
 
 Use the official Anima ComfyUI workflow or any native Anima/Qwen Image workflow, then select:
 
