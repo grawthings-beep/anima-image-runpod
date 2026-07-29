@@ -667,6 +667,18 @@
         "Authorization": "Bearer ${HF_TOKEN}"
       },
       "min_bytes": 1048576
+    },
+    {
+      "name": "Lillie Pokemon Anima Base v1.0 LoRA (by Konan)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/LilliePokemon_AnimaBaseV10_byKonan.safetensors",
+      "path": "models/loras/anima/LilliePokemon_AnimaBaseV10_byKonan.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
     }
   ]
 }
