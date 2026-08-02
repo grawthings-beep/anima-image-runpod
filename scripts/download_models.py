@@ -106,6 +106,11 @@ def run_aria2(url, output, connections, splits):
         "--continue=true",
         "--allow-overwrite=true",
         "--auto-file-renaming=false",
+        "--file-allocation=none",
+        "--connect-timeout=30",
+        "--timeout=60",
+        "--retry-wait=3",
+        "--max-tries=10",
         "--summary-interval=10",
         "--console-log-level=warn",
         "-d",
@@ -175,6 +180,7 @@ def download(entry, root, use_aria2, connections, splits):
     output = root / entry["path"]
     expected_sha = (entry.get("sha256") or "").lower()
     min_bytes = int(entry.get("min_bytes") or 0)
+    method = str(entry.get("method") or "").lower()
 
     if output.exists() and output.stat().st_size > 0:
         if min_bytes and output.stat().st_size < min_bytes:
@@ -189,14 +195,19 @@ def download(entry, root, use_aria2, connections, splits):
             return
 
     headers = cleaned_headers(entry.get("headers"))
-    method = str(entry.get("method") or "").lower()
+    aria2_available = (
+        use_aria2
+        and entry.get("use_aria2", True)
+        and method in ("", "aria2", "curl")
+        and shutil.which("aria2c")
+    )
     try:
         print(f"DOWNLOAD: {name}")
-        if method == "curl" and shutil.which("curl"):
-            run_curl(url, output, headers)
-        elif use_aria2 and entry.get("use_aria2", True) and shutil.which("aria2c"):
+        if aria2_available:
             final_url = resolve_download_url(url, headers)
             run_aria2(final_url, output, connections, splits)
+        elif method == "curl" and shutil.which("curl"):
+            run_curl(url, output, headers)
         else:
             run_urllib(url, output, headers)
 
@@ -209,6 +220,9 @@ def download(entry, root, use_aria2, connections, splits):
         tmp = output.with_suffix(output.suffix + ".tmp")
         if tmp.exists():
             tmp.unlink()
+        aria2_control = pathlib.Path(f"{output}.aria2")
+        if aria2_control.exists():
+            aria2_control.unlink()
         if output.exists():
             output.unlink()
         if required:

@@ -62,8 +62,11 @@ Keep tokens in RunPod Secrets. Do not paste raw tokens into a public template.
 The default manifest keeps the diffusion model set focused on WAI-ANIMA, while
 still downloading the bundled character LoRAs, separated pose/action LoRAs, and
 the Anima Turbo LoRA.
-Downloads run in parallel; increase or decrease `MODEL_DOWNLOAD_JOBS` if the
-network or disk is the bottleneck.
+Downloads run in parallel. aria2 is preferred when available, using
+`ARIA2_CONNECTIONS` and `ARIA2_SPLITS` per file, while
+`MODEL_DOWNLOAD_JOBS` controls how many files download at once. Existing
+manifest entries use aria2 even when their fallback method is `curl`; set
+`use_aria2` to `false` only when a source does not support ranged downloads.
 
 `CUDA_PREFLIGHT=1` verifies that PyTorch can read GPU memory before any model
 downloads or optional node setup. It retries for about one minute by default,
