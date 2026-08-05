@@ -59,9 +59,10 @@ COMFYUI_ARGS=--reserve-vram 3
 
 Keep tokens in RunPod Secrets. Do not paste raw tokens into a public template.
 
-The default manifest downloads WAI-ANIMA as its only diffusion checkpoint,
-along with the bundled character LoRAs, separated pose/action LoRAs, and the
-Anima Turbo LoRA.
+The default manifest downloads WAI-ANIMA plus the Miaomiao 3D and 2.5D
+checkpoints. Automatic LoRA downloads are limited to Qwen Image Union Control,
+Anima Turbo, Skin Texture Detail, Old Maxwell, and Marciana v3. The other LoRAs
+remain available from the bundled on-demand catalog.
 Downloads run in parallel. aria2 is preferred when available, using
 `ARIA2_CONNECTIONS` and `ARIA2_SPLITS` per file, while
 `MODEL_DOWNLOAD_JOBS` controls how many files download at once. Existing
@@ -99,24 +100,37 @@ Startup downloads:
 
 ```text
 /workspace/comfyui/models/diffusion_models/waiANIMA_v10Base10.safetensors
+/workspace/comfyui/models/diffusion_models/Miaomiao 3D Harem - Anima LH 3D 1.0.safetensors
+/workspace/comfyui/models/diffusion_models/Miaomiao Harem Ani 2.5D - v1.0.safetensors
 /workspace/comfyui/models/text_encoders/qwen_3_06b_base.safetensors
 /workspace/comfyui/models/vae/qwen_image_vae.safetensors
 /workspace/comfyui/models/upscale_models/4x-AnimeSharp.pth
 /workspace/comfyui/models/loras/qwen_image_union_diffsynth_lora.safetensors
 /workspace/comfyui/models/loras/anima-turbo-lora-v0.2.safetensors
-/workspace/comfyui/models/loras/anima/*.safetensors
-/workspace/comfyui/models/loras/anima_pose/*.safetensors
+/workspace/comfyui/models/loras/anima/Skin Texture Detail.safetensors
+/workspace/comfyui/models/loras/anima/Old Maxwell - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Marciana - Anima v3.safetensors
 ```
 
-Character LoRAs in `models/loras/anima/` use character-first filenames such as
-`Rapi - Anima.safetensors`, so ComfyUI's LoRA selector is easier to scan. When
-a renamed LoRA is present, the startup downloader removes its older manifest
-filename such as `anima_rapi.safetensors`.
+List the 39 on-demand LoRAs:
 
-Pose/action LoRAs are stored separately in `models/loras/anima_pose/` with
-numbered readable names so they stay out of the character LoRA folder. On
-startup, the downloader removes retired BAS, Nova, and Diving checkpoint files
-from persistent model storage once WAI-ANIMA is available.
+```bash
+python /opt/runpod-anima-image/scripts/download_on_demand.py --list
+```
+
+Download one by its saved filename:
+
+```bash
+python /opt/runpod-anima-image/scripts/download_on_demand.py "Rapi - Anima.safetensors"
+```
+
+The command uses the same `HF_TOKEN`, model root, and accelerated aria2 settings
+as startup. Character-first filenames keep ComfyUI's LoRA selector readable.
+
+Pose/action LoRAs are stored separately in `models/loras/anima_pose/` when they
+are downloaded on demand. On startup, the downloader removes retired BAS,
+Nova, and Diving checkpoint files from persistent model storage once WAI-ANIMA
+is available.
 
 Additional LoRAs can be added at Pod startup without rebuilding the Docker image. Put a small manifest in `EXTRA_MODEL_MANIFEST_JSON` or host it somewhere and set `EXTRA_MODEL_MANIFEST_URL`.
 

@@ -261,6 +261,7 @@ fi
 WORKSPACE_DIR="${WORKSPACE_DIR:-/workspace/comfyui}"
 MODEL_ROOT="${MODEL_ROOT:-${WORKSPACE_DIR}}"
 CONFIG_DIR="${CONFIG_DIR:-/workspace/config}"
+MODEL_MANIFEST_FROM_ENV="${MODEL_MANIFEST:-}"
 MODEL_MANIFEST="${MODEL_MANIFEST:-${CONFIG_DIR}/anima-image-models.json}"
 EXTRA_MODEL_MANIFEST="${EXTRA_MODEL_MANIFEST:-${CONFIG_DIR}/extra-anima-image-models.json}"
 PORT="${PORT:-8188}"
@@ -373,8 +374,10 @@ request = urllib.request.Request(url, headers={"User-Agent": "runpod-anima-image
 with urllib.request.urlopen(request, timeout=60) as response:
     output.write_bytes(response.read())
 PY
-elif [[ ! -f "${MODEL_MANIFEST}" && -f /opt/runpod-anima-image/config/anima-image-models.json ]]; then
-  cp /opt/runpod-anima-image/config/anima-image-models.json "${MODEL_MANIFEST}"
+elif [[ -f /opt/runpod-anima-image/config/anima-image-models.json ]]; then
+  if [[ -z "${MODEL_MANIFEST_FROM_ENV}" || ! -f "${MODEL_MANIFEST}" ]]; then
+    cp /opt/runpod-anima-image/config/anima-image-models.json "${MODEL_MANIFEST}"
+  fi
 fi
 
 if [[ -n "${EXTRA_MODEL_MANIFEST_JSON:-}" ]]; then

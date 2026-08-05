@@ -4,20 +4,49 @@ import unittest
 
 
 MANIFEST = pathlib.Path(__file__).parents[1] / "config" / "anima-image-models.json"
+ON_DEMAND = pathlib.Path(__file__).parents[1] / "config" / "anima-image-on-demand-loras.json"
 
 
 class ManifestTests(unittest.TestCase):
-    def test_wai_anima_is_the_only_diffusion_checkpoint(self):
+    def test_expected_diffusion_checkpoints_are_downloaded(self):
         models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
         diffusion_models = [
             model for model in models if model["path"].startswith("models/diffusion_models/")
         ]
 
-        self.assertEqual(len(diffusion_models), 1)
         self.assertEqual(
-            diffusion_models[0]["path"],
-            "models/diffusion_models/waiANIMA_v10Base10.safetensors",
+            {model["path"] for model in diffusion_models},
+            {
+                "models/diffusion_models/waiANIMA_v10Base10.safetensors",
+                "models/diffusion_models/Miaomiao 3D Harem - Anima LH 3D 1.0.safetensors",
+                "models/diffusion_models/Miaomiao Harem Ani 2.5D - v1.0.safetensors",
+            },
         )
+
+    def test_only_selected_loras_download_automatically(self):
+        models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
+        auto_loras = {model["name"] for model in models if model["path"].startswith("models/loras/")}
+
+        self.assertEqual(
+            auto_loras,
+            {
+                "Qwen Image Union Control LoRA (Canny / depth / pose)",
+                "Anima Turbo LoRA v0.2 (speed / step-reduction)",
+                "Skin Texture Detail LoRA",
+                "Old Maxwell Anima LoRA (trigger: oldmaxwell)",
+                "Marciana Anima LoRA (3) (trigger: m4rciana)",
+            },
+        )
+
+    def test_other_loras_are_kept_in_the_on_demand_catalog(self):
+        base = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
+        on_demand = json.loads(ON_DEMAND.read_text(encoding="utf-8"))["models"]
+        base_paths = {model["path"] for model in base}
+        on_demand_paths = {model["path"] for model in on_demand}
+
+        self.assertEqual(len(on_demand), 39)
+        self.assertTrue(all(path.startswith("models/loras/") for path in on_demand_paths))
+        self.assertTrue(base_paths.isdisjoint(on_demand_paths))
 
     def test_retired_checkpoints_are_cleaned_from_existing_storage(self):
         models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
