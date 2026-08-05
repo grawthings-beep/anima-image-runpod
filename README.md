@@ -59,9 +59,9 @@ COMFYUI_ARGS=--reserve-vram 3
 
 Keep tokens in RunPod Secrets. Do not paste raw tokens into a public template.
 
-The default manifest keeps the diffusion model set focused on WAI-ANIMA, while
-still downloading the bundled character LoRAs, separated pose/action LoRAs, and
-the Anima Turbo LoRA.
+The default manifest downloads WAI-ANIMA as its only diffusion checkpoint,
+along with the bundled character LoRAs, separated pose/action LoRAs, and the
+Anima Turbo LoRA.
 Downloads run in parallel. aria2 is preferred when available, using
 `ARIA2_CONNECTIONS` and `ARIA2_SPLITS` per file, while
 `MODEL_DOWNLOAD_JOBS` controls how many files download at once. Existing
@@ -99,8 +99,6 @@ Startup downloads:
 
 ```text
 /workspace/comfyui/models/diffusion_models/waiANIMA_v10Base10.safetensors
-/workspace/comfyui/models/diffusion_models/Diving - Anima v40.safetensors
-/workspace/comfyui/models/diffusion_models/nova3DCGAM_v10.safetensors
 /workspace/comfyui/models/text_encoders/qwen_3_06b_base.safetensors
 /workspace/comfyui/models/vae/qwen_image_vae.safetensors
 /workspace/comfyui/models/upscale_models/4x-AnimeSharp.pth
@@ -116,10 +114,9 @@ a renamed LoRA is present, the startup downloader removes its older manifest
 filename such as `anima_rapi.safetensors`.
 
 Pose/action LoRAs are stored separately in `models/loras/anima_pose/` with
-numbered readable names so they stay out of the character LoRA folder. `Diving -
-Anima v40.safetensors` is treated as a diffusion checkpoint, not a LoRA; if an
-older Pod has it under `models/loras/anima/`, the downloader removes that
-legacy file after the checkpoint path exists.
+numbered readable names so they stay out of the character LoRA folder. On
+startup, the downloader removes retired BAS, Nova, and Diving checkpoint files
+from persistent model storage once WAI-ANIMA is available.
 
 Additional LoRAs can be added at Pod startup without rebuilding the Docker image. Put a small manifest in `EXTRA_MODEL_MANIFEST_JSON` or host it somewhere and set `EXTRA_MODEL_MANIFEST_URL`.
 

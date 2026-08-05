@@ -10,44 +10,11 @@
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1073741824
-    },
-    {
-      "name": "BAS Better Anime Style Anima Base v1.0",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/BASBetterAnimeStyleAnimaBase_baseV10.safetensors",
-      "path": "models/diffusion_models/BASBetterAnimeStyleAnimaBase_baseV10.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1073741824
-    },
-    {
-      "name": "Nova 3D CGAM v1.0 Anima checkpoint",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/nova3DCGAM_v10.safetensors",
-      "path": "models/diffusion_models/nova3DCGAM_v10.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1073741824
-    },
-    {
-      "name": "Diving Anima v40 checkpoint",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/divingAnima_v40.safetensors",
-      "path": "models/diffusion_models/Diving - Anima v40.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
       "min_bytes": 1073741824,
       "legacy_paths": [
+        "models/diffusion_models/BASBetterAnimeStyleAnimaBase_baseV10.safetensors",
+        "models/diffusion_models/nova3DCGAM_v10.safetensors",
+        "models/diffusion_models/Diving - Anima v40.safetensors",
         "models/loras/anima/Diving - Anima v40.safetensors"
       ]
     },
