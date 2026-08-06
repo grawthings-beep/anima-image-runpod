@@ -114,13 +114,13 @@ Startup downloads:
 List the 40 on-demand LoRAs:
 
 ```bash
-python /opt/runpod-anima-image/scripts/download_on_demand.py --list
+python3 /opt/runpod-anima-image/scripts/download_on_demand.py --list
 ```
 
 Download one by its saved filename:
 
 ```bash
-python /opt/runpod-anima-image/scripts/download_on_demand.py "Rapi - Anima.safetensors"
+python3 /opt/runpod-anima-image/scripts/download_on_demand.py "Rapi - Anima.safetensors"
 ```
 
 The command uses the same `HF_TOKEN`, model root, and accelerated aria2 settings
