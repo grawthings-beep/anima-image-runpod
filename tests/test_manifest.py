@@ -18,8 +18,7 @@ class ManifestTests(unittest.TestCase):
             {model["path"] for model in diffusion_models},
             {
                 "models/diffusion_models/waiANIMA_v10Base10.safetensors",
-                "models/diffusion_models/Miaomiao 3D Harem - Anima LH 3D 1.0.safetensors",
-                "models/diffusion_models/Miaomiao Harem Ani 2.5D - v1.0.safetensors",
+                "models/diffusion_models/nova3DCGAM_v10.safetensors",
             },
         )
 
@@ -44,9 +43,13 @@ class ManifestTests(unittest.TestCase):
         base_paths = {model["path"] for model in base}
         on_demand_paths = {model["path"] for model in on_demand}
 
-        self.assertEqual(len(on_demand), 39)
+        self.assertEqual(len(on_demand), 40)
         self.assertTrue(all(path.startswith("models/loras/") for path in on_demand_paths))
         self.assertTrue(base_paths.isdisjoint(on_demand_paths))
+        self.assertIn(
+            "models/loras/anima/Tsurumaki Mizuka and Kawasumi Ouka - Anima v1.safetensors",
+            on_demand_paths,
+        )
 
     def test_retired_checkpoints_are_cleaned_from_existing_storage(self):
         models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
@@ -57,6 +60,14 @@ class ManifestTests(unittest.TestCase):
             wai["legacy_paths"],
         )
         self.assertIn(
+            "models/diffusion_models/Miaomiao 3D Harem - Anima LH 3D 1.0.safetensors",
+            wai["legacy_paths"],
+        )
+        self.assertIn(
+            "models/diffusion_models/Miaomiao Harem Ani 2.5D - v1.0.safetensors",
+            wai["legacy_paths"],
+        )
+        self.assertNotIn(
             "models/diffusion_models/nova3DCGAM_v10.safetensors",
             wai["legacy_paths"],
         )

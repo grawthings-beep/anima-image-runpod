@@ -59,8 +59,8 @@ COMFYUI_ARGS=--reserve-vram 3
 
 Keep tokens in RunPod Secrets. Do not paste raw tokens into a public template.
 
-The default manifest downloads WAI-ANIMA plus the Miaomiao 3D and 2.5D
-checkpoints. Automatic LoRA downloads are limited to Qwen Image Union Control,
+The default manifest downloads WAI-ANIMA plus the Nova 3D CGAM checkpoint.
+Automatic LoRA downloads are limited to Qwen Image Union Control,
 Anima Turbo, Skin Texture Detail, Old Maxwell, and Marciana v3. The other LoRAs
 remain available from the bundled on-demand catalog.
 Downloads run in parallel. aria2 is preferred when available, using
@@ -100,8 +100,7 @@ Startup downloads:
 
 ```text
 /workspace/comfyui/models/diffusion_models/waiANIMA_v10Base10.safetensors
-/workspace/comfyui/models/diffusion_models/Miaomiao 3D Harem - Anima LH 3D 1.0.safetensors
-/workspace/comfyui/models/diffusion_models/Miaomiao Harem Ani 2.5D - v1.0.safetensors
+/workspace/comfyui/models/diffusion_models/nova3DCGAM_v10.safetensors
 /workspace/comfyui/models/text_encoders/qwen_3_06b_base.safetensors
 /workspace/comfyui/models/vae/qwen_image_vae.safetensors
 /workspace/comfyui/models/upscale_models/4x-AnimeSharp.pth
@@ -112,7 +111,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Marciana - Anima v3.safetensors
 ```
 
-List the 39 on-demand LoRAs:
+List the 40 on-demand LoRAs:
 
 ```bash
 python /opt/runpod-anima-image/scripts/download_on_demand.py --list
@@ -129,8 +128,8 @@ as startup. Character-first filenames keep ComfyUI's LoRA selector readable.
 
 Pose/action LoRAs are stored separately in `models/loras/anima_pose/` when they
 are downloaded on demand. On startup, the downloader removes retired BAS,
-Nova, and Diving checkpoint files from persistent model storage once WAI-ANIMA
-is available.
+Miaomiao, and Diving checkpoint files from persistent model storage once
+WAI-ANIMA is available.
 
 Additional LoRAs can be added at Pod startup without rebuilding the Docker image. Put a small manifest in `EXTRA_MODEL_MANIFEST_JSON` or host it somewhere and set `EXTRA_MODEL_MANIFEST_URL`.
 

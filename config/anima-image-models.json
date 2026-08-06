@@ -13,30 +13,19 @@
       "min_bytes": 1073741824,
       "legacy_paths": [
         "models/diffusion_models/BASBetterAnimeStyleAnimaBase_baseV10.safetensors",
-        "models/diffusion_models/nova3DCGAM_v10.safetensors",
+        "models/diffusion_models/Miaomiao 3D Harem - Anima LH 3D 1.0.safetensors",
+        "models/diffusion_models/Miaomiao Harem Ani 2.5D - v1.0.safetensors",
         "models/diffusion_models/Diving - Anima v40.safetensors",
         "models/loras/anima/Diving - Anima v40.safetensors"
       ]
     },
     {
-      "name": "Miaomiao 3D Harem Anima LH 3D 1.0 checkpoint",
+      "name": "Nova 3D CGAM v1.0 Anima checkpoint",
       "enabled": true,
       "required": false,
       "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/miaomiao3DHarem_animaLH3D10.safetensors",
-      "path": "models/diffusion_models/Miaomiao 3D Harem - Anima LH 3D 1.0.safetensors",
-      "headers": {
-        "Authorization": "Bearer ${HF_TOKEN}"
-      },
-      "min_bytes": 1073741824
-    },
-    {
-      "name": "Miaomiao Harem Ani 2.5D v1.0 checkpoint",
-      "enabled": true,
-      "required": false,
-      "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-civitai-backup/resolve/main/MiaomiaoHaremAni25D_v10_txt.safetensors",
-      "path": "models/diffusion_models/Miaomiao Harem Ani 2.5D - v1.0.safetensors",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/nova3DCGAM_v10.safetensors",
+      "path": "models/diffusion_models/nova3DCGAM_v10.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
