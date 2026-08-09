@@ -111,7 +111,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Marciana - Anima v3.safetensors
 ```
 
-List the 40 on-demand LoRAs:
+List the 41 on-demand LoRAs:
 
 ```bash
 python3 /opt/runpod-anima-image/scripts/download_on_demand.py --list

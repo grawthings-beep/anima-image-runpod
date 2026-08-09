@@ -572,6 +572,18 @@
       ],
       "min_bytes": 104857600,
       "sha256": "02c26a9e97c37c1d38a5360be9b1e0da8a9e34c33e922a1e67cef98aa1099c36"
+    },
+    {
+      "name": "Phantom Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_phantom.safetensors",
+      "path": "models/loras/anima/Phantom - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
     }
   ]
 }

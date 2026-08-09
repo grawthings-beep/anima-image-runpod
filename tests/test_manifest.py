@@ -43,11 +43,15 @@ class ManifestTests(unittest.TestCase):
         base_paths = {model["path"] for model in base}
         on_demand_paths = {model["path"] for model in on_demand}
 
-        self.assertEqual(len(on_demand), 40)
+        self.assertEqual(len(on_demand), 41)
         self.assertTrue(all(path.startswith("models/loras/") for path in on_demand_paths))
         self.assertTrue(base_paths.isdisjoint(on_demand_paths))
         self.assertIn(
             "models/loras/anima/Tsurumaki Mizuka and Kawasumi Ouka - Anima v1.safetensors",
+            on_demand_paths,
+        )
+        self.assertIn(
+            "models/loras/anima/Phantom - Anima.safetensors",
             on_demand_paths,
         )
 
