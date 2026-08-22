@@ -141,6 +141,21 @@
       "legacy_paths": [
         "models/loras/anima/anima_rapunzel.safetensors"
       ]
+    },
+    {
+      "name": "Flora Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_flora.safetensors",
+      "path": "models/loras/anima/Flora - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_flora.safetensors"
+      ]
     }
   ]
 }
