@@ -156,6 +156,21 @@
       "legacy_paths": [
         "models/loras/anima/anima_flora.safetensors"
       ]
+    },
+    {
+      "name": "Red Hood Anima LoRA (trigger: r3dh00d)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_redhood.safetensors",
+      "path": "models/loras/anima/Red Hood - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_redhood.safetensors"
+      ]
     }
   ]
 }

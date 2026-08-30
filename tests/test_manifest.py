@@ -36,6 +36,7 @@ class ManifestTests(unittest.TestCase):
                 "Marciana Anima LoRA (3) (trigger: m4rciana)",
                 "Rapunzel Anima LoRA (trigger: r4punz3l)",
                 "Flora Anima LoRA",
+                "Red Hood Anima LoRA (trigger: r3dh00d)",
             },
         )
 
