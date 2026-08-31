@@ -171,6 +171,22 @@
       "legacy_paths": [
         "models/loras/anima/anima_redhood.safetensors"
       ]
+    },
+    {
+      "name": "Face Fucking Anima action LoRA (trigger: f4c3fk)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://civitai.red/api/download/models/3280974?fileId=3165170",
+      "path": "models/loras/anima_pose/Face Fucking - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${CIVITAI_TOKEN}"
+      },
+      "requires_env": [
+        "CIVITAI_TOKEN"
+      ],
+      "min_bytes": 104857600,
+      "sha256": "726681ab0ee0ff44796067da74f8813cec7a4a34b4c412313f4748c5eb050434"
     }
   ]
 }
