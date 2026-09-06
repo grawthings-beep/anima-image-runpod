@@ -38,6 +38,7 @@ class ManifestTests(unittest.TestCase):
                 "Flora Anima LoRA",
                 "Red Hood Anima LoRA (trigger: r3dh00d)",
                 "Face Fucking Anima action LoRA (trigger: f4c3fk)",
+                "Pixel Art Anima LoRA v2.1 (triggers: pixel art, pix_merge)",
             },
         )
 
@@ -47,7 +48,7 @@ class ManifestTests(unittest.TestCase):
         base_paths = {model["path"] for model in base}
         on_demand_paths = {model["path"] for model in on_demand}
 
-        self.assertEqual(len(on_demand), 41)
+        self.assertEqual(len(on_demand), 40)
         self.assertTrue(all(path.startswith("models/loras/") for path in on_demand_paths))
         self.assertTrue(base_paths.isdisjoint(on_demand_paths))
         self.assertIn(
