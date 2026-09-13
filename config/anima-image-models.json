@@ -173,6 +173,48 @@
       ]
     },
     {
+      "name": "Mint Anima LoRA (trigger: m1nt)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_lora.safetensors",
+      "path": "models/loras/anima/Mint - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/mint_anima.safetensors"
+      ]
+    },
+    {
+      "name": "Swimsuit Rapi Anima LoRA (trigger: swimsuitrapi)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_swimsuitrapi.safetensors",
+      "path": "models/loras/anima/Swimsuit Rapi - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Swimsuit Elegg Anima LoRA (trigger: swimsuitelegg)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_swimsuit_elegg.safetensors",
+      "path": "models/loras/anima/Swimsuit Elegg - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/anima_swimsuit_elegg.safetensors"
+      ]
+    },
+    {
       "name": "Face Fucking Anima action LoRA (trigger: f4c3fk)",
       "enabled": true,
       "required": false,
@@ -189,12 +231,34 @@
       "sha256": "726681ab0ee0ff44796067da74f8813cec7a4a34b4c412313f4748c5eb050434"
     },
     {
+      "name": "3D Animated Realistic Style Anima LoRA (trigger: @3DYLFGxg)",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://civitai.red/api/download/models/3008464?fileId=2887664",
+      "path": "models/loras/anima_style/3D Animated Realistic Style - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${CIVITAI_TOKEN}"
+      },
+      "requires_env": [
+        "CIVITAI_TOKEN"
+      ],
+      "min_bytes": 104857600,
+      "sha256": "99c1757244753ef3d531fd7ce6bac82793e2f0ee04d3bf89f13f8b9b33ee44c8"
+    },
+    {
       "name": "Pixel Art Anima LoRA v2.1 (triggers: pixel art, pix_merge)",
       "enabled": true,
       "required": false,
       "method": "curl",
       "url": "https://civitai.red/api/download/models/2952565?fileId=2831870",
       "path": "models/loras/anima_style/Pixel Art - Anima v2.1.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${CIVITAI_TOKEN}"
+      },
+      "requires_env": [
+        "CIVITAI_TOKEN"
+      ],
       "min_bytes": 10485760,
       "sha256": "6736b6f754a8b50d6e3c867c6f76c63873cda0ba5457ef40b01f4260ffe40d82",
       "legacy_paths": [

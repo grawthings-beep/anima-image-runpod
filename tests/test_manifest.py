@@ -37,7 +37,11 @@ class ManifestTests(unittest.TestCase):
                 "Rapunzel Anima LoRA (trigger: r4punz3l)",
                 "Flora Anima LoRA",
                 "Red Hood Anima LoRA (trigger: r3dh00d)",
+                "Mint Anima LoRA (trigger: m1nt)",
+                "Swimsuit Rapi Anima LoRA (trigger: swimsuitrapi)",
+                "Swimsuit Elegg Anima LoRA (trigger: swimsuitelegg)",
                 "Face Fucking Anima action LoRA (trigger: f4c3fk)",
+                "3D Animated Realistic Style Anima LoRA (trigger: @3DYLFGxg)",
                 "Pixel Art Anima LoRA v2.1 (triggers: pixel art, pix_merge)",
                 "Anis Anima LoRA (trigger: 4n1s)",
                 "Ain Anima LoRA (trigger: 41n)",
@@ -54,9 +58,16 @@ class ManifestTests(unittest.TestCase):
         base_paths = {model["path"] for model in base}
         on_demand_paths = {model["path"] for model in on_demand}
 
-        self.assertEqual(len(on_demand), 35)
+        self.assertEqual(len(on_demand), 32)
         self.assertTrue(all(path.startswith("models/loras/") for path in on_demand_paths))
         self.assertTrue(base_paths.isdisjoint(on_demand_paths))
+        for moved_path in (
+            "models/loras/anima/Mint - Anima.safetensors",
+            "models/loras/anima/Swimsuit Rapi - Anima.safetensors",
+            "models/loras/anima/Swimsuit Elegg - Anima.safetensors",
+        ):
+            self.assertIn(moved_path, base_paths)
+            self.assertNotIn(moved_path, on_demand_paths)
         self.assertIn(
             "models/loras/anima/Tsurumaki Mizuka and Kawasumi Ouka - Anima v1.safetensors",
             on_demand_paths,
@@ -65,6 +76,22 @@ class ManifestTests(unittest.TestCase):
             "models/loras/anima/Anis Star 3 - Anima.safetensors",
             on_demand_paths,
         )
+
+    def test_civitai_style_loras_use_authenticated_signed_url_resolution(self):
+        models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
+        by_path = {model["path"]: model for model in models}
+
+        for path in (
+            "models/loras/anima_style/3D Animated Realistic Style - Anima.safetensors",
+            "models/loras/anima_style/Pixel Art - Anima v2.1.safetensors",
+        ):
+            model = by_path[path]
+            self.assertEqual(
+                model["headers"]["Authorization"],
+                "Bearer ${CIVITAI_TOKEN}",
+            )
+            self.assertEqual(model["requires_env"], ["CIVITAI_TOKEN"])
+            self.assertEqual(len(model["sha256"]), 64)
 
     def test_retired_checkpoints_are_cleaned_from_existing_storage(self):
         models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]

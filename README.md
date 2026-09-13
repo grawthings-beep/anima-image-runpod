@@ -62,9 +62,10 @@ Keep tokens in RunPod Secrets. Do not paste raw tokens into a public template.
 The default manifest downloads WAI-ANIMA plus the Nova 3D CGAM checkpoint.
 Automatic LoRA downloads are limited to Qwen Image Union Control,
 Anima Turbo, Skin Texture Detail, Old Maxwell, Marciana v3, Rapunzel, Flora,
-Red Hood, Anis, Ain, Bikini Cinderella, Laplace 2, Phantom, Face Fucking, and
-Pixel Art, plus Guilty Mighty Bunny. The other LoRAs remain available from the
-bundled on-demand catalog.
+Red Hood, Mint, Swimsuit Rapi, Swimsuit Elegg, Anis, Ain, Bikini Cinderella,
+Laplace 2, Phantom, Guilty Mighty Bunny, Face Fucking, Pixel Art, and 3D
+Animated Realistic Style. The other LoRAs remain available from the bundled
+on-demand catalog.
 Downloads run in parallel. aria2 is preferred when available, using
 `ARIA2_CONNECTIONS` and `ARIA2_SPLITS` per file, while
 `MODEL_DOWNLOAD_JOBS` controls how many files download at once. Existing
@@ -114,6 +115,9 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Rapunzel - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Flora - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Hood - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Mint - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Swimsuit Rapi - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Swimsuit Elegg - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Anis - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Ain - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Bikini Cinderella - Anima.safetensors
@@ -121,10 +125,11 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Phantom - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Guilty Mighty Bunny - Anima.safetensors
 /workspace/comfyui/models/loras/anima_pose/Face Fucking - Anima.safetensors
+/workspace/comfyui/models/loras/anima_style/3D Animated Realistic Style - Anima.safetensors
 /workspace/comfyui/models/loras/anima_style/Pixel Art - Anima v2.1.safetensors
 ```
 
-List the 35 on-demand LoRAs:
+List the 32 on-demand LoRAs:
 
 ```bash
 python3 /opt/runpod-anima-image/scripts/download_on_demand.py --list
