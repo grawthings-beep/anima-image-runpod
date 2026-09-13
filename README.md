@@ -63,7 +63,8 @@ The default manifest downloads WAI-ANIMA plus the Nova 3D CGAM checkpoint.
 Automatic LoRA downloads are limited to Qwen Image Union Control,
 Anima Turbo, Skin Texture Detail, Old Maxwell, Marciana v3, Rapunzel, Flora,
 Red Hood, Anis, Ain, Bikini Cinderella, Laplace 2, Phantom, Face Fucking, and
-Pixel Art. The other LoRAs remain available from the bundled on-demand catalog.
+Pixel Art, plus Guilty Mighty Bunny. The other LoRAs remain available from the
+bundled on-demand catalog.
 Downloads run in parallel. aria2 is preferred when available, using
 `ARIA2_CONNECTIONS` and `ARIA2_SPLITS` per file, while
 `MODEL_DOWNLOAD_JOBS` controls how many files download at once. Existing
@@ -118,6 +119,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Bikini Cinderella - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Laplace 2 - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Phantom - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Guilty Mighty Bunny - Anima.safetensors
 /workspace/comfyui/models/loras/anima_pose/Face Fucking - Anima.safetensors
 /workspace/comfyui/models/loras/anima_style/Pixel Art - Anima v2.1.safetensors
 ```
