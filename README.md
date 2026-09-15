@@ -59,12 +59,10 @@ COMFYUI_ARGS=--reserve-vram 3
 
 Keep tokens in RunPod Secrets. Do not paste raw tokens into a public template.
 
-The default manifest downloads WAI-ANIMA plus the Nova 3D CGAM checkpoint.
-Automatic LoRA downloads are limited to Qwen Image Union Control,
-Anima Turbo, Skin Texture Detail, Old Maxwell, Marciana v3, Rapunzel, Flora,
-Red Hood, Mint, Swimsuit Rapi, Swimsuit Elegg, Anis, Ain, Bikini Cinderella,
-Laplace 2, Phantom, Guilty Mighty Bunny, Face Fucking, Pixel Art, and 3D
-Animated Realistic Style. The other LoRAs remain available from the bundled
+The default manifest downloads WAI-ANIMA plus the Nova 3D CGAM checkpoint,
+every bundled NIKKE character LoRA, Qwen Image Union Control, Anima Turbo,
+Skin Texture Detail, Face Fucking, Pixel Art, and 3D Animated Realistic Style.
+The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
 on-demand catalog.
 Downloads run in parallel. aria2 is preferred when available, using
 `ARIA2_CONNECTIONS` and `ARIA2_SPLITS` per file, while
@@ -118,6 +116,26 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Mint - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Swimsuit Rapi - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Swimsuit Elegg - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Elegg - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Noir - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Anis Star - Anima v2.safetensors
+/workspace/comfyui/models/loras/anima/Anis Star 3 - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Rapi - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Prika - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Siren - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Cinderella - Anima.safetensors
+/workspace/comfyui/models/loras/anima/White Cinderella - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Mast - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Maxwell - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Moran - Anima v1.safetensors
+/workspace/comfyui/models/loras/anima/Laplace - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Marciana - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Snow White - Anima v1.safetensors
+/workspace/comfyui/models/loras/anima/Blanc - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Privaty - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Label - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Ark Ranger Black - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Little Mermaid - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Anis - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Ain - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Bikini Cinderella - Anima.safetensors
@@ -129,7 +147,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima_style/Pixel Art - Anima v2.1.safetensors
 ```
 
-List the 32 on-demand LoRAs:
+List the 12 remaining on-demand LoRAs:
 
 ```bash
 python3 /opt/runpod-anima-image/scripts/download_on_demand.py --list

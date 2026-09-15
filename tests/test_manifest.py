@@ -40,6 +40,26 @@ class ManifestTests(unittest.TestCase):
                 "Mint Anima LoRA (trigger: m1nt)",
                 "Swimsuit Rapi Anima LoRA (trigger: swimsuitrapi)",
                 "Swimsuit Elegg Anima LoRA (trigger: swimsuitelegg)",
+                "Elegg Anima LoRA (trigger: elegg)",
+                "Noir Anima LoRA (trigger: n0ir)",
+                "Anis Star Anima LoRA v2 pruned (trigger: an1sstar)",
+                "Anis Star 3 Anima LoRA (trigger: an1sstar3)",
+                "Rapi Anima LoRA (trigger: r4pi)",
+                "Prika Anima LoRA (trigger: pr1ka)",
+                "Siren Anima LoRA (trigger: s1ren)",
+                "Cinderella Anima LoRA (trigger: c1nde)",
+                "White Cinderella Anima LoRA (trigger: whitecinderella)",
+                "Mast Anima LoRA (trigger: m4st)",
+                "Maxwell Anima LoRA (trigger: m4xwell)",
+                "Moran Anima LoRA (trigger: m0ran)",
+                "Laplace Anima LoRA (trigger: l4place)",
+                "Marciana Anima LoRA (trigger: m4rciana)",
+                "Snow White Anima LoRA (trigger: sn0white)",
+                "Blanc Anima LoRA (trigger: bl4nc)",
+                "Privaty Anima LoRA (trigger: pr1vaty)",
+                "Label Anima LoRA (trigger: l4bel)",
+                "Ark Ranger Black Anima LoRA (trigger: 4rkblack)",
+                "Little Mermaid Anima LoRA (trigger: l1m3rma1d)",
                 "Face Fucking Anima action LoRA (trigger: f4c3fk)",
                 "3D Animated Realistic Style Anima LoRA (trigger: @3DYLFGxg)",
                 "Pixel Art Anima LoRA v2.1 (triggers: pixel art, pix_merge)",
@@ -58,7 +78,7 @@ class ManifestTests(unittest.TestCase):
         base_paths = {model["path"] for model in base}
         on_demand_paths = {model["path"] for model in on_demand}
 
-        self.assertEqual(len(on_demand), 32)
+        self.assertEqual(len(on_demand), 12)
         self.assertTrue(all(path.startswith("models/loras/") for path in on_demand_paths))
         self.assertTrue(base_paths.isdisjoint(on_demand_paths))
         for moved_path in (
@@ -68,13 +88,22 @@ class ManifestTests(unittest.TestCase):
         ):
             self.assertIn(moved_path, base_paths)
             self.assertNotIn(moved_path, on_demand_paths)
-        self.assertIn(
-            "models/loras/anima/Tsurumaki Mizuka and Kawasumi Ouka - Anima v1.safetensors",
+        self.assertEqual(
             on_demand_paths,
-        )
-        self.assertIn(
-            "models/loras/anima/Anis Star 3 - Anima.safetensors",
-            on_demand_paths,
+            {
+                "models/loras/anima/Eris - Anima.safetensors",
+                "models/loras/anima/Kotobuki Hisako - Anima.safetensors",
+                "models/loras/anima/Michinoku Komaro - Anima.safetensors",
+                "models/loras/anima/There's No Way I Can Have a Lover - Anima.safetensors",
+                "models/loras/anima/Watajisai - Anima v1.safetensors",
+                "models/loras/anima/T-Rex Studio Style - Anima v1.safetensors",
+                "models/loras/anima/Togawagatame - Anima v1.safetensors",
+                "models/loras/anima_pose/01 BallsDeep - Anima v1.safetensors",
+                "models/loras/anima_pose/02 SuperPosition SexPose - Anima.safetensors",
+                "models/loras/anima_pose/03 Female POV - Anima.safetensors",
+                "models/loras/anima/LilliePokemon_AnimaBaseV10_byKonan.safetensors",
+                "models/loras/anima/Tsurumaki Mizuka and Kawasumi Ouka - Anima v1.safetensors",
+            },
         )
 
     def test_civitai_style_loras_use_authenticated_signed_url_resolution(self):
