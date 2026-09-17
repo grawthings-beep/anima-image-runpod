@@ -34,6 +34,7 @@ class ManifestTests(unittest.TestCase):
                 "Skin Texture Detail LoRA",
                 "Old Maxwell Anima LoRA (trigger: oldmaxwell)",
                 "Marciana Anima LoRA (3) (trigger: m4rciana)",
+                "Marciana Marine Study Anima LoRA",
                 "Rapunzel Anima LoRA (trigger: r4punz3l)",
                 "Flora Anima LoRA",
                 "Red Hood Anima LoRA (trigger: r3dh00d)",

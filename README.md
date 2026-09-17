@@ -110,6 +110,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Skin Texture Detail.safetensors
 /workspace/comfyui/models/loras/anima/Old Maxwell - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Marciana - Anima v3.safetensors
+/workspace/comfyui/models/loras/anima/Marciana Marine Study - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Rapunzel - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Flora - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Hood - Anima.safetensors
