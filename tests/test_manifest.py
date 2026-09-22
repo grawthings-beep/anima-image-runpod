@@ -69,7 +69,8 @@ class ManifestTests(unittest.TestCase):
                 "Bikini Cinderella Anima LoRA (trigger: b1k1c1nde)",
                 "Laplace 2 Anima LoRA (trigger: l4pl4ce2)",
                 "Phantom Anima LoRA (trigger: ph4nt0m)",
-                "Guilty Mighty Bunny Anima LoRA (trigger: gu1ltybunny)",
+                "Guilty Anima LoRA",
+                "Sin Anima LoRA",
             },
         )
 

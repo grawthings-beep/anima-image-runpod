@@ -142,7 +142,8 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Bikini Cinderella - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Laplace 2 - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Phantom - Anima.safetensors
-/workspace/comfyui/models/loras/anima/Guilty Mighty Bunny - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Guilty - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Sin - Anima.safetensors
 /workspace/comfyui/models/loras/anima_pose/Face Fucking - Anima.safetensors
 /workspace/comfyui/models/loras/anima_style/3D Animated Realistic Style - Anima.safetensors
 /workspace/comfyui/models/loras/anima_style/Pixel Art - Anima v2.1.safetensors
@@ -167,6 +168,10 @@ Pose/action LoRAs are stored separately in `models/loras/anima_pose/` when they
 are downloaded on demand. On startup, the downloader removes retired BAS,
 Miaomiao, and Diving checkpoint files from persistent model storage once
 WAI-ANIMA is available.
+
+Guilty replaces the previous Guilty Mighty Bunny LoRA. Its old readable and
+original filenames are removed only after the new Guilty file is available
+and passes the configured download checks.
 
 Additional LoRAs can be added at Pod startup without rebuilding the Docker image. Put a small manifest in `EXTRA_MODEL_MANIFEST_JSON` or host it somewhere and set `EXTRA_MODEL_MANIFEST_URL`.
 

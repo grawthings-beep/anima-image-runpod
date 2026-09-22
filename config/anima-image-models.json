@@ -354,20 +354,32 @@
       ]
     },
     {
-      "name": "Guilty Mighty Bunny Anima LoRA (trigger: gu1ltybunny)",
+      "name": "Guilty Anima LoRA",
       "enabled": true,
       "required": false,
       "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_guilty_mighty_bunny.safetensors",
-      "path": "models/loras/anima/Guilty Mighty Bunny - Anima.safetensors",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_guilty.safetensors",
+      "path": "models/loras/anima/Guilty - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 104857600,
-      "sha256": "057c251167bdf13bea65d65f9b9e942b5edf59d3cecd474e84a41e05b05d7c44",
+      "min_bytes": 1048576,
       "legacy_paths": [
+        "models/loras/anima/Guilty Mighty Bunny - Anima.safetensors",
         "models/loras/anima/anima_guilty_mighty_bunny.safetensors"
       ]
+    },
+    {
+      "name": "Sin Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_sin.safetensors",
+      "path": "models/loras/anima/Sin - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
     },
     {
       "name": "Elegg Anima LoRA (trigger: elegg)",
