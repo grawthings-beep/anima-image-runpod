@@ -677,6 +677,42 @@
       "legacy_paths": [
         "models/loras/anima/anima_littlemermaid.safetensors"
       ]
+    },
+    {
+      "name": "Arcana Fortune Mate Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_arcana_fortune_mate.safetensors",
+      "path": "models/loras/anima/Arcana Fortune Mate - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Dorothy Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_dorothy.safetensors",
+      "path": "models/loras/anima/Dorothy - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Little Mermaid Shell Princess Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_littlemermaid_shell_princess.safetensors",
+      "path": "models/loras/anima/Little Mermaid Shell Princess - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
     }
   ]
 }

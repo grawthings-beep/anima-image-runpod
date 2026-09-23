@@ -137,6 +137,9 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Label - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Ark Ranger Black - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Little Mermaid - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Arcana Fortune Mate - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Dorothy - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Little Mermaid Shell Princess - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Anis - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Ain - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Bikini Cinderella - Anima.safetensors
