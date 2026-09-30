@@ -64,7 +64,6 @@ class ManifestTests(unittest.TestCase):
                 "Arcana Fortune Mate Anima LoRA",
                 "Dorothy Anima LoRA",
                 "Little Mermaid Shell Princess Anima LoRA",
-                "Face Fucking Anima action LoRA (trigger: f4c3fk)",
                 "3D Animated Realistic Style Anima LoRA (trigger: @3DYLFGxg)",
                 "Pixel Art Anima LoRA v2.1 (triggers: pixel art, pix_merge)",
                 "Anis Anima LoRA (trigger: 4n1s)",

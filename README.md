@@ -61,7 +61,7 @@ Keep tokens in RunPod Secrets. Do not paste raw tokens into a public template.
 
 The default manifest downloads WAI-ANIMA plus the Nova 3D CGAM checkpoint,
 every bundled NIKKE character LoRA, Qwen Image Union Control, Anima Turbo,
-Skin Texture Detail, Face Fucking, Pixel Art, and 3D Animated Realistic Style.
+Skin Texture Detail, Pixel Art, and 3D Animated Realistic Style.
 The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
 on-demand catalog.
 Downloads run in parallel. aria2 is preferred when available, using
@@ -147,7 +147,6 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Phantom - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Guilty - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Sin - Anima.safetensors
-/workspace/comfyui/models/loras/anima_pose/Face Fucking - Anima.safetensors
 /workspace/comfyui/models/loras/anima_style/3D Animated Realistic Style - Anima.safetensors
 /workspace/comfyui/models/loras/anima_style/Pixel Art - Anima v2.1.safetensors
 ```
