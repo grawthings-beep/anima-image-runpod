@@ -1,8 +1,8 @@
 {
   "id": "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe",
   "revision": 0,
-  "last_node_id": 65,
-  "last_link_id": 58,
+  "last_node_id": 66,
+  "last_link_id": 63,
   "nodes": [
     {
       "id": 1,
@@ -35,7 +35,7 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            3
+            58
           ]
         }
       ],
@@ -251,7 +251,7 @@
         {
           "name": "layout",
           "type": "STRING",
-          "link": 58,
+          "link": 63,
           "widget": {
             "name": "layout"
           }
@@ -366,7 +366,7 @@
     {
       "id": 8,
       "type": "AnimaAppLoRA",
-      "title": "Global Turbo",
+      "title": "LoRA 1",
       "pos": [
         760,
         340
@@ -382,7 +382,7 @@
         {
           "name": "model",
           "type": "MODEL",
-          "link": 3
+          "link": 58
         },
         {
           "name": "lora_name",
@@ -391,7 +391,7 @@
             "name": "lora_name"
           },
           "link": null,
-          "label": "全体 Turbo LoRA"
+          "label": "LoRA 1"
         },
         {
           "name": "strength",
@@ -400,7 +400,7 @@
             "name": "strength"
           },
           "link": null,
-          "label": "全体 Turbo 強度"
+          "label": "LoRA 1 強度"
         }
       ],
       "outputs": [
@@ -408,7 +408,7 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            4
+            59
           ]
         }
       ],
@@ -418,13 +418,13 @@
       },
       "widgets_values": [
         "anima-turbo-lora-v0.2.safetensors",
-        0.65
+        0.6
       ]
     },
     {
       "id": 9,
       "type": "AnimaAppLoRA",
-      "title": "Global Skin Texture",
+      "title": "LoRA 3",
       "pos": [
         1140,
         340
@@ -440,7 +440,7 @@
         {
           "name": "model",
           "type": "MODEL",
-          "link": 4
+          "link": 60
         },
         {
           "name": "lora_name",
@@ -449,7 +449,7 @@
             "name": "lora_name"
           },
           "link": null,
-          "label": "全体 質感 LoRA"
+          "label": "LoRA 3"
         },
         {
           "name": "strength",
@@ -458,7 +458,7 @@
             "name": "strength"
           },
           "link": null,
-          "label": "全体 質感 強度"
+          "label": "LoRA 3 強度"
         }
       ],
       "outputs": [
@@ -466,8 +466,8 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            41,
-            49
+            61,
+            62
           ]
         }
       ],
@@ -477,7 +477,7 @@
       },
       "widgets_values": [
         "anima/Skin Texture Detail.safetensors",
-        0.4
+        0.45
       ]
     },
     {
@@ -1244,7 +1244,7 @@
         {
           "name": "model",
           "type": "MODEL",
-          "link": 41
+          "link": 61
         },
         {
           "name": "positive",
@@ -1479,7 +1479,7 @@
         {
           "name": "model",
           "type": "MODEL",
-          "link": 49
+          "link": 62
         },
         {
           "name": "positive",
@@ -1710,8 +1710,8 @@
     },
     {
       "id": 65,
-      "type": "AnimaAppRegionPreset",
-      "title": "領域配置",
+      "type": "AnimaAppLoRA",
+      "title": "LoRA 2",
       "pos": [
         760,
         1700
@@ -1722,6 +1722,64 @@
       ],
       "flags": {},
       "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 59
+        },
+        {
+          "name": "lora_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "lora_name"
+          },
+          "link": null,
+          "label": "LoRA 2"
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": null,
+          "label": "LoRA 2 強度"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            60
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AnimaAppLoRA"
+      },
+      "widgets_values": [
+        "(none)",
+        0.9
+      ]
+    },
+    {
+      "id": 66,
+      "type": "AnimaAppRegionPreset",
+      "title": "領域配置",
+      "pos": [
+        1140,
+        1700
+      ],
+      "size": [
+        340,
+        200
+      ],
+      "flags": {},
+      "order": 28,
       "mode": 0,
       "inputs": [
         {
@@ -1757,7 +1815,7 @@
           "name": "layout",
           "type": "STRING",
           "links": [
-            58
+            63
           ],
           "slot_index": 0
         }
@@ -1788,22 +1846,6 @@
       7,
       1,
       "INT"
-    ],
-    [
-      3,
-      1,
-      0,
-      8,
-      0,
-      "MODEL"
-    ],
-    [
-      4,
-      8,
-      0,
-      9,
-      0,
-      "MODEL"
     ],
     [
       5,
@@ -2094,14 +2136,6 @@
       "CONDITIONING"
     ],
     [
-      41,
-      9,
-      0,
-      54,
-      0,
-      "MODEL"
-    ],
-    [
       42,
       53,
       0,
@@ -2156,14 +2190,6 @@
       57,
       0,
       "LATENT"
-    ],
-    [
-      49,
-      9,
-      0,
-      61,
-      0,
-      "MODEL"
     ],
     [
       50,
@@ -2231,7 +2257,47 @@
     ],
     [
       58,
+      1,
+      0,
+      8,
+      0,
+      "MODEL"
+    ],
+    [
+      59,
+      8,
+      0,
       65,
+      0,
+      "MODEL"
+    ],
+    [
+      60,
+      65,
+      0,
+      9,
+      0,
+      "MODEL"
+    ],
+    [
+      61,
+      9,
+      0,
+      54,
+      0,
+      "MODEL"
+    ],
+    [
+      62,
+      9,
+      0,
+      61,
+      0,
+      "MODEL"
+    ],
+    [
+      63,
+      66,
       0,
       6,
       2,
@@ -2344,17 +2410,53 @@
           }
         ],
         [
-          "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:65:preset",
+          "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:8:lora_name",
+          "LoRA 1",
+          {
+            "description": "使わない欄は(none)。選んだLoRAのトリガーはプロンプトに入力してください。"
+          }
+        ],
+        [
+          "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:8:strength",
+          "LoRA 1 強度",
+          {}
+        ],
+        [
+          "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:65:lora_name",
+          "LoRA 2",
+          {
+            "description": "使わない欄は(none)。選んだLoRAのトリガーはプロンプトに入力してください。"
+          }
+        ],
+        [
+          "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:65:strength",
+          "LoRA 2 強度",
+          {}
+        ],
+        [
+          "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:9:lora_name",
+          "LoRA 3",
+          {
+            "description": "使わない欄は(none)。選んだLoRAのトリガーはプロンプトに入力してください。"
+          }
+        ],
+        [
+          "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:9:strength",
+          "LoRA 3 強度",
+          {}
+        ],
+        [
+          "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:66:preset",
           "領域配置",
           {}
         ],
         [
-          "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:65:overlap_percent",
+          "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:66:overlap_percent",
           "領域の重なり（%）",
           {}
         ],
         [
-          "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:65:feather_percent",
+          "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:66:feather_percent",
           "境界のぼかし（%）",
           {}
         ],
@@ -2477,26 +2579,6 @@
             "description": "使う領域だけ入力してください。",
             "height": 100
           }
-        ],
-        [
-          "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:8:lora_name",
-          "全体 Turbo LoRA",
-          {}
-        ],
-        [
-          "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:8:strength",
-          "全体 Turbo 強度",
-          {}
-        ],
-        [
-          "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:9:lora_name",
-          "全体 質感 LoRA",
-          {}
-        ],
-        [
-          "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:9:strength",
-          "全体 質感 強度",
-          {}
         ],
         [
           "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:54:seed",

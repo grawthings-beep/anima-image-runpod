@@ -10,6 +10,11 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "workflows" / "source"
 DEST = ROOT / "workflows" / "apps"
 NAMESPACE = uuid.UUID("7851bc10-64be-4b61-a140-551dad6129de")
+LORA_DEFAULTS = (
+    ("anima-turbo-lora-v0.2.safetensors", 0.6),
+    ("(none)", 0.9),
+    ("anima/Skin Texture Detail.safetensors", 0.45),
+)
 
 
 class Graph:
@@ -126,15 +131,34 @@ def models(g):
             g.expose(n["id"], "unet_name", "モデル")
 
 
-def loras(g, model, targets, count=3):
-    for i in range(count):
-        node = g.add("AnimaAppLoRA", f"LoRA {i + 1}", ["(none)", 0.8], (("model", "MODEL"),), (("MODEL", "MODEL"),))
-        g.connect(model, 0, node, "model")
-        model = node
-        g.expose(node, "lora_name", f"LoRA {i + 1}", "使わない欄は(none)。選んだLoRAのトリガーはプロンプトに入力してください。")
+def loras(g, model, targets, existing=None, character=False, shared_targets=()):
+    slots = []
+    for i, defaults in enumerate(LORA_DEFAULTS):
+        title = f"LoRA {i + 1}" + ("（今回の人物）" if character and i == 1 else "")
+        node = (existing or {}).get(i)
+        if node is None:
+            node = g.add("AnimaAppLoRA", title, list(defaults), (("model", "MODEL"),), (("MODEL", "MODEL"),))
+        else:
+            n = g.node(node)
+            n["type"] = "AnimaAppLoRA"
+            n["title"] = title
+            n["widgets_values"] = list(defaults)
+        slots.append(node)
+        description = "使わない欄は(none)。選んだLoRAのトリガーはプロンプトに入力してください。"
+        if character and i == 1:
+            description = "今回マスクで描き直す人物に適用します。使わない場合は(none)。"
+        g.expose(node, "lora_name", title, description)
         g.expose(node, "strength", f"LoRA {i + 1} 強度")
+    # Apply global Turbo/Skin before the character LoRA, so the final inpaint
+    # hires pass can share both styles without applying B's LoRA to person A.
+    order = (0, 2, 1) if character else (0, 1, 2)
+    for i in order:
+        g.connect(model, 0, slots[i], "model")
+        model = slots[i]
     for target in targets:
         g.connect(model, 0, target, "model")
+    for target in shared_targets:
+        g.connect(slots[2], 0, target, "model")
 
 
 def sampler(g, node_id, label, default=None, seed=True):
@@ -154,7 +178,7 @@ def prompts(g, positive, negative):
 
 def build():
     DEST.mkdir(parents=True, exist_ok=True)
-    # One-pass app: no optional models or LoRAs needed.
+    # Every app starts with the same editable Turbo / character / Skin slots.
     g = Graph(load("anima_basic.json"))
     g.keep_ancestors([9])
     g.node(9)["type"] = "SaveImage"
@@ -191,6 +215,7 @@ def build():
     g.expose(5, "value", "共通ネガティブ", "CFGが1の場合、通常ネガティブは効きません。", 100)
     models(g)
     resolution(g, 6, long_edge=1024)
+    loras(g, 1, [54, 61], existing={0: 8, 2: 9})
     preset = g.add("AnimaAppRegionPreset", "領域配置", ["A・B 左右", 4, 4], outputs=(("layout", "STRING"),))
     g.connect(preset, 0, 6, "layout", "STRING", True)
     for field, label in (("preset", "領域配置"), ("overlap_percent", "領域の重なり（%）"), ("feather_percent", "境界のぼかし（%）")):
@@ -198,10 +223,6 @@ def build():
     for node_id, letter in ((10, "A"), (30, "B"), (40, "C"), (41, "D")):
         for field, title in (("lora_name", "LoRA"), ("strength", "LoRA強度"), ("positive", "プロンプト"), ("negative", "ネガティブ")):
             g.expose(node_id, field, f"{letter} {title}", "使う領域だけ入力してください。", 100 if field in ("positive", "negative") else None)
-    for node_id, title in ((8, "全体 Turbo"), (9, "全体 質感")):
-        g.node(node_id)["type"] = "AnimaAppLoRA"
-        for field, label in (("lora_name", "LoRA"), ("strength", "強度")):
-            g.expose(node_id, field, f"{title} {label}")
     sampler(g, 54, "初回")
     sampler(g, 61, "高解像度化")
     g.expose(57, "scale_by", "latent拡大倍率")
@@ -225,15 +246,12 @@ def build():
         elif output == 29:
             resolution(g, 25, long_edge=1536)
             g.node(25)["widgets_values"][3] = "center"
+        existing = {0: 5}
         if character:
-            n = g.node(character)
-            n["type"] = "AnimaAppLoRA"
-            n["widgets_values"] = ["(none)", 0.8]
-            g.expose(character, "lora_name", "今回の人物LoRA")
-            g.expose(character, "strength", "人物LoRA強度")
-        g.node(5)["type"] = "AnimaAppLoRA"
-        g.expose(5, "lora_name", "共通LoRA（Turbo）")
-        g.expose(5, "strength", "共通LoRA強度")
+            existing[1] = character
+        loras(g, 2, sampler_ids[:1] if character else sampler_ids,
+              existing=existing, character=bool(character),
+              shared_targets=sampler_ids[1:] if character else ())
         for i, node_id in enumerate(sampler_ids):
             sampler(g, node_id, "高解像度化" if i else "生成")
         if output == 29:

@@ -104,11 +104,72 @@ class AppTests(unittest.TestCase):
             self.assertNotIn("ESRGAN", p.name)
             self.assertNotIn("anima_pose/", p.read_text(encoding="utf-8"))
 
+    def test_common_lora_defaults_are_exposed_and_downloaded_for_every_app(self):
+        expected = [
+            ["anima-turbo-lora-v0.2.safetensors", 0.6],
+            ["(none)", 0.9],
+            ["anima/Skin Texture Detail.safetensors", 0.45],
+        ]
+        manifest = json.loads((ROOT / "config/anima-image-models.json").read_text())
+        installed = {entry["path"].removeprefix("models/loras/") for entry in manifest["models"] if entry.get("enabled", True)}
+        for name, _ in expected:
+            if name != "(none)":
+                self.assertIn(name, installed)
+        for path in (ROOT / "workflows/apps").glob("*.app.json"):
+            with self.subTest(app=path.name):
+                workflow = json.loads(path.read_text(encoding="utf-8"))
+                slots = [n for n in workflow["nodes"] if n["type"] == "AnimaAppLoRA"]
+                slots.sort(key=lambda n: n["title"])
+                self.assertEqual([n["widgets_values"] for n in slots], expected)
+                exposed = {entry[0] for entry in workflow["extra"]["linearData"]["inputs"]}
+                for slot in slots:
+                    for field in ("lora_name", "strength"):
+                        self.assertIn(f"{workflow['id']}:{slot['id']}:{field}", exposed)
+
+    def test_inpaint_hires_keeps_skin_and_turbo_without_spreading_character_b(self):
+        workflow = json.loads((ROOT / "workflows/apps/06_2人描き直し_3人物Bと高解像度.app.json").read_text(encoding="utf-8"))
+        nodes = {n["id"]: n for n in workflow["nodes"]}
+        links = {link[0]: link for link in workflow["links"]}
+
+        def model_loras(sampler):
+            found = []
+            node = nodes[sampler]
+            while node["type"] != "UNETLoader":
+                input_ = next(item for item in node["inputs"] if item["name"] == "model")
+                node = nodes[links[input_["link"]][1]]
+                if node["type"] == "AnimaAppLoRA":
+                    found.append(node["title"])
+            return found
+
+        self.assertEqual(model_loras(43), ["LoRA 2（今回の人物）", "LoRA 3", "LoRA 1"])
+        self.assertEqual(model_loras(27), ["LoRA 3", "LoRA 1"])
+
+    def test_queue_zip_collects_final_second_pass_images_with_auto_download(self):
+        workflow = json.loads((ROOT / "workflows/apps/02_プロンプト一括_latent高解像度.app.json").read_text(encoding="utf-8"))
+        nodes = {n["id"]: n for n in workflow["nodes"]}
+        links = {link[0]: link for link in workflow["links"]}
+
+        def source(node, field):
+            input_ = next(item for item in node["inputs"] if item["name"] == field)
+            return nodes[links[input_["link"]][1]]
+
+        archive = next(n for n in nodes.values() if n["type"] == "AnimaSaveQueueZip")
+        self.assertEqual(archive["widgets_values"], [True])
+        final_decode = source(archive, "images")
+        self.assertEqual(final_decode["type"], "VAEDecode")
+        second_pass = source(final_decode, "samples")
+        self.assertEqual(second_pass["type"], "KSampler")
+        self.assertEqual(source(second_pass, "latent_image")["type"], "LatentUpscaleBy")
+        self.assertEqual(source(archive, "file_stems")["type"], "AnimaPromptQueue")
+        self.assertEqual(source(archive, "archive_name")["type"], "AnimaPromptQueue")
+        png = next(n for n in nodes.values() if n["type"] == "SaveImage")
+        self.assertEqual(source(png, "images")["id"], final_decode["id"])
+
     def test_inpaint_stages_are_separate_and_have_editable_image_inputs(self):
         a = json.loads((ROOT / "workflows/apps/05_2人描き直し_2人物A.app.json").read_text(encoding="utf-8"))
         b = json.loads((ROOT / "workflows/apps/06_2人描き直し_3人物Bと高解像度.app.json").read_text(encoding="utf-8"))
-        self.assertNotIn(36, {n["id"] for n in a["nodes"]})
-        self.assertNotIn(17, {n["id"] for n in b["nodes"]})
+        self.assertEqual([n["id"] for n in a["nodes"] if n["type"] == "LoadImage"], [17])
+        self.assertEqual([n["id"] for n in b["nodes"] if n["type"] == "LoadImage"], [36])
         for w, node in ((a, 17), (b, 36)):
             self.assertTrue(any(entry[0] == f"{w['id']}:{node}:image" for entry in w["extra"]["linearData"]["inputs"]))
 

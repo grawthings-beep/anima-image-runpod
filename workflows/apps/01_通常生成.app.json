@@ -568,8 +568,8 @@
         "Node name for S&R": "AnimaAppLoRA"
       },
       "widgets_values": [
-        "(none)",
-        0.8
+        "anima-turbo-lora-v0.2.safetensors",
+        0.6
       ]
     },
     {
@@ -627,7 +627,7 @@
       },
       "widgets_values": [
         "(none)",
-        0.8
+        0.9
       ]
     },
     {
@@ -684,8 +684,8 @@
         "Node name for S&R": "AnimaAppLoRA"
       },
       "widgets_values": [
-        "(none)",
-        0.8
+        "anima/Skin Texture Detail.safetensors",
+        0.45
       ]
     }
   ],

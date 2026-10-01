@@ -1,8 +1,8 @@
 {
   "id": "4223a20e-b2f9-5c66-8108-7e66cd6d6f55",
   "revision": 0,
-  "last_node_id": 35,
-  "last_link_id": 32,
+  "last_node_id": 36,
+  "last_link_id": 36,
   "nodes": [
     {
       "id": 2,
@@ -34,7 +34,7 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            1
+            33
           ]
         }
       ],
@@ -150,7 +150,7 @@
         {
           "name": "model",
           "type": "MODEL",
-          "link": 1
+          "link": 33
         },
         {
           "name": "lora_name",
@@ -159,7 +159,7 @@
             "name": "lora_name"
           },
           "link": null,
-          "label": "共通LoRA（Turbo）"
+          "label": "LoRA 1"
         },
         {
           "name": "strength_model",
@@ -176,7 +176,7 @@
             "name": "strength"
           },
           "link": null,
-          "label": "共通LoRA強度"
+          "label": "LoRA 1 強度"
         }
       ],
       "outputs": [
@@ -184,7 +184,7 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            2
+            34
           ]
         }
       ],
@@ -201,9 +201,9 @@
       },
       "widgets_values": [
         "anima-turbo-lora-v0.2.safetensors",
-        1
+        0.6
       ],
-      "title": "Global Anima Turbo LoRA v0.2",
+      "title": "LoRA 1",
       "color": "#27323a",
       "bgcolor": "#34434d"
     },
@@ -225,7 +225,7 @@
         {
           "name": "model",
           "type": "MODEL",
-          "link": 2
+          "link": 35
         },
         {
           "name": "character",
@@ -242,7 +242,7 @@
             "name": "strength"
           },
           "link": null,
-          "label": "人物LoRA強度"
+          "label": "LoRA 2 強度"
         },
         {
           "name": "lora_name",
@@ -251,7 +251,7 @@
             "name": "lora_name"
           },
           "link": null,
-          "label": "今回の人物LoRA"
+          "label": "LoRA 2（今回の人物）"
         }
       ],
       "outputs": [
@@ -259,7 +259,7 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            23
+            36
           ]
         }
       ],
@@ -269,9 +269,9 @@
       },
       "widgets_values": [
         "(none)",
-        0.8
+        0.9
       ],
-      "title": "Character A LoRA: A masked inpaint only",
+      "title": "LoRA 2（今回の人物）",
       "color": "#233333",
       "bgcolor": "#355555"
     },
@@ -690,7 +690,7 @@
         {
           "name": "model",
           "type": "MODEL",
-          "link": 23
+          "link": 36
         },
         {
           "name": "positive",
@@ -937,25 +937,67 @@
       "title": "ENABLE STAGE 2: Save finished Character A",
       "color": "#4b3121",
       "bgcolor": "#70492f"
+    },
+    {
+      "id": 36,
+      "type": "AnimaAppLoRA",
+      "title": "LoRA 3",
+      "pos": [
+        1140,
+        1020
+      ],
+      "size": [
+        340,
+        200
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 34
+        },
+        {
+          "name": "lora_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "lora_name"
+          },
+          "link": null,
+          "label": "LoRA 3"
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": null,
+          "label": "LoRA 3 強度"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            35
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AnimaAppLoRA"
+      },
+      "widgets_values": [
+        "anima/Skin Texture Detail.safetensors",
+        0.45
+      ]
     }
   ],
   "links": [
-    [
-      1,
-      2,
-      0,
-      5,
-      0,
-      "MODEL"
-    ],
-    [
-      2,
-      5,
-      0,
-      6,
-      0,
-      "MODEL"
-    ],
     [
       5,
       3,
@@ -1037,14 +1079,6 @@
       "IMAGE"
     ],
     [
-      23,
-      6,
-      0,
-      20,
-      0,
-      "MODEL"
-    ],
-    [
       24,
       11,
       0,
@@ -1115,6 +1149,38 @@
       35,
       0,
       "IMAGE"
+    ],
+    [
+      33,
+      2,
+      0,
+      5,
+      0,
+      "MODEL"
+    ],
+    [
+      34,
+      5,
+      0,
+      36,
+      0,
+      "MODEL"
+    ],
+    [
+      35,
+      36,
+      0,
+      6,
+      0,
+      "MODEL"
+    ],
+    [
+      36,
+      6,
+      0,
+      20,
+      0,
+      "MODEL"
     ]
   ],
   "groups": [
@@ -1217,23 +1283,39 @@
           {}
         ],
         [
-          "4223a20e-b2f9-5c66-8108-7e66cd6d6f55:6:lora_name",
-          "今回の人物LoRA",
-          {}
-        ],
-        [
-          "4223a20e-b2f9-5c66-8108-7e66cd6d6f55:6:strength",
-          "人物LoRA強度",
-          {}
-        ],
-        [
           "4223a20e-b2f9-5c66-8108-7e66cd6d6f55:5:lora_name",
-          "共通LoRA（Turbo）",
-          {}
+          "LoRA 1",
+          {
+            "description": "使わない欄は(none)。選んだLoRAのトリガーはプロンプトに入力してください。"
+          }
         ],
         [
           "4223a20e-b2f9-5c66-8108-7e66cd6d6f55:5:strength",
-          "共通LoRA強度",
+          "LoRA 1 強度",
+          {}
+        ],
+        [
+          "4223a20e-b2f9-5c66-8108-7e66cd6d6f55:6:lora_name",
+          "LoRA 2（今回の人物）",
+          {
+            "description": "今回マスクで描き直す人物に適用します。使わない場合は(none)。"
+          }
+        ],
+        [
+          "4223a20e-b2f9-5c66-8108-7e66cd6d6f55:6:strength",
+          "LoRA 2 強度",
+          {}
+        ],
+        [
+          "4223a20e-b2f9-5c66-8108-7e66cd6d6f55:36:lora_name",
+          "LoRA 3",
+          {
+            "description": "使わない欄は(none)。選んだLoRAのトリガーはプロンプトに入力してください。"
+          }
+        ],
+        [
+          "4223a20e-b2f9-5c66-8108-7e66cd6d6f55:36:strength",
+          "LoRA 3 強度",
           {}
         ],
         [
