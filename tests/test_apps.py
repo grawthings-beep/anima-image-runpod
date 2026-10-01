@@ -144,7 +144,7 @@ class AppTests(unittest.TestCase):
         self.assertEqual(model_loras(43), ["LoRA 2（今回の人物）", "LoRA 3", "LoRA 1"])
         self.assertEqual(model_loras(27), ["LoRA 3", "LoRA 1"])
 
-    def test_queue_zip_collects_final_second_pass_images_with_auto_download(self):
+    def test_queue_zip_collects_final_images_with_optional_auto_download_off_by_default(self):
         workflow = json.loads((ROOT / "workflows/apps/02_プロンプト一括_latent高解像度.app.json").read_text(encoding="utf-8"))
         nodes = {n["id"]: n for n in workflow["nodes"]}
         links = {link[0]: link for link in workflow["links"]}
@@ -154,7 +154,11 @@ class AppTests(unittest.TestCase):
             return nodes[links[input_["link"]][1]]
 
         archive = next(n for n in nodes.values() if n["type"] == "AnimaSaveQueueZip")
-        self.assertEqual(archive["widgets_values"], [True])
+        self.assertEqual(archive["widgets_values"], [False])
+        toggle = next(i for i in archive["inputs"] if i["name"] == "auto_download")
+        self.assertEqual(toggle["type"], "BOOLEAN")
+        self.assertIn(f"{workflow['id']}:{archive['id']}:auto_download",
+                      {entry[0] for entry in workflow["extra"]["linearData"]["inputs"]})
         final_decode = source(archive, "images")
         self.assertEqual(final_decode["type"], "VAEDecode")
         second_pass = source(final_decode, "samples")

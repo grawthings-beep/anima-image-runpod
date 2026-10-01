@@ -374,8 +374,8 @@
       "widgets_values": [
         566871253377100,
         "fixed",
-        30,
-        4,
+        18,
+        1,
         "er_sde",
         "simple",
         1
@@ -607,8 +607,8 @@
       "widgets_values": [
         566871253377101,
         "fixed",
-        24,
-        4,
+        8,
+        1,
         "er_sde",
         "simple",
         0.55
@@ -687,6 +687,15 @@
           "name": "archive_name",
           "type": "STRING",
           "link": 22
+        },
+        {
+          "name": "auto_download",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "auto_download"
+          },
+          "link": null,
+          "label": "ZIP自動ダウンロード"
         }
       ],
       "outputs": [],
@@ -695,7 +704,7 @@
         "Node name for S&R": "AnimaSaveQueueZip"
       },
       "widgets_values": [
-        true
+        false
       ],
       "title": "ZIP final images + auto-download",
       "color": "#243",
@@ -874,7 +883,7 @@
       },
       "widgets_values": [
         "3:4 縦",
-        1024
+        1536
       ]
     },
     {
@@ -1473,6 +1482,13 @@
           "09ef7031-118b-5071-af28-e6da28adff98:10:scale_by",
           "latent拡大倍率",
           {}
+        ],
+        [
+          "09ef7031-118b-5071-af28-e6da28adff98:13:auto_download",
+          "ZIP自動ダウンロード",
+          {
+            "description": "ONで全シーンの二段階目が完了した後にダウンロードします。OFFでもZIPはPodに保存されます。"
+          }
         ]
       ],
       "outputs": [

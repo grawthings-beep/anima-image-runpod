@@ -79,7 +79,8 @@ class Graph:
             integer = {"long_edge", "seed", "steps", "scene_limit", "start_in_range", "base_seed"}
             decimal = {"strength", "cfg", "denoise", "scale_by", "overlap_percent", "feather_percent"}
             text = {"text", "value", "scene_prompts", "positive", "negative"}
-            type_ = "INT" if name in integer else "FLOAT" if name in decimal else "STRING" if name in text else "COMBO"
+            boolean = {"auto_download"}
+            type_ = "INT" if name in integer else "FLOAT" if name in decimal else "STRING" if name in text else "BOOLEAN" if name in boolean else "COMBO"
             slot = {"name": name, "type": type_, "widget": {"name": name}, "link": None}
             n.setdefault("inputs", []).append(slot)
         slot["label"] = label
@@ -115,7 +116,7 @@ def load(name):
     return json.loads((SOURCE / name).read_text(encoding="utf-8"))
 
 
-def resolution(g, target, width="width", height="height", long_edge=1024):
+def resolution(g, target, width="width", height="height", long_edge=1536):
     node = g.add("AnimaAppResolution", "縦横比・解像度", ["3:4 縦", long_edge], outputs=(("width", "INT"), ("height", "INT")))
     g.connect(node, 0, target, width, "INT", True)
     g.connect(node, 1, target, height, "INT", True)
@@ -161,8 +162,9 @@ def loras(g, model, targets, existing=None, character=False, shared_targets=()):
         g.connect(slots[2], 0, target, "model")
 
 
-def sampler(g, node_id, label, default=None, seed=True):
+def sampler(g, node_id, label, default=None, seed=True, steps=18, cfg=1):
     n = g.node(node_id)
+    n["widgets_values"][2:4] = [steps, cfg]
     if default:
         n["widgets_values"][4:6] = list(default)
     if seed and not any(i["name"] == "seed" and i.get("link") for i in n.get("inputs", [])):
@@ -202,8 +204,10 @@ def build():
     resolution(g, 6)
     loras(g, 1, [7, 11])
     sampler(g, 7, "初回", seed=False)
-    sampler(g, 11, "高解像度化", seed=False)
+    sampler(g, 11, "高解像度化", seed=False, steps=8)
     g.expose(10, "scale_by", "latent拡大倍率")
+    g.node(13)["widgets_values"] = [False]
+    g.expose(13, "auto_download", "ZIP自動ダウンロード", "ONで全シーンの二段階目が完了した後にダウンロードします。OFFでもZIPはPodに保存されます。")
     g.node(15)["widgets_values"][3] = 1  # Do not submit hundreds of scenes on the first run.
     save = g.add("SaveImage", "生成画像", ["Anima_App/queue"], (("images", "IMAGE"),))
     g.connect(12, 0, save, "images")
@@ -214,7 +218,7 @@ def build():
     g.expose(4, "value", "共通プロンプト", height=160)
     g.expose(5, "value", "共通ネガティブ", "CFGが1の場合、通常ネガティブは効きません。", 100)
     models(g)
-    resolution(g, 6, long_edge=1024)
+    resolution(g, 6)
     loras(g, 1, [54, 61], existing={0: 8, 2: 9})
     preset = g.add("AnimaAppRegionPreset", "領域配置", ["A・B 左右", 4, 4], outputs=(("layout", "STRING"),))
     g.connect(preset, 0, 6, "layout", "STRING", True)
@@ -224,7 +228,7 @@ def build():
         for field, title in (("lora_name", "LoRA"), ("strength", "LoRA強度"), ("positive", "プロンプト"), ("negative", "ネガティブ")):
             g.expose(node_id, field, f"{letter} {title}", "使う領域だけ入力してください。", 100 if field in ("positive", "negative") else None)
     sampler(g, 54, "初回")
-    sampler(g, 61, "高解像度化")
+    sampler(g, 61, "高解像度化", steps=8)
     g.expose(57, "scale_by", "latent拡大倍率")
     g.finish("03_領域別LoRA_A-D_実験的.json", [56, 63])
 
@@ -253,7 +257,7 @@ def build():
               existing=existing, character=bool(character),
               shared_targets=sampler_ids[1:] if character else ())
         for i, node_id in enumerate(sampler_ids):
-            sampler(g, node_id, "高解像度化" if i else "生成")
+            sampler(g, node_id, "高解像度化" if i else "生成", steps=8 if i else 18)
         if output == 29:
             g.expose(23, "model_name", "拡大モデル")
         g.finish(filename, [output])

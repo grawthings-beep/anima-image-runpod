@@ -823,8 +823,8 @@
       "widgets_values": [
         566871253377102,
         "randomize",
-        12,
-        1.5,
+        18,
+        1,
         "euler",
         "simple",
         0.82
@@ -1248,8 +1248,8 @@
       "widgets_values": [
         566871253377103,
         "randomize",
-        12,
-        1.5,
+        8,
+        1,
         "euler",
         "simple",
         0.2
