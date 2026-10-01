@@ -68,9 +68,11 @@ Keep tokens in RunPod Secrets. Do not paste raw tokens into a public template.
 
 The default manifest downloads WAI-ANIMA plus the Nova 3D CGAM checkpoint,
 every bundled NIKKE character LoRA, Qwen Image Union Control, Anima Turbo,
-Skin Texture Detail, Pixel Art, and 3D Animated Realistic Style.
+and Skin Texture Detail.
 The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
 on-demand catalog.
+Civitai-hosted files, including 3D Animated Realistic Style and Pixel Art,
+are downloaded only on request so a slow transfer cannot delay startup.
 Downloads run in parallel. aria2 is preferred when available, using
 `ARIA2_CONNECTIONS` and `ARIA2_SPLITS` per file, while
 `MODEL_DOWNLOAD_JOBS` controls how many files download at once. Existing
@@ -154,11 +156,9 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Phantom - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Guilty - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Sin - Anima.safetensors
-/workspace/comfyui/models/loras/anima_style/3D Animated Realistic Style - Anima.safetensors
-/workspace/comfyui/models/loras/anima_style/Pixel Art - Anima v2.1.safetensors
 ```
 
-List the 12 remaining on-demand LoRAs:
+List the 14 on-demand LoRAs:
 
 ```bash
 python3 /opt/runpod-anima-image/scripts/download_on_demand.py --list
@@ -167,11 +167,13 @@ python3 /opt/runpod-anima-image/scripts/download_on_demand.py --list
 Download one by its saved filename:
 
 ```bash
-python3 /opt/runpod-anima-image/scripts/download_on_demand.py "Rapi - Anima.safetensors"
+python3 /opt/runpod-anima-image/scripts/download_on_demand.py "Eris - Anima.safetensors"
 ```
 
-The command uses the same `HF_TOKEN`, model root, and accelerated aria2 settings
-as startup. Character-first filenames keep ComfyUI's LoRA selector readable.
+The command uses the same `HF_TOKEN` / `CIVITAI_TOKEN`, model root, and
+accelerated aria2 settings as startup. Character-first filenames keep
+ComfyUI's LoRA selector readable. Moving a LoRA to the on-demand catalog does
+not delete an already downloaded file.
 
 Pose/action LoRAs are stored separately in `models/loras/anima_pose/` when they
 are downloaded on demand. On startup, the downloader removes retired BAS,

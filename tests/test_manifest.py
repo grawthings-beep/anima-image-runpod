@@ -1,6 +1,7 @@
 import json
 import pathlib
 import unittest
+from urllib.parse import urlsplit
 
 
 MANIFEST = pathlib.Path(__file__).parents[1] / "config" / "anima-image-models.json"
@@ -64,8 +65,6 @@ class ManifestTests(unittest.TestCase):
                 "Arcana Fortune Mate Anima LoRA",
                 "Dorothy Anima LoRA",
                 "Little Mermaid Shell Princess Anima LoRA",
-                "3D Animated Realistic Style Anima LoRA (trigger: @3DYLFGxg)",
-                "Pixel Art Anima LoRA v2.1 (triggers: pixel art, pix_merge)",
                 "Anis Anima LoRA (trigger: 4n1s)",
                 "Ain Anima LoRA (trigger: 41n)",
                 "Bikini Cinderella Anima LoRA (trigger: b1k1c1nde)",
@@ -82,7 +81,7 @@ class ManifestTests(unittest.TestCase):
         base_paths = {model["path"] for model in base}
         on_demand_paths = {model["path"] for model in on_demand}
 
-        self.assertEqual(len(on_demand), 12)
+        self.assertEqual(len(on_demand), 14)
         self.assertTrue(all(path.startswith("models/loras/") for path in on_demand_paths))
         self.assertTrue(base_paths.isdisjoint(on_demand_paths))
         for moved_path in (
@@ -107,11 +106,13 @@ class ManifestTests(unittest.TestCase):
                 "models/loras/anima_pose/03 Female POV - Anima.safetensors",
                 "models/loras/anima/LilliePokemon_AnimaBaseV10_byKonan.safetensors",
                 "models/loras/anima/Tsurumaki Mizuka and Kawasumi Ouka - Anima v1.safetensors",
+                "models/loras/anima_style/3D Animated Realistic Style - Anima.safetensors",
+                "models/loras/anima_style/Pixel Art - Anima v2.1.safetensors",
             },
         )
 
     def test_civitai_style_loras_use_authenticated_signed_url_resolution(self):
-        models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
+        models = json.loads(ON_DEMAND.read_text(encoding="utf-8"))["models"]
         by_path = {model["path"]: model for model in models}
 
         for path in (
@@ -125,6 +126,12 @@ class ManifestTests(unittest.TestCase):
             )
             self.assertEqual(model["requires_env"], ["CIVITAI_TOKEN"])
             self.assertEqual(len(model["sha256"]), 64)
+
+    def test_startup_never_waits_for_civitai_downloads(self):
+        models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
+        for model in models:
+            if model.get("enabled", True):
+                self.assertNotIn(urlsplit(model["url"]).hostname, ("civitai.com", "civitai.red"))
 
     def test_retired_checkpoints_are_cleaned_from_existing_storage(self):
         models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
