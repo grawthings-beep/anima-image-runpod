@@ -74,3 +74,11 @@ EXTRA_MODEL_MANIFEST_JSON={"models":[{"name":"Velvet Anima LoRA","enabled":true,
 Use RunPod Connect port `8188`.
 
 The first boot downloads the model files. Later boots reuse `/workspace/comfyui/models`.
+
+## App Mode (PC / iPhone)
+
+Use the updated container image and restart ComfyUI. Open Connect > 8188,
+then select an app in the workflow tabs/list or Workflows > Anima Apps.
+Every bundled app opens in App Mode by default.
+Use the same HTTPS Connect URL in Safari on iPhone; GPU work stays on the Pod.
+See [APP_MODE.md](APP_MODE.md) for the six apps and migration details.

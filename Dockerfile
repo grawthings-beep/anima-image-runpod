@@ -19,6 +19,12 @@ RUN apt-get update \
 
 COPY config/ /opt/runpod-anima-image/config/
 COPY scripts/ /opt/runpod-anima-image/scripts/
+COPY workflows/ /opt/runpod-anima-image/workflows/
+COPY custom_nodes/ /opt/runpod-anima-image/custom_nodes/
+
+# App Builder and its mobile/mask editor interface use this tested stable UI.
+ARG COMFYUI_FRONTEND_VERSION=1.54.8
+RUN python -m pip install --no-cache-dir "comfyui-frontend-package==${COMFYUI_FRONTEND_VERSION}"
 RUN chmod +x /opt/runpod-anima-image/scripts/*.sh
 
 EXPOSE 8188

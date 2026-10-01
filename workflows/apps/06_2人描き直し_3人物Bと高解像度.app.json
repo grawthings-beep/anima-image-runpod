@@ -1,0 +1,1893 @@
+{
+  "id": "705fc2b5-d1c9-5269-aed7-6179af95a2b8",
+  "revision": 0,
+  "last_node_id": 46,
+  "last_link_id": 63,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "UNETLoader",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        330,
+        82
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "unet_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "unet_name"
+          },
+          "link": null,
+          "label": "モデル"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        "waiANIMA_v10Base10.safetensors",
+        "default"
+      ],
+      "title": "WAI-ANIMA / Anima diffusion model"
+    },
+    {
+      "id": 3,
+      "type": "CLIPLoader",
+      "pos": [
+        380,
+        0
+      ],
+      "size": [
+        330,
+        106
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            4,
+            6,
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader",
+        "cnr_id": "comfy-core",
+        "models": [
+          {
+            "name": "qwen_3_06b_base.safetensors",
+            "url": "https://huggingface.co/circlestone-labs/Anima/resolve/main/split_files/text_encoders/qwen_3_06b_base.safetensors",
+            "directory": "text_encoders"
+          }
+        ]
+      },
+      "widgets_values": [
+        "qwen_3_06b_base.safetensors",
+        "stable_diffusion",
+        "default"
+      ],
+      "title": "Anima Qwen text encoder"
+    },
+    {
+      "id": 4,
+      "type": "VAELoader",
+      "pos": [
+        760,
+        0
+      ],
+      "size": [
+        330,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            36,
+            46,
+            54,
+            60
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader",
+        "cnr_id": "comfy-core",
+        "models": [
+          {
+            "name": "qwen_image_vae.safetensors",
+            "url": "https://huggingface.co/circlestone-labs/Anima/resolve/main/split_files/vae/qwen_image_vae.safetensors",
+            "directory": "vae"
+          }
+        ]
+      },
+      "widgets_values": [
+        "qwen_image_vae.safetensors"
+      ],
+      "title": "Qwen Image VAE"
+    },
+    {
+      "id": 5,
+      "type": "AnimaAppLoRA",
+      "pos": [
+        1140,
+        0
+      ],
+      "size": [
+        360,
+        98
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1
+        },
+        {
+          "name": "lora_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "lora_name"
+          },
+          "link": null,
+          "label": "共通LoRA（Turbo）"
+        },
+        {
+          "name": "strength_model",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength_model"
+          },
+          "link": null
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": null,
+          "label": "共通LoRA強度"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            3,
+            55
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly",
+        "cnr_id": "comfy-core",
+        "models": [
+          {
+            "name": "anima-turbo-lora-v0.2.safetensors",
+            "url": "https://huggingface.co/circlestone-labs/Anima-Official-LoRAs/resolve/main/anima-turbo-lora-v0.2.safetensors",
+            "directory": "loras"
+          }
+        ]
+      },
+      "widgets_values": [
+        "anima-turbo-lora-v0.2.safetensors",
+        1
+      ],
+      "title": "Global Anima Turbo LoRA v0.2",
+      "color": "#27323a",
+      "bgcolor": "#34434d"
+    },
+    {
+      "id": 7,
+      "type": "AnimaAppLoRA",
+      "pos": [
+        1520,
+        0
+      ],
+      "size": [
+        420,
+        140
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 3
+        },
+        {
+          "name": "character",
+          "type": "COMBO",
+          "widget": {
+            "name": "character"
+          },
+          "link": null
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": null,
+          "label": "人物LoRA強度"
+        },
+        {
+          "name": "lora_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "lora_name"
+          },
+          "link": null,
+          "label": "今回の人物LoRA"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            41
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AnimaCharacterLoRALoader",
+        "cnr_id": "ComfyUI-AnimaVariationBatch"
+      },
+      "widgets_values": [
+        "(none)",
+        0.8
+      ],
+      "title": "Character B LoRA: B masked inpaint only",
+      "color": "#233333",
+      "bgcolor": "#355555"
+    },
+    {
+      "id": 10,
+      "type": "CLIPTextEncode",
+      "pos": [
+        0,
+        340
+      ],
+      "size": [
+        520,
+        340
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            56
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        "masterpiece, best quality, score_7, safe, 2girls, exactly two adult women, no other people, full body, two adult women in a close affectionate hug, natural intertwined pose, close body contact, both faces visible, coherent arms and hands, both standing on the same ground level, detailed school courtyard, anime illustration, anime coloring.\nCharacter A is the taller girl on the left: k0t0h1s4k0, braid, side ponytail, school uniform, serafuku, sailor collar, white shirt, blue neckerchief, black pleated skirt, white kneehighs, brown loafers, arms around Character B's shoulders and upper back.\nCharacter B is the noticeably shorter petite girl on the right: m1ch1n0kuk0m4r0, bags under eyes, ahoge, messy hair, hair between eyes, school uniform, serafuku, green sailor collar, white shirt, long sleeves, green pleated skirt, black pantyhose, brown loafers, arms around Character A's waist."
+      ],
+      "title": "Base composition: both characters and interaction",
+      "color": "#233326",
+      "bgcolor": "#35503a"
+    },
+    {
+      "id": 34,
+      "type": "CLIPTextEncode",
+      "pos": [
+        380,
+        340
+      ],
+      "size": [
+        520,
+        390
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 7
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": null,
+          "label": "プロンプト"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            42
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        "Redraw only Character B inside the painted mask while preserving the finished Character A, existing interaction, contact points, camera, lighting, and background outside the mask.\nmasterpiece, best quality, score_7, safe, 2girls, exactly two adult women, no other people, full body, two adult women in a close affectionate hug, natural intertwined pose, close body contact, both faces visible, coherent arms and hands, both standing on the same ground level, detailed school courtyard, anime illustration, anime coloring.\nCharacter A is the taller girl on the left: k0t0h1s4k0, braid, side ponytail, school uniform, serafuku, sailor collar, white shirt, blue neckerchief, black pleated skirt, white kneehighs, brown loafers, arms around Character B's shoulders and upper back.\nCharacter B is the noticeably shorter petite girl on the right: m1ch1n0kuk0m4r0, bags under eyes, ahoge, messy hair, hair between eyes, school uniform, serafuku, green sailor collar, white shirt, long sleeves, green pleated skirt, black pantyhose, brown loafers, arms around Character A's waist.\nCharacter B must keep a distinct face, hair, green uniform details, shorter height, and naturally connected arms and hands where she touches Character A."
+      ],
+      "title": "Inpaint B: complete scene and B identity",
+      "color": "#3a2b26",
+      "bgcolor": "#5a4238"
+    },
+    {
+      "id": 12,
+      "type": "CLIPTextEncode",
+      "pos": [
+        760,
+        340
+      ],
+      "size": [
+        520,
+        240
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 6
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": null,
+          "label": "ネガティブプロンプト"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            43,
+            57
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        "worst quality, low quality, score_1, score_2, score_3, blurry, jpeg artifacts, bad anatomy, bad hands, standing apart, separate portraits, gap between characters, stiff pose, arms at sides, fused bodies, merged faces, shared limbs, duplicate person, identical faces, ghost, afterimage, transparent person, translucent person, silhouette, third girl, 3girls, extra arms, extra legs, missing limbs, malformed hands, mixed clothing, color bleeding, text, watermark, signature, logo"
+      ],
+      "title": "Shared negative prompt"
+    },
+    {
+      "id": 36,
+      "type": "LoadImage",
+      "pos": [
+        1140,
+        340
+      ],
+      "size": [
+        360,
+        410
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "COMBO",
+          "widget": {
+            "name": "image"
+          },
+          "link": null,
+          "label": "前段階の画像・マスク"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            35,
+            47
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            33
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        "",
+        "image"
+      ],
+      "title": "Load Finished A + Paint Character B Mask",
+      "color": "#3a2c25",
+      "bgcolor": "#594137"
+    },
+    {
+      "id": 37,
+      "type": "ThresholdMask",
+      "pos": [
+        1520,
+        340
+      ],
+      "size": [
+        280,
+        90
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 33
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            34
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ThresholdMask",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        0.05
+      ],
+      "title": "Make painted B mask fully opaque"
+    },
+    {
+      "id": 38,
+      "type": "GrowMask",
+      "pos": [
+        0,
+        680
+      ],
+      "size": [
+        280,
+        90
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 34
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            37,
+            38
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "GrowMask",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        32,
+        true
+      ],
+      "title": "Cover the old B silhouette + 32px"
+    },
+    {
+      "id": 39,
+      "type": "VAEEncodeForInpaint",
+      "pos": [
+        380,
+        680
+      ],
+      "size": [
+        330,
+        110
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 35
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 36
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 37
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            44
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncodeForInpaint",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        16
+      ],
+      "title": "Encode masked B area"
+    },
+    {
+      "id": 40,
+      "type": "MaskToImage",
+      "pos": [
+        760,
+        680
+      ],
+      "size": [
+        220,
+        58
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 38
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            39
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MaskToImage",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [],
+      "title": "B mask to image for edge blur"
+    },
+    {
+      "id": 41,
+      "type": "ImageBlur",
+      "pos": [
+        1140,
+        680
+      ],
+      "size": [
+        260,
+        110
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 39
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            40
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageBlur",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        12,
+        4
+      ],
+      "title": "Blur only the expanded B outer edge"
+    },
+    {
+      "id": 42,
+      "type": "ImageToMask",
+      "pos": [
+        1520,
+        680
+      ],
+      "size": [
+        220,
+        80
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 40
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            49
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageToMask",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        "red"
+      ],
+      "title": "Clean B composite mask"
+    },
+    {
+      "id": 43,
+      "type": "KSampler",
+      "pos": [
+        0,
+        1020
+      ],
+      "size": [
+        320,
+        330
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 41
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 42
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 43
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 44
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null,
+          "label": "生成 シード"
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": null,
+          "label": "生成 サンプラー"
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": null,
+          "label": "生成 スケジューラー"
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": null,
+          "label": "生成 ステップ"
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": null,
+          "label": "生成 CFG"
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "widget": {
+            "name": "denoise"
+          },
+          "link": null,
+          "label": "生成 ノイズ除去強度"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            45
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        566871253377102,
+        "randomize",
+        12,
+        1.5,
+        "euler",
+        "simple",
+        0.82
+      ],
+      "title": "Stage 3: B-only masked inpaint",
+      "color": "#3a262f",
+      "bgcolor": "#573743"
+    },
+    {
+      "id": 44,
+      "type": "VAEDecode",
+      "pos": [
+        380,
+        1020
+      ],
+      "size": [
+        240,
+        58
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 45
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 46
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            48
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [],
+      "title": "Decode Character B inpaint"
+    },
+    {
+      "id": 45,
+      "type": "ImageCompositeMasked",
+      "pos": [
+        760,
+        1020
+      ],
+      "size": [
+        330,
+        170
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "destination",
+          "type": "IMAGE",
+          "link": 47
+        },
+        {
+          "name": "source",
+          "type": "IMAGE",
+          "link": 48
+        },
+        {
+          "name": "x",
+          "type": "INT",
+          "widget": {
+            "name": "x"
+          },
+          "link": null
+        },
+        {
+          "name": "y",
+          "type": "INT",
+          "widget": {
+            "name": "y"
+          },
+          "link": null
+        },
+        {
+          "name": "resize_source",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "resize_source"
+          },
+          "link": null
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 49
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            51
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageCompositeMasked",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        0,
+        0,
+        false
+      ],
+      "title": "Restore untouched pixels around Character B"
+    },
+    {
+      "id": 23,
+      "type": "UpscaleModelLoader",
+      "pos": [
+        1140,
+        1020
+      ],
+      "size": [
+        330,
+        58
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "model_name"
+          },
+          "link": null,
+          "label": "拡大モデル"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "UPSCALE_MODEL",
+          "type": "UPSCALE_MODEL",
+          "links": [
+            50
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UpscaleModelLoader",
+        "cnr_id": "comfy-core",
+        "models": [
+          {
+            "name": "4x-AnimeSharp.pth",
+            "url": "https://huggingface.co/Kim2091/AnimeSharp/resolve/main/4x-AnimeSharp.pth",
+            "directory": "upscale_models"
+          }
+        ]
+      },
+      "widgets_values": [
+        "4x-AnimeSharp.pth"
+      ],
+      "title": "Load anime ESRGAN"
+    },
+    {
+      "id": 24,
+      "type": "ImageUpscaleWithModel",
+      "pos": [
+        1520,
+        1020
+      ],
+      "size": [
+        280,
+        72
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "upscale_model",
+          "type": "UPSCALE_MODEL",
+          "link": 50
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 51
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            52
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageUpscaleWithModel",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [],
+      "title": "AnimeSharp 4x"
+    },
+    {
+      "id": 25,
+      "type": "ImageScale",
+      "pos": [
+        0,
+        1360
+      ],
+      "size": [
+        320,
+        170
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 52
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 62,
+          "widget": {
+            "name": "width"
+          }
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": 63,
+          "widget": {
+            "name": "height"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            53
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScale",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        "lanczos",
+        1160,
+        1536,
+        "center"
+      ],
+      "title": "Exact output size: 1160x1536"
+    },
+    {
+      "id": 26,
+      "type": "VAEEncode",
+      "pos": [
+        380,
+        1360
+      ],
+      "size": [
+        250,
+        58
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 53
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 54
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            58
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [],
+      "title": "Re-encode exact size"
+    },
+    {
+      "id": 27,
+      "type": "KSampler",
+      "pos": [
+        760,
+        1360
+      ],
+      "size": [
+        320,
+        330
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 55
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 56
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 57
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 58
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null,
+          "label": "高解像度化 シード"
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": null,
+          "label": "高解像度化 サンプラー"
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": null,
+          "label": "高解像度化 スケジューラー"
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": null,
+          "label": "高解像度化 ステップ"
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": null,
+          "label": "高解像度化 CFG"
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "widget": {
+            "name": "denoise"
+          },
+          "link": null,
+          "label": "高解像度化 ノイズ除去強度"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            59
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        566871253377103,
+        "randomize",
+        12,
+        1.5,
+        "euler",
+        "simple",
+        0.2
+      ],
+      "title": "Stage 4: Turbo Hires-fix, denoise 0.20",
+      "color": "#26343a",
+      "bgcolor": "#374e57"
+    },
+    {
+      "id": 28,
+      "type": "VAEDecode",
+      "pos": [
+        1140,
+        1360
+      ],
+      "size": [
+        240,
+        58
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 59
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 60
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            61
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [],
+      "title": "Decode final"
+    },
+    {
+      "id": 29,
+      "type": "SaveImage",
+      "pos": [
+        1520,
+        1360
+      ],
+      "size": [
+        460,
+        540
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 61
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage",
+        "cnr_id": "comfy-core"
+      },
+      "widgets_values": [
+        "Anima_two_character_inpaint_hiresfix"
+      ],
+      "title": "ENABLE STAGE 3: Save final 1160x1536",
+      "color": "#4d2020",
+      "bgcolor": "#702f2f"
+    },
+    {
+      "id": 46,
+      "type": "AnimaAppResolution",
+      "title": "縦横比・解像度",
+      "pos": [
+        0,
+        1700
+      ],
+      "size": [
+        340,
+        200
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "aspect_ratio",
+          "type": "COMBO",
+          "widget": {
+            "name": "aspect_ratio"
+          },
+          "link": null,
+          "label": "縦横比"
+        },
+        {
+          "name": "long_edge",
+          "type": "INT",
+          "widget": {
+            "name": "long_edge"
+          },
+          "link": null,
+          "label": "長辺（px）"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            62
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            63
+          ],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AnimaAppResolution"
+      },
+      "widgets_values": [
+        "3:4 縦",
+        1536
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      5,
+      0,
+      "MODEL"
+    ],
+    [
+      3,
+      5,
+      0,
+      7,
+      0,
+      "MODEL"
+    ],
+    [
+      4,
+      3,
+      0,
+      10,
+      0,
+      "CLIP"
+    ],
+    [
+      6,
+      3,
+      0,
+      12,
+      0,
+      "CLIP"
+    ],
+    [
+      7,
+      3,
+      0,
+      34,
+      0,
+      "CLIP"
+    ],
+    [
+      33,
+      36,
+      1,
+      37,
+      0,
+      "MASK"
+    ],
+    [
+      34,
+      37,
+      0,
+      38,
+      0,
+      "MASK"
+    ],
+    [
+      35,
+      36,
+      0,
+      39,
+      0,
+      "IMAGE"
+    ],
+    [
+      36,
+      4,
+      0,
+      39,
+      1,
+      "VAE"
+    ],
+    [
+      37,
+      38,
+      0,
+      39,
+      2,
+      "MASK"
+    ],
+    [
+      38,
+      38,
+      0,
+      40,
+      0,
+      "MASK"
+    ],
+    [
+      39,
+      40,
+      0,
+      41,
+      0,
+      "IMAGE"
+    ],
+    [
+      40,
+      41,
+      0,
+      42,
+      0,
+      "IMAGE"
+    ],
+    [
+      41,
+      7,
+      0,
+      43,
+      0,
+      "MODEL"
+    ],
+    [
+      42,
+      34,
+      0,
+      43,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      43,
+      12,
+      0,
+      43,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      44,
+      39,
+      0,
+      43,
+      3,
+      "LATENT"
+    ],
+    [
+      45,
+      43,
+      0,
+      44,
+      0,
+      "LATENT"
+    ],
+    [
+      46,
+      4,
+      0,
+      44,
+      1,
+      "VAE"
+    ],
+    [
+      47,
+      36,
+      0,
+      45,
+      0,
+      "IMAGE"
+    ],
+    [
+      48,
+      44,
+      0,
+      45,
+      1,
+      "IMAGE"
+    ],
+    [
+      49,
+      42,
+      0,
+      45,
+      5,
+      "MASK"
+    ],
+    [
+      50,
+      23,
+      0,
+      24,
+      0,
+      "UPSCALE_MODEL"
+    ],
+    [
+      51,
+      45,
+      0,
+      24,
+      1,
+      "IMAGE"
+    ],
+    [
+      52,
+      24,
+      0,
+      25,
+      0,
+      "IMAGE"
+    ],
+    [
+      53,
+      25,
+      0,
+      26,
+      0,
+      "IMAGE"
+    ],
+    [
+      54,
+      4,
+      0,
+      26,
+      1,
+      "VAE"
+    ],
+    [
+      55,
+      5,
+      0,
+      27,
+      0,
+      "MODEL"
+    ],
+    [
+      56,
+      10,
+      0,
+      27,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      57,
+      12,
+      0,
+      27,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      58,
+      26,
+      0,
+      27,
+      3,
+      "LATENT"
+    ],
+    [
+      59,
+      27,
+      0,
+      28,
+      0,
+      "LATENT"
+    ],
+    [
+      60,
+      4,
+      0,
+      28,
+      1,
+      "VAE"
+    ],
+    [
+      61,
+      28,
+      0,
+      29,
+      0,
+      "IMAGE"
+    ],
+    [
+      62,
+      46,
+      0,
+      25,
+      1,
+      "INT"
+    ],
+    [
+      63,
+      46,
+      1,
+      25,
+      2,
+      "INT"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "1. Models, readable LoRA selectors, and prompts",
+      "bounding": [
+        -980,
+        -80,
+        1880,
+        1660
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "2. Build the interaction with Turbo only",
+      "bounding": [
+        940,
+        -80,
+        1510,
+        600
+      ],
+      "color": "#7b65a8",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "3. Paint A in Mask Editor, then apply only Character A LoRA",
+      "bounding": [
+        2490,
+        -80,
+        2500,
+        730
+      ],
+      "color": "#a45d62",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "4. Paint B in Mask Editor, then apply only Character B LoRA",
+      "bounding": [
+        5050,
+        -80,
+        1940,
+        730
+      ],
+      "color": "#a46f4f",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "5. AnimeSharp and exact 1160x1536 Hires-fix",
+      "bounding": [
+        7250,
+        -80,
+        2750,
+        650
+      ],
+      "color": "#4f7f86",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "linearMode": true,
+    "linearData": {
+      "inputs": [
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:36:image",
+          "前段階の画像・マスク",
+          {
+            "description": "前段階のPNGをアップロードし、画像欄のマスク編集ボタンで今回の人物だけ塗ります。"
+          }
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:34:text",
+          "プロンプト",
+          {
+            "height": 180
+          }
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:12:text",
+          "ネガティブプロンプト",
+          {
+            "description": "CFGが1の場合、通常ネガティブは効きません。",
+            "height": 100
+          }
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:2:unet_name",
+          "モデル",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:46:aspect_ratio",
+          "縦横比",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:46:long_edge",
+          "長辺（px）",
+          {
+            "description": "高解像度化する場合は、ここで指定した生成サイズから拡大します。"
+          }
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:7:lora_name",
+          "今回の人物LoRA",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:7:strength",
+          "人物LoRA強度",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:5:lora_name",
+          "共通LoRA（Turbo）",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:5:strength",
+          "共通LoRA強度",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:43:seed",
+          "生成 シード",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:43:sampler_name",
+          "生成 サンプラー",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:43:scheduler",
+          "生成 スケジューラー",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:43:steps",
+          "生成 ステップ",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:43:cfg",
+          "生成 CFG",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:43:denoise",
+          "生成 ノイズ除去強度",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:27:seed",
+          "高解像度化 シード",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:27:sampler_name",
+          "高解像度化 サンプラー",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:27:scheduler",
+          "高解像度化 スケジューラー",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:27:steps",
+          "高解像度化 ステップ",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:27:cfg",
+          "高解像度化 CFG",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:27:denoise",
+          "高解像度化 ノイズ除去強度",
+          {}
+        ],
+        [
+          "705fc2b5-d1c9-5269-aed7-6179af95a2b8:23:model_name",
+          "拡大モデル",
+          {}
+        ]
+      ],
+      "outputs": [
+        "29"
+      ]
+    },
+    "frontendVersion": "1.54.8"
+  },
+  "version": 0.4
+}

@@ -218,6 +218,11 @@ PY
 
 wait_for_cuda
 
+# Keep saved App Builder configurations and settings on the persistent volume.
+WORKSPACE_DIR="${WORKSPACE_DIR:-/workspace/comfyui}"
+COMFYUI_USER_DIR="${COMFYUI_USER_DIR:-${WORKSPACE_DIR}/user}"
+COMFYUI_WORKFLOW_DIR="${COMFYUI_WORKFLOW_DIR:-${COMFYUI_USER_DIR}/default/workflows}"
+
 # --- Install / refresh the Anima Variation Batch custom node ---
 if [[ "${INSTALL_ANIMA_NODE:-1}" == "1" ]]; then
   ANIMA_NODE_REPO="${ANIMA_NODE_REPO:-https://github.com/grawthings-beep/comfyui-anima-variation-batch.git}"
@@ -230,15 +235,22 @@ if [[ "${INSTALL_ANIMA_NODE:-1}" == "1" ]]; then
     git clone --depth 1 "${ANIMA_NODE_REPO}" "${ANIMA_NODE_DIR}" || echo "WARN: node clone failed."
   fi
 
-  COMFYUI_WORKFLOW_DIR="${COMFYUI_WORKFLOW_DIR:-${COMFYUI_DIR}/user/default/workflows}"
   ANIMA_WORKFLOW_SOURCE_DIR="${ANIMA_NODE_DIR}/example_workflows"
   if [[ -d "${ANIMA_WORKFLOW_SOURCE_DIR}" ]]; then
     mkdir -p "${COMFYUI_WORKFLOW_DIR}"
     shopt -s nullglob
     anima_workflow_sources=("${ANIMA_WORKFLOW_SOURCE_DIR}"/*.json)
     if (( ${#anima_workflow_sources[@]} > 0 )); then
-      cp "${anima_workflow_sources[@]}" "${COMFYUI_WORKFLOW_DIR}/"
-      echo "Installed ${#anima_workflow_sources[@]} Anima workflow(s) in ${COMFYUI_WORKFLOW_DIR}."
+      anima_workflow_count=0
+      for workflow_source in "${anima_workflow_sources[@]}"; do
+        # The dedicated ESRGAN 2-pass workflow was explicitly retired.
+        if [[ "$(basename "${workflow_source}")" == "anima_hiresfix_esrgan_2pass.json" ]]; then
+          continue
+        fi
+        cp "${workflow_source}" "${COMFYUI_WORKFLOW_DIR}/"
+        anima_workflow_count=$((anima_workflow_count + 1))
+      done
+      echo "Installed ${anima_workflow_count} Anima workflow(s) in ${COMFYUI_WORKFLOW_DIR}."
     else
       echo "WARN: no Anima workflow JSON files were found in ${ANIMA_WORKFLOW_SOURCE_DIR}."
     fi
@@ -335,6 +347,30 @@ fi
 
 repair_torchaudio_cuda_mismatch
 
+if [[ "${INSTALL_ANIMA_APPS:-1}" == "1" ]]; then
+  if [[ "${INSTALL_ANIMA_NODE:-1}" != "1" ]]; then
+    echo "ERROR: Anima Apps require INSTALL_ANIMA_NODE=1 for queue and regional nodes." >&2
+    exit 2
+  fi
+  if [[ ! -f "${ANIMA_NODE_DIR}/__init__.py" ]]; then
+    echo "ERROR: Anima Variation Batch was not installed; check the clone error above." >&2
+    exit 2
+  fi
+  "${PYTHON_BIN}" /opt/runpod-anima-image/scripts/install_apps.py \
+    --source /opt/runpod-anima-image \
+    --workflow-dir "${COMFYUI_WORKFLOW_DIR}" \
+    --custom-nodes-dir "${COMFYUI_DIR}/custom_nodes" \
+    --legacy-user-dir "${COMFYUI_DIR}/user" \
+    --user-dir "${COMFYUI_USER_DIR}"
+  retired_esrgan="${COMFYUI_WORKFLOW_DIR}/anima_hiresfix_esrgan_2pass.json"
+  if [[ -f "${retired_esrgan}" ]]; then
+    archive_dir="${COMFYUI_USER_DIR}/default/retired_workflows"
+    mkdir -p "${archive_dir}"
+    mv "${retired_esrgan}" "${archive_dir}/anima_hiresfix_esrgan_2pass_$(date +%s).json"
+    echo "Archived retired ESRGAN workflow outside the active workflow list."
+  fi
+fi
+
 write_extra_model_paths() {
   local target="$1"
   cat > "${target}" <<YAML
@@ -429,6 +465,7 @@ exec "${PYTHON_BIN}" main.py \
   --listen "${LISTEN}" \
   --port "${PORT}" \
   --enable-cors-header "${COMFYUI_CORS_ORIGIN:-*}" \
+  --user-directory "${COMFYUI_USER_DIR}" \
   --input-directory "${WORKSPACE_DIR}/input" \
   --output-directory "${WORKSPACE_DIR}/output" \
   ${COMFYUI_ARGS:-}

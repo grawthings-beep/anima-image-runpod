@@ -2,7 +2,14 @@
 
 RunPod ComfyUI template for Anima / WAI-ANIMA image generation with reusable LoRA downloads.
 
-This image bakes only ComfyUI startup glue and downloader scripts. Large model files are downloaded into `/workspace/comfyui/models` at Pod startup so a persistent RunPod volume can reuse them.
+**App Mode for PC / iPhone:** six ready-to-run apps expose prompts, installed
+LoRAs, aspect ratios and sampler/scheduler controls. See [APP_MODE.md](APP_MODE.md)
+for the workflow inventory, iPhone operation and rollout steps.
+
+This image includes startup/downloader scripts, six native App Mode workflows,
+and small controls for aspect ratios, optional LoRAs, and region layouts. Large
+model files are downloaded into `/workspace/comfyui/models` at Pod startup so a
+persistent RunPod volume can reuse them.
 
 ## Container Image
 
@@ -188,24 +195,29 @@ EXTRA_MODEL_MANIFEST_JSON={"models":[{"name":"Velvet Anima LoRA","enabled":true,
 Open RunPod Connect for port `8188`.
 
 The container installs or refreshes the custom variation node on every startup
-and copies every JSON file from its `example_workflows` directory into ComfyUI's
-normal Workflows list, currently:
+and installs these three original workflows in ComfyUI's normal Workflows list:
 
 ```text
-anima_hiresfix_esrgan_2pass.json
 anima_hiresfix_latent_2pass.json
+anima_two_character_hooks_hiresfix.json
 anima_two_character_inpaint_hiresfix.json
 ```
 
-Restart an existing Pod once after this image update to receive them.
+The dedicated ESRGAN 2-pass workflow is excluded. An existing saved copy is
+archived outside the active workflow list at startup.
 
-`anima_two_character_inpaint_hiresfix.json` first builds the complete
-interaction with Character A's LoRA and a temporary second character. Copy that
-base image into the included Load Image node, paint Character B with ComfyUI's
-Mask Editor, then enable the red final Save node. Character B's LoRA is applied
-only to the masked inpaint sampler. The result is composited over the untouched
-base pixels, upscaled with AnimeSharp, resized to an exact 1160x1536, and
-finished with a low-denoise Turbo pass.
+The inpaint workflow builds the composition, redraws Character A inside a
+mask, then redraws Character B and finishes with AnimeSharp and a low-denoise
+pass. Its App Mode version separates these stages into apps 04, 05 and 06.
+Transfer each saved PNG to the next app and paint the next character's mask
+using the image field's Mask Editor. The final app exposes the output aspect
+ratio and size.
+
+Six native `.app.json` workflows are installed under **Anima Apps** and added
+to the workflow switcher on each device. Use the same HTTPS 8188 Connect URL
+from PC or iPhone. Build and deploy the updated container image to receive
+the frontend and app controls; starting an old Pod alone does not guarantee
+an image update. See [APP_MODE.md](APP_MODE.md) for the complete inventory.
 
 The workflow uses current ComfyUI core inpaint nodes and the bundled readable
 character selector. It does not require ControlNet Aux, OpenPose, or another

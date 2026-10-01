@@ -1,0 +1,918 @@
+{
+  "id": "c47e291a-6131-57d8-b6c1-cd91e888dfec",
+  "revision": 0,
+  "last_node_id": 13,
+  "last_link_id": 15,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        310,
+        82
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "unet_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "unet_name"
+          },
+          "link": null,
+          "label": "モデル"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "waiANIMA_v10Base10.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "CLIPLoader",
+      "pos": [
+        380,
+        0
+      ],
+      "size": [
+        310,
+        106
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            1,
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen_3_06b_base.safetensors",
+        "stable_diffusion",
+        "default"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "VAELoader",
+      "pos": [
+        760,
+        0
+      ],
+      "size": [
+        310,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "qwen_image_vae.safetensors"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1140,
+        0
+      ],
+      "size": [
+        460,
+        200
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 1
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": null,
+          "label": "プロンプト"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            4
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "masterpiece, best quality, score_8, highres, safe, 1girl, original character, long dark hair, blue eyes, casual outfit, detailed background"
+      ],
+      "title": "Positive Prompt",
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 5,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1520,
+        0
+      ],
+      "size": [
+        460,
+        160
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 2
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": null,
+          "label": "ネガティブプロンプト"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "worst quality, low quality, score_1, score_2, score_3, blurry, jpeg artifacts, sepia, bad anatomy, bad hands, extra fingers, deformed hands, text, watermark, signature, logo"
+      ],
+      "title": "Negative Prompt",
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 6,
+      "type": "EmptyLatentImage",
+      "pos": [
+        0,
+        340
+      ],
+      "size": [
+        310,
+        106
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 10,
+          "widget": {
+            "name": "width"
+          }
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": 11,
+          "widget": {
+            "name": "height"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            6
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        832,
+        1216,
+        1
+      ],
+      "title": "1st pass size (832x1216)"
+    },
+    {
+      "id": 7,
+      "type": "KSampler",
+      "pos": [
+        380,
+        340
+      ],
+      "size": [
+        300,
+        262
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 15
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 4
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 5
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 6
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "widget": {
+            "name": "seed"
+          },
+          "link": null,
+          "label": "生成 シード"
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "sampler_name"
+          },
+          "link": null,
+          "label": "生成 サンプラー"
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "widget": {
+            "name": "scheduler"
+          },
+          "link": null,
+          "label": "生成 スケジューラー"
+        },
+        {
+          "name": "steps",
+          "type": "INT",
+          "widget": {
+            "name": "steps"
+          },
+          "link": null,
+          "label": "生成 ステップ"
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "widget": {
+            "name": "cfg"
+          },
+          "link": null,
+          "label": "生成 CFG"
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "widget": {
+            "name": "denoise"
+          },
+          "link": null,
+          "label": "生成 ノイズ除去強度"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        566871253377100,
+        "randomize",
+        30,
+        4,
+        "res_multistep",
+        "sgm_uniform",
+        1
+      ],
+      "title": "KSampler 1st pass"
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        760,
+        340
+      ],
+      "size": [
+        190,
+        46
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 7
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "title": "Decode 1st pass"
+    },
+    {
+      "id": 9,
+      "type": "SaveImage",
+      "pos": [
+        1140,
+        340
+      ],
+      "size": [
+        300,
+        330
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 9
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": [
+        "Anima_App/basic"
+      ],
+      "title": "生成画像"
+    },
+    {
+      "id": 10,
+      "type": "AnimaAppResolution",
+      "title": "縦横比・解像度",
+      "pos": [
+        1520,
+        340
+      ],
+      "size": [
+        340,
+        200
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "aspect_ratio",
+          "type": "COMBO",
+          "widget": {
+            "name": "aspect_ratio"
+          },
+          "link": null,
+          "label": "縦横比"
+        },
+        {
+          "name": "long_edge",
+          "type": "INT",
+          "widget": {
+            "name": "long_edge"
+          },
+          "link": null,
+          "label": "長辺（px）"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            10
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            11
+          ],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AnimaAppResolution"
+      },
+      "widgets_values": [
+        "3:4 縦",
+        1024
+      ]
+    },
+    {
+      "id": 11,
+      "type": "AnimaAppLoRA",
+      "title": "LoRA 1",
+      "pos": [
+        0,
+        680
+      ],
+      "size": [
+        340,
+        200
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 12
+        },
+        {
+          "name": "lora_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "lora_name"
+          },
+          "link": null,
+          "label": "LoRA 1"
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": null,
+          "label": "LoRA 1 強度"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            13
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AnimaAppLoRA"
+      },
+      "widgets_values": [
+        "(none)",
+        0.8
+      ]
+    },
+    {
+      "id": 12,
+      "type": "AnimaAppLoRA",
+      "title": "LoRA 2",
+      "pos": [
+        380,
+        680
+      ],
+      "size": [
+        340,
+        200
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 13
+        },
+        {
+          "name": "lora_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "lora_name"
+          },
+          "link": null,
+          "label": "LoRA 2"
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": null,
+          "label": "LoRA 2 強度"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            14
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AnimaAppLoRA"
+      },
+      "widgets_values": [
+        "(none)",
+        0.8
+      ]
+    },
+    {
+      "id": 13,
+      "type": "AnimaAppLoRA",
+      "title": "LoRA 3",
+      "pos": [
+        760,
+        680
+      ],
+      "size": [
+        340,
+        200
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 14
+        },
+        {
+          "name": "lora_name",
+          "type": "COMBO",
+          "widget": {
+            "name": "lora_name"
+          },
+          "link": null,
+          "label": "LoRA 3"
+        },
+        {
+          "name": "strength",
+          "type": "FLOAT",
+          "widget": {
+            "name": "strength"
+          },
+          "link": null,
+          "label": "LoRA 3 強度"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            15
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AnimaAppLoRA"
+      },
+      "widgets_values": [
+        "(none)",
+        0.8
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      4,
+      0,
+      "CLIP"
+    ],
+    [
+      2,
+      2,
+      0,
+      5,
+      0,
+      "CLIP"
+    ],
+    [
+      4,
+      4,
+      0,
+      7,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      5,
+      5,
+      0,
+      7,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      6,
+      6,
+      0,
+      7,
+      3,
+      "LATENT"
+    ],
+    [
+      7,
+      7,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      8,
+      3,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      9,
+      8,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ],
+    [
+      10,
+      10,
+      0,
+      6,
+      0,
+      "INT"
+    ],
+    [
+      11,
+      10,
+      1,
+      6,
+      1,
+      "INT"
+    ],
+    [
+      12,
+      1,
+      0,
+      11,
+      0,
+      "MODEL"
+    ],
+    [
+      13,
+      11,
+      0,
+      12,
+      0,
+      "MODEL"
+    ],
+    [
+      14,
+      12,
+      0,
+      13,
+      0,
+      "MODEL"
+    ],
+    [
+      15,
+      13,
+      0,
+      7,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "linearMode": true,
+    "linearData": {
+      "inputs": [
+        [
+          "c47e291a-6131-57d8-b6c1-cd91e888dfec:4:text",
+          "プロンプト",
+          {
+            "height": 180
+          }
+        ],
+        [
+          "c47e291a-6131-57d8-b6c1-cd91e888dfec:5:text",
+          "ネガティブプロンプト",
+          {
+            "description": "CFGが1の場合、通常ネガティブは効きません。",
+            "height": 100
+          }
+        ],
+        [
+          "c47e291a-6131-57d8-b6c1-cd91e888dfec:1:unet_name",
+          "モデル",
+          {}
+        ],
+        [
+          "c47e291a-6131-57d8-b6c1-cd91e888dfec:10:aspect_ratio",
+          "縦横比",
+          {}
+        ],
+        [
+          "c47e291a-6131-57d8-b6c1-cd91e888dfec:10:long_edge",
+          "長辺（px）",
+          {
+            "description": "高解像度化する場合は、ここで指定した生成サイズから拡大します。"
+          }
+        ],
+        [
+          "c47e291a-6131-57d8-b6c1-cd91e888dfec:11:lora_name",
+          "LoRA 1",
+          {
+            "description": "使わない欄は(none)。選んだLoRAのトリガーはプロンプトに入力してください。"
+          }
+        ],
+        [
+          "c47e291a-6131-57d8-b6c1-cd91e888dfec:11:strength",
+          "LoRA 1 強度",
+          {}
+        ],
+        [
+          "c47e291a-6131-57d8-b6c1-cd91e888dfec:12:lora_name",
+          "LoRA 2",
+          {
+            "description": "使わない欄は(none)。選んだLoRAのトリガーはプロンプトに入力してください。"
+          }
+        ],
+        [
+          "c47e291a-6131-57d8-b6c1-cd91e888dfec:12:strength",
+          "LoRA 2 強度",
+          {}
+        ],
+        [
+          "c47e291a-6131-57d8-b6c1-cd91e888dfec:13:lora_name",
+          "LoRA 3",
+          {
+            "description": "使わない欄は(none)。選んだLoRAのトリガーはプロンプトに入力してください。"
+          }
+        ],
+        [
+          "c47e291a-6131-57d8-b6c1-cd91e888dfec:13:strength",
+          "LoRA 3 強度",
+          {}
+        ],
+        [
+          "c47e291a-6131-57d8-b6c1-cd91e888dfec:7:seed",
+          "生成 シード",
+          {}
+        ],
+        [
+          "c47e291a-6131-57d8-b6c1-cd91e888dfec:7:sampler_name",
+          "生成 サンプラー",
+          {}
+        ],
+        [
+          "c47e291a-6131-57d8-b6c1-cd91e888dfec:7:scheduler",
+          "生成 スケジューラー",
+          {}
+        ],
+        [
+          "c47e291a-6131-57d8-b6c1-cd91e888dfec:7:steps",
+          "生成 ステップ",
+          {}
+        ],
+        [
+          "c47e291a-6131-57d8-b6c1-cd91e888dfec:7:cfg",
+          "生成 CFG",
+          {}
+        ],
+        [
+          "c47e291a-6131-57d8-b6c1-cd91e888dfec:7:denoise",
+          "生成 ノイズ除去強度",
+          {}
+        ]
+      ],
+      "outputs": [
+        "9"
+      ]
+    },
+    "frontendVersion": "1.54.8"
+  },
+  "version": 0.4
+}
