@@ -67,8 +67,8 @@ COMFYUI_ARGS=--reserve-vram 3
 Keep tokens in RunPod Secrets. Do not paste raw tokens into a public template.
 
 The default manifest downloads WAI-ANIMA, Nova 3D CGAM, and MeMAX 6 Noob v-pred,
-every bundled NIKKE character LoRA, Qwen Image Union Control, Anima Turbo,
-Skin Texture Detail, and the 3DCGstyle DAAAA style LoRA.
+every bundled NIKKE character LoRA, Kotegawa Yui, Qwen Image Union Control,
+Anima Turbo, Skin Texture Detail, 3DCGstyle DAAAA, and Flat Color v3.
 The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
 on-demand catalog.
 Civitai-hosted files, including 3D Animated Realistic Style and Pixel Art,
@@ -119,10 +119,15 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima-turbo-lora-v0.2.safetensors
 /workspace/comfyui/models/loras/anima/Skin Texture Detail.safetensors
 /workspace/comfyui/models/loras/style/3DCGstyle_DAAAA.safetensors
+/workspace/comfyui/models/loras/style/anima-base-1-flat-color-v3.safetensors
 /workspace/comfyui/models/loras/anima/Old Maxwell - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Marciana - Anima v3.safetensors
 /workspace/comfyui/models/loras/anima/Marciana Marine Study - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Rapunzel - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Rapunzel 2 - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Scarlet Black Shadow - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Liberalio - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Kotegawa Yui - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Flora - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Hood - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Mint - Anima.safetensors
@@ -165,6 +170,10 @@ diffusion-only model or LoRA. Select it with a checkpoint loader in a compatible
 workflow. 3DCGstyle DAAAA is kept separately from Anima character LoRAs under
 `models/loras/style/`. These downloads do not change the bundled Anima workflows;
 compatibility with those workflows has not been verified.
+
+Rapunzel 2 is an additional download; the original Rapunzel remains available.
+Flat Color v3 uses the same `models/loras/style/anima-base-1-flat-color-v3.safetensors`
+path as the temporary download command, so an existing valid file is reused.
 
 List the 14 on-demand LoRAs:
 

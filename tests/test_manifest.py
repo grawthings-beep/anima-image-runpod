@@ -41,6 +41,33 @@ class ManifestTests(unittest.TestCase):
                 self.assertFalse(model["required"])
                 self.assertEqual(model["headers"]["Authorization"], "Bearer ${HF_TOKEN}")
 
+    def test_new_anima_character_and_flat_color_loras_download_on_startup(self):
+        models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
+        expected = {
+            "anima_rapunzel2.safetensors": "models/loras/anima/Rapunzel 2 - Anima.safetensors",
+            "anima_scarlet_black_shadow.safetensors": "models/loras/anima/Scarlet Black Shadow - Anima.safetensors",
+            "anima_liberalio.safetensors": "models/loras/anima/Liberalio - Anima.safetensors",
+            "anima_kotegawayui.safetensors": "models/loras/anima/Kotegawa Yui - Anima.safetensors",
+            "anima-base-1-flat-color-v3.safetensors": "models/loras/style/anima-base-1-flat-color-v3.safetensors",
+        }
+
+        for filename, path in expected.items():
+            with self.subTest(filename=filename):
+                url = f"https://huggingface.co/uwgm/nikke-loras/resolve/main/{filename}"
+                matches = [model for model in models if model.get("url") == url]
+                self.assertEqual(len(matches), 1)
+                model = matches[0]
+                self.assertEqual(model["path"], path)
+                self.assertTrue(model["enabled"])
+                self.assertFalse(model["required"])
+                self.assertEqual(model["headers"]["Authorization"], "Bearer ${HF_TOKEN}")
+
+        original_rapunzel = "models/loras/anima/Rapunzel - Anima.safetensors"
+        self.assertTrue(any(model["path"] == original_rapunzel and model["enabled"] for model in models))
+        self.assertTrue(all(original_rapunzel not in model.get("legacy_paths", []) for model in models))
+        paths = [model["path"] for model in models]
+        self.assertEqual(len(paths), len(set(paths)))
+
     def test_only_selected_loras_download_automatically(self):
         models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
         auto_loras = {model["name"] for model in models if model["path"].startswith("models/loras/")}
@@ -52,10 +79,15 @@ class ManifestTests(unittest.TestCase):
                 "Anima Turbo LoRA v0.2 (speed / step-reduction)",
                 "Skin Texture Detail LoRA",
                 "3DCGstyle DAAAA style LoRA",
+                "Flat Color Anima LoRA v3",
                 "Old Maxwell Anima LoRA (trigger: oldmaxwell)",
                 "Marciana Anima LoRA (3) (trigger: m4rciana)",
                 "Marciana Marine Study Anima LoRA",
                 "Rapunzel Anima LoRA (trigger: r4punz3l)",
+                "Rapunzel 2 Anima LoRA",
+                "Scarlet Black Shadow Anima LoRA",
+                "Liberalio Anima LoRA",
+                "Kotegawa Yui Anima LoRA",
                 "Flora Anima LoRA",
                 "Red Hood Anima LoRA (trigger: r3dh00d)",
                 "Mint Anima LoRA (trigger: m1nt)",

@@ -125,6 +125,18 @@
       "min_bytes": 1048576
     },
     {
+      "name": "Flat Color Anima LoRA v3",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima-base-1-flat-color-v3.safetensors",
+      "path": "models/loras/style/anima-base-1-flat-color-v3.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
       "name": "Old Maxwell Anima LoRA (trigger: oldmaxwell)",
       "enabled": true,
       "required": false,
@@ -177,6 +189,54 @@
       "legacy_paths": [
         "models/loras/anima/anima_rapunzel.safetensors"
       ]
+    },
+    {
+      "name": "Rapunzel 2 Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_rapunzel2.safetensors",
+      "path": "models/loras/anima/Rapunzel 2 - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Scarlet Black Shadow Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_scarlet_black_shadow.safetensors",
+      "path": "models/loras/anima/Scarlet Black Shadow - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Liberalio Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_liberalio.safetensors",
+      "path": "models/loras/anima/Liberalio - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Kotegawa Yui Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_kotegawayui.safetensors",
+      "path": "models/loras/anima/Kotegawa Yui - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
     },
     {
       "name": "Flora Anima LoRA",
