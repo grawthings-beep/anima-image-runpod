@@ -23,6 +23,24 @@ class ManifestTests(unittest.TestCase):
             },
         )
 
+    def test_memax_checkpoint_and_3dcg_style_download_to_separate_folders(self):
+        models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
+        expected = {
+            "MeMax6-noob-vpred.safetensors": "models/checkpoints/MeMax6-noob-vpred.safetensors",
+            "3DCGstyle_DAAAA.safetensors": "models/loras/style/3DCGstyle_DAAAA.safetensors",
+        }
+
+        for filename, path in expected.items():
+            with self.subTest(filename=filename):
+                url = f"https://huggingface.co/uwgm/nikke-loras/resolve/main/{filename}"
+                matches = [model for model in models if model.get("url") == url]
+                self.assertEqual(len(matches), 1)
+                model = matches[0]
+                self.assertEqual(model["path"], path)
+                self.assertTrue(model["enabled"])
+                self.assertFalse(model["required"])
+                self.assertEqual(model["headers"]["Authorization"], "Bearer ${HF_TOKEN}")
+
     def test_only_selected_loras_download_automatically(self):
         models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
         auto_loras = {model["name"] for model in models if model["path"].startswith("models/loras/")}
@@ -33,6 +51,7 @@ class ManifestTests(unittest.TestCase):
                 "Qwen Image Union Control LoRA (Canny / depth / pose)",
                 "Anima Turbo LoRA v0.2 (speed / step-reduction)",
                 "Skin Texture Detail LoRA",
+                "3DCGstyle DAAAA style LoRA",
                 "Old Maxwell Anima LoRA (trigger: oldmaxwell)",
                 "Marciana Anima LoRA (3) (trigger: m4rciana)",
                 "Marciana Marine Study Anima LoRA",

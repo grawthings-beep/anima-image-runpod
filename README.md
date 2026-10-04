@@ -66,9 +66,9 @@ COMFYUI_ARGS=--reserve-vram 3
 
 Keep tokens in RunPod Secrets. Do not paste raw tokens into a public template.
 
-The default manifest downloads WAI-ANIMA plus the Nova 3D CGAM checkpoint,
+The default manifest downloads WAI-ANIMA, Nova 3D CGAM, and MeMAX 6 Noob v-pred,
 every bundled NIKKE character LoRA, Qwen Image Union Control, Anima Turbo,
-and Skin Texture Detail.
+Skin Texture Detail, and the 3DCGstyle DAAAA style LoRA.
 The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
 on-demand catalog.
 Civitai-hosted files, including 3D Animated Realistic Style and Pixel Art,
@@ -111,12 +111,14 @@ Startup downloads:
 ```text
 /workspace/comfyui/models/diffusion_models/waiANIMA_v10Base10.safetensors
 /workspace/comfyui/models/diffusion_models/nova3DCGAM_v10.safetensors
+/workspace/comfyui/models/checkpoints/MeMax6-noob-vpred.safetensors
 /workspace/comfyui/models/text_encoders/qwen_3_06b_base.safetensors
 /workspace/comfyui/models/vae/qwen_image_vae.safetensors
 /workspace/comfyui/models/upscale_models/4x-AnimeSharp.pth
 /workspace/comfyui/models/loras/qwen_image_union_diffsynth_lora.safetensors
 /workspace/comfyui/models/loras/anima-turbo-lora-v0.2.safetensors
 /workspace/comfyui/models/loras/anima/Skin Texture Detail.safetensors
+/workspace/comfyui/models/loras/style/3DCGstyle_DAAAA.safetensors
 /workspace/comfyui/models/loras/anima/Old Maxwell - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Marciana - Anima v3.safetensors
 /workspace/comfyui/models/loras/anima/Marciana Marine Study - Anima.safetensors
@@ -157,6 +159,12 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Guilty - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Sin - Anima.safetensors
 ```
+
+MeMAX is stored as a checkpoint under `models/checkpoints/`, not as an Anima
+diffusion-only model or LoRA. Select it with a checkpoint loader in a compatible
+workflow. 3DCGstyle DAAAA is kept separately from Anima character LoRAs under
+`models/loras/style/`. These downloads do not change the bundled Anima workflows;
+compatibility with those workflows has not been verified.
 
 List the 14 on-demand LoRAs:
 

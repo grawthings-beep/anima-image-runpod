@@ -32,6 +32,18 @@
       "min_bytes": 1073741824
     },
     {
+      "name": "MeMAX 6 Noob v-pred checkpoint",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/MeMax6-noob-vpred.safetensors",
+      "path": "models/checkpoints/MeMax6-noob-vpred.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1073741824
+    },
+    {
       "name": "Anima Qwen text encoder",
       "enabled": true,
       "required": true,
@@ -99,6 +111,18 @@
       "legacy_paths": [
         "models/loras/anima/skintextureV1.safetensors"
       ]
+    },
+    {
+      "name": "3DCGstyle DAAAA style LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/3DCGstyle_DAAAA.safetensors",
+      "path": "models/loras/style/3DCGstyle_DAAAA.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
     },
     {
       "name": "Old Maxwell Anima LoRA (trigger: oldmaxwell)",
