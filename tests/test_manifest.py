@@ -48,6 +48,7 @@ class ManifestTests(unittest.TestCase):
             "anima_scarlet_black_shadow.safetensors": "models/loras/anima/Scarlet Black Shadow - Anima.safetensors",
             "anima_liberalio.safetensors": "models/loras/anima/Liberalio - Anima.safetensors",
             "anima_kotegawayui.safetensors": "models/loras/anima/Kotegawa Yui - Anima.safetensors",
+            "anima_inoueorihime.safetensors": "models/loras/anima/Orihime Inoue - Anima.safetensors",
             "anima-base-1-flat-color-v3.safetensors": "models/loras/style/anima-base-1-flat-color-v3.safetensors",
         }
 
@@ -88,6 +89,7 @@ class ManifestTests(unittest.TestCase):
                 "Scarlet Black Shadow Anima LoRA",
                 "Liberalio Anima LoRA",
                 "Kotegawa Yui Anima LoRA",
+                "Orihime Inoue Anima LoRA (trigger: 0r1h1me)",
                 "Flora Anima LoRA",
                 "Red Hood Anima LoRA (trigger: r3dh00d)",
                 "Mint Anima LoRA (trigger: m1nt)",
