@@ -67,8 +67,9 @@ COMFYUI_ARGS=--reserve-vram 3
 Keep tokens in RunPod Secrets. Do not paste raw tokens into a public template.
 
 The default manifest downloads WAI-ANIMA, Nova 3D CGAM, and MeMAX 6 Noob v-pred,
-every bundled NIKKE character LoRA, Kotegawa Yui, Qwen Image Union Control,
-Anima Turbo, Skin Texture Detail, 3DCGstyle DAAAA, and Flat Color v3.
+every bundled NIKKE character LoRA, Kotegawa Yui, Orihime Inoue v2, Riruka,
+Qwen Image Union Control, Anima Turbo, Skin Texture Detail, 3DCGstyle DAAAA,
+and Flat Color v3.
 The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
 on-demand catalog.
 Civitai-hosted files, including 3D Animated Realistic Style and Pixel Art,
@@ -128,6 +129,8 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Scarlet Black Shadow - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Liberalio - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Kotegawa Yui - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Orihime Inoue - Anima v2.safetensors
+/workspace/comfyui/models/loras/anima/Riruka - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Flora - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Hood - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Mint - Anima.safetensors
@@ -141,6 +144,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Prika - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Siren - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Cinderella - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Maid Cinderella - Anima.safetensors
 /workspace/comfyui/models/loras/anima/White Cinderella - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Mast - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Maxwell - Anima.safetensors
@@ -200,6 +204,11 @@ WAI-ANIMA is available.
 Guilty replaces the previous Guilty Mighty Bunny LoRA. Its old readable and
 original filenames are removed only after the new Guilty file is available
 and passes the configured download checks.
+
+Orihime Inoue v2 replaces the original Orihime LoRA. It has a distinct v2
+filename so an existing v1 file cannot skip the new download. The old readable
+and original filenames are removed only after v2 passes the configured download
+checks. Saved workflows selecting the old file need to select the v2 filename.
 
 Additional LoRAs can be added at Pod startup without rebuilding the Docker image. Put a small manifest in `EXTRA_MODEL_MANIFEST_JSON` or host it somewhere and set `EXTRA_MODEL_MANIFEST_URL`.
 

@@ -747,12 +747,40 @@
       "min_bytes": 1048576
     },
     {
-      "name": "Orihime Inoue Anima LoRA (trigger: 0r1h1me)",
+      "name": "Orihime Inoue Anima LoRA v2",
       "enabled": true,
       "required": false,
       "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_inoueorihime.safetensors",
-      "path": "models/loras/anima/Orihime Inoue - Anima.safetensors",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_inoueorihime2.safetensors",
+      "path": "models/loras/anima/Orihime Inoue - Anima v2.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/Orihime Inoue - Anima.safetensors",
+        "models/loras/anima/anima_inoueorihime.safetensors"
+      ]
+    },
+    {
+      "name": "Maid Cinderella Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_maid_cinderella.safetensors",
+      "path": "models/loras/anima/Maid Cinderella - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Riruka Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_riruka.safetensors",
+      "path": "models/loras/anima/Riruka - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },

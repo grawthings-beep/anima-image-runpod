@@ -48,7 +48,9 @@ class ManifestTests(unittest.TestCase):
             "anima_scarlet_black_shadow.safetensors": "models/loras/anima/Scarlet Black Shadow - Anima.safetensors",
             "anima_liberalio.safetensors": "models/loras/anima/Liberalio - Anima.safetensors",
             "anima_kotegawayui.safetensors": "models/loras/anima/Kotegawa Yui - Anima.safetensors",
-            "anima_inoueorihime.safetensors": "models/loras/anima/Orihime Inoue - Anima.safetensors",
+            "anima_inoueorihime2.safetensors": "models/loras/anima/Orihime Inoue - Anima v2.safetensors",
+            "anima_maid_cinderella.safetensors": "models/loras/anima/Maid Cinderella - Anima.safetensors",
+            "anima_riruka.safetensors": "models/loras/anima/Riruka - Anima.safetensors",
             "anima-base-1-flat-color-v3.safetensors": "models/loras/style/anima-base-1-flat-color-v3.safetensors",
         }
 
@@ -89,7 +91,9 @@ class ManifestTests(unittest.TestCase):
                 "Scarlet Black Shadow Anima LoRA",
                 "Liberalio Anima LoRA",
                 "Kotegawa Yui Anima LoRA",
-                "Orihime Inoue Anima LoRA (trigger: 0r1h1me)",
+                "Orihime Inoue Anima LoRA v2",
+                "Maid Cinderella Anima LoRA",
+                "Riruka Anima LoRA",
                 "Flora Anima LoRA",
                 "Red Hood Anima LoRA (trigger: r3dh00d)",
                 "Mint Anima LoRA (trigger: m1nt)",
@@ -127,6 +131,24 @@ class ManifestTests(unittest.TestCase):
                 "Sin Anima LoRA",
             },
         )
+
+    def test_orihime_v2_replaces_v1_without_reusing_its_cached_path(self):
+        models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
+        on_demand = json.loads(ON_DEMAND.read_text(encoding="utf-8"))["models"]
+        replacement = next(model for model in models if model["name"] == "Orihime Inoue Anima LoRA v2")
+        old_paths = {
+            "models/loras/anima/Orihime Inoue - Anima.safetensors",
+            "models/loras/anima/anima_inoueorihime.safetensors",
+        }
+
+        self.assertEqual(set(replacement["legacy_paths"]), old_paths)
+        self.assertNotIn(replacement["path"], old_paths)
+        for model in models + on_demand:
+            self.assertNotIn(model["path"], old_paths)
+            self.assertNotEqual(
+                model["url"],
+                "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_inoueorihime.safetensors",
+            )
 
     def test_other_loras_are_kept_in_the_on_demand_catalog(self):
         base = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]

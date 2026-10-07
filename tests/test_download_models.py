@@ -39,6 +39,45 @@ class DownloadModelsTests(unittest.TestCase):
             curl.assert_not_called()
             self.assertEqual(output.read_bytes(), b"complete")
 
+    def test_replacement_removes_legacy_only_after_valid_download(self):
+        for outcome in ("success", "existing", "failure", "too_small"):
+            with self.subTest(outcome=outcome), tempfile.TemporaryDirectory() as directory:
+                root = pathlib.Path(directory)
+                output = root / "models" / "new.safetensors"
+                legacy = root / "models" / "old.safetensors"
+                legacy.parent.mkdir(parents=True)
+                legacy.write_bytes(b"old model")
+                entry = {
+                    "name": "replacement model",
+                    "url": "https://example.test/new",
+                    "path": "models/new.safetensors",
+                    "required": False,
+                    "min_bytes": 8,
+                    "legacy_paths": ["models/old.safetensors"],
+                }
+                if outcome == "existing":
+                    output.write_bytes(b"complete")
+
+                def finish_download(_url, target, _headers):
+                    self.assertTrue(legacy.exists())
+                    target.write_bytes(b"x" if outcome == "too_small" else b"complete")
+                    if outcome == "failure":
+                        raise RuntimeError("test download failed")
+
+                with mock.patch.object(download_models, "run_urllib", side_effect=finish_download) as transfer:
+                    download_models.download(entry, root, False, 16, 16)
+
+                if outcome == "existing":
+                    transfer.assert_not_called()
+                else:
+                    transfer.assert_called_once()
+                if outcome in ("success", "existing"):
+                    self.assertEqual(output.read_bytes(), b"complete")
+                    self.assertFalse(legacy.exists())
+                else:
+                    self.assertFalse(output.exists())
+                    self.assertEqual(legacy.read_bytes(), b"old model")
+
     def test_aria2_command_uses_parallel_connections(self):
         with tempfile.TemporaryDirectory() as directory:
             output = pathlib.Path(directory) / "model.safetensors"
