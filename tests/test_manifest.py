@@ -51,6 +51,10 @@ class ManifestTests(unittest.TestCase):
             "anima_inoueorihime2.safetensors": "models/loras/anima/Orihime Inoue - Anima v2.safetensors",
             "anima_maid_cinderella.safetensors": "models/loras/anima/Maid Cinderella - Anima.safetensors",
             "anima_riruka.safetensors": "models/loras/anima/Riruka - Anima.safetensors",
+            "anima_kaguya_2d.safetensors": "models/loras/anima/Kaguya 2D - Anima.safetensors",
+            "anima_yukino_s3.safetensors": "models/loras/anima/Yukino S3 - Anima.safetensors",
+            "anima_yui_yuigahama_s3.safetensors": "models/loras/anima/Yui Yuigahama S3 - Anima.safetensors",
+            "anima_rangiku_tybw.safetensors": "models/loras/anima/Rangiku TYBW - Anima.safetensors",
             "anima-base-1-flat-color-v3.safetensors": "models/loras/style/anima-base-1-flat-color-v3.safetensors",
         }
 
@@ -94,6 +98,10 @@ class ManifestTests(unittest.TestCase):
                 "Orihime Inoue Anima LoRA v2",
                 "Maid Cinderella Anima LoRA",
                 "Riruka Anima LoRA",
+                "Kaguya 2D Anima LoRA",
+                "Yukino S3 Anima LoRA",
+                "Yui Yuigahama S3 Anima LoRA",
+                "Rangiku TYBW Anima LoRA",
                 "Flora Anima LoRA",
                 "Red Hood Anima LoRA (trigger: r3dh00d)",
                 "Mint Anima LoRA (trigger: m1nt)",

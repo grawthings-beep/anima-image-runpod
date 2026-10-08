@@ -68,8 +68,8 @@ Keep tokens in RunPod Secrets. Do not paste raw tokens into a public template.
 
 The default manifest downloads WAI-ANIMA, Nova 3D CGAM, and MeMAX 6 Noob v-pred,
 every bundled NIKKE character LoRA, Kotegawa Yui, Orihime Inoue v2, Riruka,
-Qwen Image Union Control, Anima Turbo, Skin Texture Detail, 3DCGstyle DAAAA,
-and Flat Color v3.
+Kaguya 2D, Yukino S3, Yui Yuigahama S3, Rangiku TYBW, Qwen Image Union Control,
+Anima Turbo, Skin Texture Detail, 3DCGstyle DAAAA, and Flat Color v3.
 The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
 on-demand catalog.
 Civitai-hosted files, including 3D Animated Realistic Style and Pixel Art,
@@ -131,6 +131,10 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Kotegawa Yui - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Orihime Inoue - Anima v2.safetensors
 /workspace/comfyui/models/loras/anima/Riruka - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Kaguya 2D - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Yukino S3 - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Yui Yuigahama S3 - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Rangiku TYBW - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Flora - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Hood - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Mint - Anima.safetensors
