@@ -825,8 +825,8 @@
         "randomize",
         18,
         1,
-        "euler",
-        "simple",
+        "res_multistep",
+        "sgm_uniform",
         0.82
       ],
       "title": "Stage 3: B-only masked inpaint",
@@ -1250,8 +1250,8 @@
         "randomize",
         8,
         1,
-        "euler",
-        "simple",
+        "res_multistep",
+        "sgm_uniform",
         0.2
       ],
       "title": "Stage 4: Turbo Hires-fix, denoise 0.20",

@@ -780,8 +780,8 @@
         "randomize",
         18,
         1,
-        "euler",
-        "simple",
+        "res_multistep",
+        "sgm_uniform",
         0.82
       ],
       "title": "Stage 2: A-only masked inpaint",

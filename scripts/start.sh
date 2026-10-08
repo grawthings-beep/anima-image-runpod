@@ -235,7 +235,9 @@ if [[ "${INSTALL_ANIMA_NODE:-1}" == "1" ]]; then
     git clone --depth 1 "${ANIMA_NODE_REPO}" "${ANIMA_NODE_DIR}" || echo "WARN: node clone failed."
   fi
 
-  ANIMA_WORKFLOW_SOURCE_DIR="${ANIMA_NODE_DIR}/example_workflows"
+  # Use the workflows shipped with this image, so node-repo updates cannot
+  # restore older sampler defaults in the normal Workflows list.
+  ANIMA_WORKFLOW_SOURCE_DIR="/opt/runpod-anima-image/workflows/source"
   if [[ -d "${ANIMA_WORKFLOW_SOURCE_DIR}" ]]; then
     mkdir -p "${COMFYUI_WORKFLOW_DIR}"
     shopt -s nullglob
@@ -243,10 +245,11 @@ if [[ "${INSTALL_ANIMA_NODE:-1}" == "1" ]]; then
     if (( ${#anima_workflow_sources[@]} > 0 )); then
       anima_workflow_count=0
       for workflow_source in "${anima_workflow_sources[@]}"; do
-        # The dedicated ESRGAN 2-pass workflow was explicitly retired.
-        if [[ "$(basename "${workflow_source}")" == "anima_hiresfix_esrgan_2pass.json" ]]; then
-          continue
-        fi
+        # Basic is an App Builder source only; the dedicated ESRGAN workflow
+        # was explicitly retired. Install the three normal workflows.
+        case "$(basename "${workflow_source}")" in
+          anima_basic.json|anima_hiresfix_esrgan_2pass.json) continue ;;
+        esac
         cp "${workflow_source}" "${COMFYUI_WORKFLOW_DIR}/"
         anima_workflow_count=$((anima_workflow_count + 1))
       done

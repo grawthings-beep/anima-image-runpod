@@ -275,8 +275,8 @@
         "fixed",
         30,
         4,
-        "er_sde",
-        "simple",
+        "res_multistep",
+        "sgm_uniform",
         1
       ],
       "title": "KSampler 1st pass"

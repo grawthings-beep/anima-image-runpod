@@ -296,8 +296,8 @@
         "fixed",
         30,
         4,
-        "er_sde",
-        "simple",
+        "res_multistep",
+        "sgm_uniform",
         1
       ],
       "title": "KSampler 1st pass"
@@ -475,8 +475,8 @@
         "fixed",
         24,
         4,
-        "er_sde",
-        "simple",
+        "res_multistep",
+        "sgm_uniform",
         0.55
       ],
       "title": "KSampler 2nd pass (denoise 0.55)"

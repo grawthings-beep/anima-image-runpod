@@ -231,6 +231,11 @@ anima_two_character_hooks_hiresfix.json
 anima_two_character_inpaint_hiresfix.json
 ```
 
+The normal workflows are installed from this image's bundled `workflows/source`
+files. All normal and App Mode KSamplers default to `res_multistep` / `sgm_uniform`,
+including both Hires-fix passes and character inpainting. App regeneration uses
+the same defaults.
+
 The dedicated ESRGAN 2-pass workflow is excluded. An existing saved copy is
 archived outside the active workflow list at startup.
 
