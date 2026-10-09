@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "workflows" / "source"
 DEST = ROOT / "workflows" / "apps"
 NAMESPACE = uuid.UUID("7851bc10-64be-4b61-a140-551dad6129de")
+SAMPLER_DEFAULTS = ("res_multistep", "sgm_uniform")
 LORA_DEFAULTS = (
     ("anima-turbo-lora-v0.2.safetensors", 0.6),
     ("(none)", 0.9),
@@ -162,11 +163,10 @@ def loras(g, model, targets, existing=None, character=False, shared_targets=()):
         g.connect(slots[2], 0, target, "model")
 
 
-def sampler(g, node_id, label, default=None, seed=True, steps=18, cfg=1):
+def sampler(g, node_id, label, seed=True, steps=18, cfg=1):
     n = g.node(node_id)
     n["widgets_values"][2:4] = [steps, cfg]
-    if default:
-        n["widgets_values"][4:6] = list(default)
+    n["widgets_values"][4:6] = list(SAMPLER_DEFAULTS)
     if seed and not any(i["name"] == "seed" and i.get("link") for i in n.get("inputs", [])):
         g.expose(node_id, "seed", f"{label} シード")
     for field, title in (("sampler_name", "サンプラー"), ("scheduler", "スケジューラー"), ("steps", "ステップ"), ("cfg", "CFG"), ("denoise", "ノイズ除去強度")):
@@ -191,7 +191,7 @@ def build():
     models(g)
     resolution(g, 6)
     loras(g, 1, [7])
-    sampler(g, 7, "生成", ("res_multistep", "sgm_uniform"))
+    sampler(g, 7, "生成")
     g.finish("01_通常生成.json", [9])
 
     g = Graph(load("anima_hiresfix_latent_2pass.json"))

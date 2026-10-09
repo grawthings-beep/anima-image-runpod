@@ -594,8 +594,8 @@
         "randomize",
         12,
         1.5,
-        "euler",
-        "simple",
+        "res_multistep",
+        "sgm_uniform",
         1
       ],
       "title": "Stage 1: Turbo base composition",
@@ -1020,8 +1020,8 @@
         "randomize",
         12,
         1.5,
-        "euler",
-        "simple",
+        "res_multistep",
+        "sgm_uniform",
         0.82
       ],
       "title": "Stage 2: A-only masked inpaint",
@@ -1521,8 +1521,8 @@
         "randomize",
         12,
         1.5,
-        "euler",
-        "simple",
+        "res_multistep",
+        "sgm_uniform",
         0.82
       ],
       "title": "Stage 3: B-only masked inpaint",
@@ -1866,8 +1866,8 @@
         "randomize",
         12,
         1.5,
-        "euler",
-        "simple",
+        "res_multistep",
+        "sgm_uniform",
         0.2
       ],
       "title": "Stage 4: Turbo Hires-fix, denoise 0.20",
