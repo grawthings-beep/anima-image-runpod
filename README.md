@@ -68,7 +68,8 @@ Keep tokens in RunPod Secrets. Do not paste raw tokens into a public template.
 
 The default manifest downloads WAI-ANIMA, Nova 3D CGAM, and MeMAX 6 Noob v-pred,
 every bundled NIKKE character LoRA, Kotegawa Yui, Orihime Inoue v2, Riruka,
-Kaguya 2D, Yukino S3, Yui Yuigahama S3, Rangiku TYBW, Qwen Image Union Control,
+Kaguya 2D, Yukino S3, Yui Yuigahama S3, Rangiku TYBW, Kaoruko Waguri,
+Kotobuki Hisako v2, Subaru Hoshina, Yoruichi TYBW, Qwen Image Union Control,
 Anima Turbo, Skin Texture Detail, 3DCGstyle DAAAA, and Flat Color v3.
 The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
 on-demand catalog.
@@ -135,6 +136,10 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Yukino S3 - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Yui Yuigahama S3 - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Rangiku TYBW - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Kaoruko Waguri - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Kotobuki Hisako - Anima v2.safetensors
+/workspace/comfyui/models/loras/anima/Subaru Hoshina - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Yoruichi TYBW - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Flora - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Hood - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Mint - Anima.safetensors
@@ -182,6 +187,9 @@ compatibility with those workflows has not been verified.
 Rapunzel 2 is an additional download; the original Rapunzel remains available.
 Flat Color v3 uses the same `models/loras/style/anima-base-1-flat-color-v3.safetensors`
 path as the temporary download command, so an existing valid file is reused.
+
+Kotobuki Hisako v2 is an additional startup download. The original Kotobuki
+Hisako remains in the on-demand catalog and is not removed from model storage.
 
 List the 14 on-demand LoRAs:
 

@@ -55,6 +55,10 @@ class ManifestTests(unittest.TestCase):
             "anima_yukino_s3.safetensors": "models/loras/anima/Yukino S3 - Anima.safetensors",
             "anima_yui_yuigahama_s3.safetensors": "models/loras/anima/Yui Yuigahama S3 - Anima.safetensors",
             "anima_rangiku_tybw.safetensors": "models/loras/anima/Rangiku TYBW - Anima.safetensors",
+            "anima_kaoruko_waguri.safetensors": "models/loras/anima/Kaoruko Waguri - Anima.safetensors",
+            "anima_kotobukihisako2.safetensors": "models/loras/anima/Kotobuki Hisako - Anima v2.safetensors",
+            "anima_subaru_hoshina.safetensors": "models/loras/anima/Subaru Hoshina - Anima.safetensors",
+            "anima_yoruichi_tybw.safetensors": "models/loras/anima/Yoruichi TYBW - Anima.safetensors",
             "anima-base-1-flat-color-v3.safetensors": "models/loras/style/anima-base-1-flat-color-v3.safetensors",
         }
 
@@ -102,6 +106,10 @@ class ManifestTests(unittest.TestCase):
                 "Yukino S3 Anima LoRA",
                 "Yui Yuigahama S3 Anima LoRA",
                 "Rangiku TYBW Anima LoRA",
+                "Kaoruko Waguri Anima LoRA",
+                "Kotobuki Hisako Anima LoRA v2",
+                "Subaru Hoshina Anima LoRA",
+                "Yoruichi TYBW Anima LoRA",
                 "Flora Anima LoRA",
                 "Red Hood Anima LoRA (trigger: r3dh00d)",
                 "Mint Anima LoRA (trigger: m1nt)",
@@ -157,6 +165,20 @@ class ManifestTests(unittest.TestCase):
                 model["url"],
                 "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_inoueorihime.safetensors",
             )
+
+    def test_hisako_v2_keeps_the_original_on_demand_lora(self):
+        models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
+        on_demand = json.loads(ON_DEMAND.read_text(encoding="utf-8"))["models"]
+        original_path = "models/loras/anima/Kotobuki Hisako - Anima.safetensors"
+        original = next(model for model in on_demand if model["path"] == original_path)
+
+        self.assertTrue(original["enabled"])
+        self.assertEqual(
+            original["url"],
+            "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_kotobukihisako.safetensors",
+        )
+        for model in models + on_demand:
+            self.assertNotIn(original_path, model.get("legacy_paths", []))
 
     def test_other_loras_are_kept_in_the_on_demand_catalog(self):
         base = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
