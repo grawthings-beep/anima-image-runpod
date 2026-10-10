@@ -881,6 +881,54 @@
         "Authorization": "Bearer ${HF_TOKEN}"
       },
       "min_bytes": 1048576
+    },
+    {
+      "name": "Arisu Terui Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_arisu_terui.safetensors",
+      "path": "models/loras/anima/Arisu Terui - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Emilia Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_emilia.safetensors",
+      "path": "models/loras/anima/Emilia - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Nayuta Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_nayuta.safetensors",
+      "path": "models/loras/anima/Nayuta - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Michinoku Komaro Anima LoRA v2",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_michinokukomaro2.safetensors",
+      "path": "models/loras/anima/Michinoku Komaro - Anima v2.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
     }
   ]
 }

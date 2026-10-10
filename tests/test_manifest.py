@@ -59,6 +59,10 @@ class ManifestTests(unittest.TestCase):
             "anima_kotobukihisako2.safetensors": "models/loras/anima/Kotobuki Hisako - Anima v2.safetensors",
             "anima_subaru_hoshina.safetensors": "models/loras/anima/Subaru Hoshina - Anima.safetensors",
             "anima_yoruichi_tybw.safetensors": "models/loras/anima/Yoruichi TYBW - Anima.safetensors",
+            "anima_arisu_terui.safetensors": "models/loras/anima/Arisu Terui - Anima.safetensors",
+            "anima_emilia.safetensors": "models/loras/anima/Emilia - Anima.safetensors",
+            "anima_nayuta.safetensors": "models/loras/anima/Nayuta - Anima.safetensors",
+            "anima_michinokukomaro2.safetensors": "models/loras/anima/Michinoku Komaro - Anima v2.safetensors",
             "anima-base-1-flat-color-v3.safetensors": "models/loras/style/anima-base-1-flat-color-v3.safetensors",
         }
 
@@ -110,6 +114,10 @@ class ManifestTests(unittest.TestCase):
                 "Kotobuki Hisako Anima LoRA v2",
                 "Subaru Hoshina Anima LoRA",
                 "Yoruichi TYBW Anima LoRA",
+                "Arisu Terui Anima LoRA",
+                "Emilia Anima LoRA",
+                "Nayuta Anima LoRA",
+                "Michinoku Komaro Anima LoRA v2",
                 "Flora Anima LoRA",
                 "Red Hood Anima LoRA (trigger: r3dh00d)",
                 "Mint Anima LoRA (trigger: m1nt)",
@@ -166,19 +174,24 @@ class ManifestTests(unittest.TestCase):
                 "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_inoueorihime.safetensors",
             )
 
-    def test_hisako_v2_keeps_the_original_on_demand_lora(self):
+    def test_v2_character_loras_keep_original_on_demand_loras(self):
         models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
         on_demand = json.loads(ON_DEMAND.read_text(encoding="utf-8"))["models"]
-        original_path = "models/loras/anima/Kotobuki Hisako - Anima.safetensors"
-        original = next(model for model in on_demand if model["path"] == original_path)
+        originals = {
+            "models/loras/anima/Kotobuki Hisako - Anima.safetensors": "anima_kotobukihisako.safetensors",
+            "models/loras/anima/Michinoku Komaro - Anima.safetensors": "anima_michinokukomaro.safetensors",
+        }
 
-        self.assertTrue(original["enabled"])
-        self.assertEqual(
-            original["url"],
-            "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_kotobukihisako.safetensors",
-        )
-        for model in models + on_demand:
-            self.assertNotIn(original_path, model.get("legacy_paths", []))
+        for original_path, filename in originals.items():
+            with self.subTest(path=original_path):
+                original = next(model for model in on_demand if model["path"] == original_path)
+                self.assertTrue(original["enabled"])
+                self.assertEqual(
+                    original["url"],
+                    f"https://huggingface.co/uwgm/nikke-loras/resolve/main/{filename}",
+                )
+                for model in models + on_demand:
+                    self.assertNotIn(original_path, model.get("legacy_paths", []))
 
     def test_other_loras_are_kept_in_the_on_demand_catalog(self):
         base = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
