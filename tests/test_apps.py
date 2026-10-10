@@ -70,7 +70,7 @@ class AppTests(unittest.TestCase):
 
     def test_apps_have_valid_graph_links_bindings_and_active_outputs(self):
         apps = list((ROOT / "workflows/apps").glob("*.json"))
-        self.assertEqual(len(apps), 6)
+        self.assertEqual(len(apps), 7)
         for path in apps:
             with self.subTest(path=path.name):
                 w = json.loads(path.read_text(encoding="utf-8"))

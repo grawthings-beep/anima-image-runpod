@@ -15,6 +15,7 @@ MODEL_WIDGETS = {
     "UpscaleModelLoader": [(0, "model_name")],
     "AnimaAppLoRA": [(0, "lora_name")],
     "AnimaRegionalCharacter": [(0, "lora_name")],
+    "AnimaLLLiteApply_sdscripts": [(0, "lllite_name")],
     "KSampler": [(4, "sampler_name"), (5, "scheduler")],
 }
 

@@ -2,14 +2,29 @@
 
 RunPod ComfyUI template for Anima / WAI-ANIMA image generation with reusable LoRA downloads.
 
-**App Mode for PC / iPhone:** six ready-to-run apps expose prompts, installed
+**App Mode for PC / iPhone:** seven bundled apps expose prompts, installed
 LoRAs, aspect ratios and sampler/scheduler controls. See [APP_MODE.md](APP_MODE.md)
 for the workflow inventory, iPhone operation and rollout steps.
 
-This image includes startup/downloader scripts, six native App Mode workflows,
+This image includes startup/downloader scripts, seven native App Mode workflows,
 and small controls for aspect ratios, optional LoRAs, and region layouts. Large
 model files are downloaded into `/workspace/comfyui/models` at Pod startup so a
 persistent RunPod volume can reuse them.
+
+## Anima LLLite Regional ControlNet
+
+Open **Anima Apps / 07 LLLite領域制御（実験的）** to try colored layout control
+alongside the existing A-D regional LoRA hooks and latent hires pass.
+The original six apps remain unchanged. The pinned official LLLite node is
+bundled in the image; the 51.1 MB public `anima-lllite-regional-exp-v3.safetensors`
+is downloaded to `models/controlnet/` at startup with SHA-256 verification.
+No ControlNet Aux, Impact Pack, KJNodes, or PPM installation is required.
+
+`(layout)` automatically makes the control image from the region preset.
+Alternatively upload a white-background color map: A = red, B = blue,
+C = green, D = yellow. The same map supplies both the ControlNet image and
+the per-character masks. See [REGIONAL_LLLITE.md](REGIONAL_LLLITE.md) for
+settings, limitations, comparisons, and deployment checks.
 
 ## Container Image
 
@@ -71,7 +86,7 @@ every bundled NIKKE character LoRA, Kotegawa Yui, Orihime Inoue v2, Riruka,
 Kaguya 2D, Yukino S3, Yui Yuigahama S3, Rangiku TYBW, Kaoruko Waguri,
 Kotobuki Hisako v2, Subaru Hoshina, Yoruichi TYBW, Arisu Terui, Emilia, Nayuta,
 Michinoku Komaro v2, Qwen Image Union Control, Anima Turbo, Skin Texture Detail,
-3DCGstyle DAAAA, and Flat Color v3.
+3DCGstyle DAAAA, Flat Color v3, and Anima LLLite Regional ControlNet exp v3.
 The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
 on-demand catalog.
 Civitai-hosted files, including 3D Animated Realistic Style and Pixel Art,
@@ -95,8 +110,8 @@ the GPU driver and PyTorch CUDA build so host-side GPU failures can be
 distinguished from image compatibility problems.
 
 The default startup does not install ControlNet Aux, OpenPose Editor, Easy-Use,
-or rgthree. The bundled Anima workflows use the Anima custom node plus ComfyUI
-core nodes, so those helper nodes only add startup time for the current setup.
+or rgthree. The bundled Anima workflows use the Anima custom node, ComfyUI
+core nodes, and the pinned LLLite node for App 07, without these preprocessors.
 Set `INSTALL_CONTROLNET_AUX=1` only when you need DWPose/OpenPose/depth/canny
 preprocessors, `INSTALL_OPENPOSE_EDITOR=1` only when you want the editor UI,
 and `INSTALL_EASY_USE=1` or `INSTALL_RGTHREE=1` only for your own legacy
@@ -112,6 +127,7 @@ different CUDA versions.
 Startup downloads:
 
 ```text
+/workspace/comfyui/models/controlnet/anima-lllite-regional-exp-v3.safetensors
 /workspace/comfyui/models/diffusion_models/waiANIMA_v10Base10.safetensors
 /workspace/comfyui/models/diffusion_models/nova3DCGAM_v10.safetensors
 /workspace/comfyui/models/checkpoints/MeMax6-noob-vpred.safetensors

@@ -108,10 +108,105 @@ class AnimaAppRegionPreset:
                             "feather": feather_percent / 100, "regions": regions}),)
 
 
-NODE_CLASS_MAPPINGS = {cls.__name__: cls for cls in (AnimaAppResolution, AnimaAppLoRA, AnimaAppRegionPreset)}
+REGIONAL_PALETTE = ((255, 0, 0), (0, 0, 255), (0, 255, 0), (255, 255, 0), (255, 255, 255))
+
+
+def regional_map_arrays(masks, image=None, feather_percent=2):
+    """One ownership map drives both the solid control image and soft conditioning."""
+    import numpy as np
+    from PIL import Image, ImageFilter
+
+    masks = np.asarray(masks, dtype=np.float32)
+    if masks.ndim != 3 or masks.shape[0] != 4 or min(masks.shape[1:]) < 1:
+        raise ValueError("Expected four equally sized region masks")
+    if not np.isfinite(masks).all() or not 0 <= feather_percent <= 10:
+        raise ValueError("Invalid masks or feather amount (0-10%)")
+    height, width = masks.shape[1:]
+    palette = np.asarray(REGIONAL_PALETTE, dtype=np.uint8)
+    if image is None:
+        owners = masks.argmax(axis=0)
+        owners[masks.max(axis=0) <= 0] = 4
+    else:
+        rgba = image.convert("RGBA")
+        white = Image.new("RGBA", rgba.size, (255, 255, 255, 255))
+        rgb = Image.alpha_composite(white, rgba).convert("RGB")
+        pixels = np.asarray(rgb.resize((width, height), Image.Resampling.NEAREST), dtype=np.float32) / 255
+        best = np.full((height, width), np.inf, dtype=np.float32)
+        owners = np.full((height, width), 4, dtype=np.int64)
+        for index, color in enumerate(palette.astype(np.float32) / 255):
+            distance = ((pixels - color) ** 2).sum(axis=-1)
+            closer = distance < best
+            owners[closer] = index
+            best[closer] = distance[closer]
+        if np.mean(best > 0.5) > 0.01:
+            raise ValueError("Use red (A), blue (B), green (C), yellow (D), and white background in the color map")
+    if not np.any(owners < 4):
+        raise ValueError("The color map has no character regions")
+    color_map = palette[owners].astype(np.float32) / 255
+    soft = np.stack([owners == index for index in range(4)]).astype(np.float32)
+    radius = feather_percent * min(width, height) / 100
+    if radius > 0:
+        for index in range(4):
+            mask_image = Image.fromarray((soft[index] * 255).astype(np.uint8))
+            soft[index] = np.asarray(mask_image.filter(ImageFilter.GaussianBlur(radius)), dtype=np.float32) / 255
+        soft /= np.maximum(soft.sum(axis=0), 1)[None]
+    return color_map, soft
+
+
+class AnimaAppRegionalMap:
+    @classmethod
+    def INPUT_TYPES(cls):
+        from nodes import LoadImage
+        image_options = LoadImage.INPUT_TYPES()["required"]["image"][0]
+        return {"required": {
+            **{f"mask_{letter}": ("MASK",) for letter in "ABCD"},
+            "image": (["(layout)"] + image_options, {"image_upload": True}),
+            "feather_percent": ("FLOAT", {"default": 2, "min": 0, "max": 10, "step": 0.5}),
+        }}
+
+    RETURN_TYPES = ("IMAGE", "MASK", "MASK", "MASK", "MASK")
+    RETURN_NAMES = ("color_map", "mask_A", "mask_B", "mask_C", "mask_D")
+    FUNCTION = "create"
+    CATEGORY = "Anima/App"
+
+    @classmethod
+    def VALIDATE_INPUTS(cls, image):
+        if image == "(layout)":
+            return True
+        from nodes import LoadImage
+        return LoadImage.VALIDATE_INPUTS(image)
+
+    @classmethod
+    def IS_CHANGED(cls, image):
+        if image == "(layout)":
+            return "layout"
+        from nodes import LoadImage
+        return LoadImage.IS_CHANGED(image)
+
+    def create(self, mask_A, mask_B, mask_C, mask_D, image, feather_percent):
+        import numpy as np
+        import torch
+        from PIL import Image, ImageOps
+
+        masks = []
+        for mask in (mask_A, mask_B, mask_C, mask_D):
+            if mask.ndim != 3 or mask.shape[0] != 1:
+                raise ValueError("Regional color maps require a single-image layout")
+            masks.append(mask[0].detach().cpu().numpy())
+        source_image = None
+        if image != "(layout)":
+            import folder_paths
+            with Image.open(folder_paths.get_annotated_filepath(image)) as loaded:
+                source_image = ImageOps.exif_transpose(loaded).convert("RGBA")
+        color_map, soft = regional_map_arrays(np.stack(masks), source_image, feather_percent)
+        return (torch.from_numpy(color_map[None]), *[torch.from_numpy(mask[None]) for mask in soft])
+
+
+NODE_CLASS_MAPPINGS = {cls.__name__: cls for cls in (AnimaAppResolution, AnimaAppLoRA, AnimaAppRegionPreset, AnimaAppRegionalMap)}
 NODE_DISPLAY_NAME_MAPPINGS = {
     "AnimaAppResolution": "縦横比・解像度",
     "AnimaAppLoRA": "LoRA選択",
     "AnimaAppRegionPreset": "領域配置",
+    "AnimaAppRegionalMap": "LLLite色マップ・領域マスク",
 }
 WEB_DIRECTORY = "./web"

@@ -1,6 +1,16 @@
 {
   "models": [
     {
+      "name": "Anima LLLite Regional ControlNet exp v3",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/Sen-sou/Anima-LLLite-Regional-Controlnet/resolve/f1b7beeddb4175d2d20b14e10538db62bbb441a6/anima-lllite-regional-exp-v3.safetensors",
+      "path": "models/controlnet/anima-lllite-regional-exp-v3.safetensors",
+      "sha256": "f8cdc9897a4eaa50b0f9bc18dda098fb096eeb64df001589492b9774d0cf5cc5",
+      "min_bytes": 51133504
+    },
+    {
       "name": "WAI-ANIMA checkpoint v1.0",
       "enabled": true,
       "required": true,

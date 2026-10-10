@@ -41,6 +41,10 @@ def install(source, workflow_dir, custom_nodes_dir):
         print(f"Installed app: {dest.name}")
     state_path.write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8")
     shutil.copytree(source / "custom_nodes" / "ComfyUI-AnimaApp", custom_nodes_dir / "ComfyUI-AnimaApp", dirs_exist_ok=True)
+    lllite = source / "vendor" / "ComfyUI-Anima-LLLite"
+    if lllite.is_dir():
+        shutil.copytree(lllite, custom_nodes_dir / "ComfyUI-Anima-LLLite",
+                        dirs_exist_ok=True, ignore=shutil.ignore_patterns(".git", "__pycache__"))
 
 
 def main():

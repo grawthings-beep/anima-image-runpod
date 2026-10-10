@@ -77,7 +77,7 @@ class Graph:
         slot = next((item for item in n.get("inputs", []) if item["name"] == name), None)
         if slot is None:
             integer = {"long_edge", "seed", "steps", "scene_limit", "start_in_range", "base_seed"}
-            decimal = {"strength", "cfg", "denoise", "scale_by", "overlap_percent", "feather_percent"}
+            decimal = {"strength", "cfg", "denoise", "scale_by", "overlap_percent", "feather_percent", "start_percent", "end_percent"}
             text = {"text", "value", "scene_prompts", "positive", "negative"}
             boolean = {"auto_download"}
             type_ = "INT" if name in integer else "FLOAT" if name in decimal else "STRING" if name in text else "BOOLEAN" if name in boolean else "COMBO"
@@ -109,7 +109,7 @@ class Graph:
         for i, n in enumerate(self.w["nodes"]):
             n["pos"] = [(i % 5) * 380, (i // 5) * 340]
             n["order"] = i
-        (DEST / filename).write_text(json.dumps(self.w, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        (DEST / filename).write_text(json.dumps(self.w, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
 def load(name):
@@ -231,6 +231,35 @@ def build():
     sampler(g, 61, "高解像度化", steps=8)
     g.expose(57, "scale_by", "latent拡大倍率")
     g.finish("03_領域別LoRA_A-D_実験的.json", [56, 63])
+
+    # Separate experimental app: the existing six apps keep their graphs/defaults.
+    regional = Graph(g.w)
+    regional.inputs = [copy.deepcopy(item) for item in g.inputs
+                       if not (item[0] == preset and item[1] in ("overlap_percent", "feather_percent"))]
+    regional.node(preset)["widgets_values"][1:] = [0, 0]
+    color_map = regional.add("AnimaAppRegionalMap", "色マップ A赤・B青・C緑・D黄", ["(layout)", 2],
+                             tuple((f"mask_{letter}", "MASK") for letter in "ABCD"),
+                             (("color_map", "IMAGE"),) + tuple((f"mask_{letter}", "MASK") for letter in "ABCD"))
+    for index, character in enumerate((10, 30, 40, 41)):
+        regional.connect(6, index, color_map, f"mask_{'ABCD'[index]}")
+        regional.connect(color_map, index + 1, character, "mask")
+    regional.expose(color_map, "image", "色マップ（(layout)で配置プリセット）")
+    regional.expose(color_map, "feather_percent", "プロンプト境界のぼかし（%）")
+    preview = regional.add("PreviewImage", "制御色マップ", [], (("images", "IMAGE"),))
+    regional.connect(color_map, 0, preview, "images")
+    for sampler_id, label, strength, end in ((54, "初回", 0.6, 0.65), (61, "高解像度化", 0.25, 1.0)):
+        input_ = next(item for item in regional.node(sampler_id)["inputs"] if item["name"] == "model")
+        source = next(link[1] for link in regional.w["links"] if link[0] == input_["link"])
+        control = regional.add("AnimaLLLiteApply_sdscripts", f"{label} LLLite Regional",
+                               ["anima-lllite-regional-exp-v3.safetensors", strength, 0.0, end, True],
+                               (("model", "MODEL"), ("image", "IMAGE")), (("MODEL", "MODEL"),))
+        regional.connect(source, 0, control, "model")
+        regional.connect(color_map, 0, control, "image")
+        regional.connect(control, 0, sampler_id, "model")
+        for field, title in (("strength", "強度"), ("start_percent", "開始"), ("end_percent", "終了")):
+            regional.expose(control, field, f"{label} ControlNet {title}")
+    regional.node(63)["widgets_values"] = ["Anima_App/lllite_regional"]
+    regional.finish("07_LLLite領域制御_実験的.json", [preview, 56, 63])
 
     original = load("anima_two_character_inpaint_hiresfix.json")
     for filename, output, prompt_id, sampler_ids, load_id, character in (
