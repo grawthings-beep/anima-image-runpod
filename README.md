@@ -84,7 +84,7 @@ Keep tokens in RunPod Secrets. Do not paste raw tokens into a public template.
 The default manifest downloads WAI-ANIMA, Nova 3D CGAM, and MeMAX 6 Noob v-pred,
 every bundled NIKKE character LoRA, Kotegawa Yui, Orihime Inoue v2, Riruka,
 Kaguya 2D, Yukino S3, Yui Yuigahama S3, Rangiku TYBW, Kaoruko Waguri,
-Kotobuki Hisako v2, Subaru Hoshina, Yoruichi TYBW, Arisu Terui, Emilia, Nayuta,
+Kotobuki Hisako v2, Subaru Hoshina, Yoruichi TYBW, Arisu Terui, Emilia, Nayuta v2,
 Michinoku Komaro v2, Qwen Image Union Control, Anima Turbo, Skin Texture Detail,
 3DCGstyle DAAAA, Flat Color v3, and Anima LLLite Regional ControlNet exp v3.
 The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
@@ -159,7 +159,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Yoruichi TYBW - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Arisu Terui - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Emilia - Anima.safetensors
-/workspace/comfyui/models/loras/anima/Nayuta - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Nayuta - Anima v2.safetensors
 /workspace/comfyui/models/loras/anima/Michinoku Komaro - Anima v2.safetensors
 /workspace/comfyui/models/loras/anima/Flora - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Hood - Anima.safetensors
@@ -212,6 +212,10 @@ path as the temporary download command, so an existing valid file is reused.
 Kotobuki Hisako v2 and Michinoku Komaro v2 are additional startup downloads.
 Their original versions remain in the on-demand catalog and are not removed
 from model storage.
+
+Nayuta v2 replaces the original Nayuta. It uses a separate versioned filename;
+the old readable/raw filenames are removed only after the replacement passes
+the downloader's file checks. Mast remains an existing startup download.
 
 List the 14 on-demand LoRAs:
 

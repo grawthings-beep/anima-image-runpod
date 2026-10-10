@@ -917,16 +917,20 @@
       "min_bytes": 1048576
     },
     {
-      "name": "Nayuta Anima LoRA",
+      "name": "Nayuta Anima LoRA v2",
       "enabled": true,
       "required": false,
       "method": "curl",
-      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_nayuta.safetensors",
-      "path": "models/loras/anima/Nayuta - Anima.safetensors",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_nayuta2.safetensors",
+      "path": "models/loras/anima/Nayuta - Anima v2.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
-      "min_bytes": 1048576
+      "min_bytes": 1048576,
+      "legacy_paths": [
+        "models/loras/anima/Nayuta - Anima.safetensors",
+        "models/loras/anima/anima_nayuta.safetensors"
+      ]
     },
     {
       "name": "Michinoku Komaro Anima LoRA v2",

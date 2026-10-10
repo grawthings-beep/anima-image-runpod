@@ -61,7 +61,8 @@ class ManifestTests(unittest.TestCase):
             "anima_yoruichi_tybw.safetensors": "models/loras/anima/Yoruichi TYBW - Anima.safetensors",
             "anima_arisu_terui.safetensors": "models/loras/anima/Arisu Terui - Anima.safetensors",
             "anima_emilia.safetensors": "models/loras/anima/Emilia - Anima.safetensors",
-            "anima_nayuta.safetensors": "models/loras/anima/Nayuta - Anima.safetensors",
+            "anima_nayuta2.safetensors": "models/loras/anima/Nayuta - Anima v2.safetensors",
+            "anima_mast.safetensors": "models/loras/anima/Mast - Anima.safetensors",
             "anima_michinokukomaro2.safetensors": "models/loras/anima/Michinoku Komaro - Anima v2.safetensors",
             "anima-base-1-flat-color-v3.safetensors": "models/loras/style/anima-base-1-flat-color-v3.safetensors",
         }
@@ -116,7 +117,7 @@ class ManifestTests(unittest.TestCase):
                 "Yoruichi TYBW Anima LoRA",
                 "Arisu Terui Anima LoRA",
                 "Emilia Anima LoRA",
-                "Nayuta Anima LoRA",
+                "Nayuta Anima LoRA v2",
                 "Michinoku Komaro Anima LoRA v2",
                 "Flora Anima LoRA",
                 "Red Hood Anima LoRA (trigger: r3dh00d)",
@@ -172,6 +173,24 @@ class ManifestTests(unittest.TestCase):
             self.assertNotEqual(
                 model["url"],
                 "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_inoueorihime.safetensors",
+            )
+
+    def test_nayuta_v2_replaces_v1_without_reusing_its_cached_path(self):
+        models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
+        on_demand = json.loads(ON_DEMAND.read_text(encoding="utf-8"))["models"]
+        replacement = next(model for model in models if model["name"] == "Nayuta Anima LoRA v2")
+        old_paths = {
+            "models/loras/anima/Nayuta - Anima.safetensors",
+            "models/loras/anima/anima_nayuta.safetensors",
+        }
+
+        self.assertEqual(set(replacement["legacy_paths"]), old_paths)
+        self.assertNotIn(replacement["path"], old_paths)
+        for model in models + on_demand:
+            self.assertNotIn(model["path"], old_paths)
+            self.assertNotEqual(
+                model["url"],
+                "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_nayuta.safetensors",
             )
 
     def test_v2_character_loras_keep_original_on_demand_loras(self):
