@@ -1,0 +1,11 @@
+# Imports required by Impact Pack and KJNodes, not annotator/model downloads.
+# SAM2 is optional in Impact Pack and is not used by PreviewBridge.
+segment-anything==1.0
+piexif==1.1.3
+scikit-image
+scipy
+dill
+matplotlib
+color-matcher
+mss
+opencv-python-headless

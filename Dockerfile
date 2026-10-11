@@ -29,9 +29,28 @@ RUN git init /opt/runpod-anima-image/vendor/ComfyUI-Anima-LLLite \
     && git -C /opt/runpod-anima-image/vendor/ComfyUI-Anima-LLLite fetch --depth 1 origin "${ANIMA_LLLITE_REV}" \
     && git -C /opt/runpod-anima-image/vendor/ComfyUI-Anima-LLLite checkout --detach FETCH_HEAD
 
+# Article-style graph: real Attention Couple, KJ color masks and PreviewBridge.
+ARG PPM_REV=6c6c360155cace9d7091306c1b8e26d9c7438620
+ARG KJNODES_REV=d7641533d6634eb05f8570c980fce8fc8528dc7b
+ARG IMPACT_REV=429d0159ad429e64d2b3916e6e7be9c22d025c3c
+RUN git init /opt/runpod-anima-image/vendor/ComfyUI-ppm \
+    && git -C /opt/runpod-anima-image/vendor/ComfyUI-ppm remote add origin https://github.com/pamparamm/ComfyUI-ppm.git \
+    && git -C /opt/runpod-anima-image/vendor/ComfyUI-ppm fetch --depth 1 origin "${PPM_REV}" \
+    && git -C /opt/runpod-anima-image/vendor/ComfyUI-ppm checkout --detach FETCH_HEAD \
+    && git init /opt/runpod-anima-image/vendor/ComfyUI-KJNodes \
+    && git -C /opt/runpod-anima-image/vendor/ComfyUI-KJNodes remote add origin https://github.com/kijai/ComfyUI-KJNodes.git \
+    && git -C /opt/runpod-anima-image/vendor/ComfyUI-KJNodes fetch --depth 1 origin "${KJNODES_REV}" \
+    && git -C /opt/runpod-anima-image/vendor/ComfyUI-KJNodes checkout --detach FETCH_HEAD \
+    && git init /opt/runpod-anima-image/vendor/ComfyUI-Impact-Pack \
+    && git -C /opt/runpod-anima-image/vendor/ComfyUI-Impact-Pack remote add origin https://github.com/ltdrdata/ComfyUI-Impact-Pack.git \
+    && git -C /opt/runpod-anima-image/vendor/ComfyUI-Impact-Pack fetch --depth 1 origin "${IMPACT_REV}" \
+    && git -C /opt/runpod-anima-image/vendor/ComfyUI-Impact-Pack checkout --detach FETCH_HEAD
+RUN python3 /opt/runpod-anima-image/scripts/install_regional_dependencies.py
+
 # App Builder and its mobile/mask editor interface use this tested stable UI.
 ARG COMFYUI_FRONTEND_VERSION=1.54.8
 RUN python3 -m pip install --no-cache-dir "comfyui-frontend-package==${COMFYUI_FRONTEND_VERSION}"
+RUN python3 /opt/runpod-anima-image/scripts/check_regional_runtime.py
 RUN chmod +x /opt/runpod-anima-image/scripts/*.sh
 
 EXPOSE 8188

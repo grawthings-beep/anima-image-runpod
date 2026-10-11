@@ -1,5 +1,8 @@
 # Anima LLLite Regional ControlNet の試し方
 
+これは既存の **App 07 / LoRA hooks版** の説明です。
+記事方式の **通常グラフ / Attention Couple版** は [REGIONAL_PPM_WORKFLOW.md](REGIONAL_PPM_WORKFLOW.md) を参照してください。
+
 ## 追加内容
 
 `Anima Apps/07_LLLite領域制御_実験的.app.json`を追加しています。

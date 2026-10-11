@@ -347,6 +347,14 @@ fi
 
 repair_torchaudio_cuda_mismatch
 
+if [[ "${INSTALL_ANIMA_REGIONAL_GRAPH:-1}" == "1" ]]; then
+  "${PYTHON_BIN}" /opt/runpod-anima-image/scripts/install_graph_workflows.py \
+    --source /opt/runpod-anima-image \
+    --workflow-dir "${COMFYUI_WORKFLOW_DIR}" \
+    --custom-nodes-dir "${COMFYUI_DIR}/custom_nodes" \
+    --input-dir "${WORKSPACE_DIR}/input"
+fi
+
 if [[ "${INSTALL_ANIMA_APPS:-1}" == "1" ]]; then
   if [[ "${INSTALL_ANIMA_NODE:-1}" != "1" ]]; then
     echo "ERROR: Anima Apps require INSTALL_ANIMA_NODE=1 for queue and regional nodes." >&2
