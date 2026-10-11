@@ -85,7 +85,7 @@ The default manifest downloads WAI-ANIMA, Nova 3D CGAM, and MeMAX 6 Noob v-pred,
 every bundled NIKKE character LoRA, Kotegawa Yui, Orihime Inoue v2, Riruka,
 Kaguya 2D, Yukino S3, Yui Yuigahama S3, Rangiku TYBW, Kaoruko Waguri,
 Kotobuki Hisako v2, Subaru Hoshina, Yoruichi TYBW, Arisu Terui, Emilia, Nayuta v2,
-Michinoku Komaro v2, Qwen Image Union Control, Anima Turbo, Skin Texture Detail,
+Michinoku Komaro v2, Lillie, Qwen Image Union Control, Anima Turbo, Skin Texture Detail,
 3DCGstyle DAAAA, Flat Color v3, and Anima LLLite Regional ControlNet exp v3.
 The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
 on-demand catalog.
@@ -161,6 +161,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Emilia - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Nayuta - Anima v2.safetensors
 /workspace/comfyui/models/loras/anima/Michinoku Komaro - Anima v2.safetensors
+/workspace/comfyui/models/loras/anima/Lillie - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Flora - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Hood - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Mint - Anima.safetensors
@@ -176,6 +177,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Cinderella - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Maid Cinderella - Anima.safetensors
 /workspace/comfyui/models/loras/anima/White Cinderella - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Cinderella Glass Courtesy - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Mast - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Maxwell - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Moran - Anima v1.safetensors
@@ -216,6 +218,10 @@ from model storage.
 Nayuta v2 replaces the original Nayuta. It uses a separate versioned filename;
 the old readable/raw filenames are removed only after the replacement passes
 the downloader's file checks. Mast remains an existing startup download.
+
+Cinderella Glass Courtesy and Lillie are additional startup downloads, not
+replacements. Other Cinderella variants remain available, and the separate
+`LilliePokemon_AnimaBaseV10_byKonan.safetensors` stays in the on-demand catalog.
 
 List the 14 on-demand LoRAs:
 

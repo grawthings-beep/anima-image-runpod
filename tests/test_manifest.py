@@ -64,6 +64,8 @@ class ManifestTests(unittest.TestCase):
             "anima_nayuta2.safetensors": "models/loras/anima/Nayuta - Anima v2.safetensors",
             "anima_mast.safetensors": "models/loras/anima/Mast - Anima.safetensors",
             "anima_michinokukomaro2.safetensors": "models/loras/anima/Michinoku Komaro - Anima v2.safetensors",
+            "anima_cinderella_glass_courtesy.safetensors": "models/loras/anima/Cinderella Glass Courtesy - Anima.safetensors",
+            "anima_lillie.safetensors": "models/loras/anima/Lillie - Anima.safetensors",
             "anima-base-1-flat-color-v3.safetensors": "models/loras/style/anima-base-1-flat-color-v3.safetensors",
         }
 
@@ -119,6 +121,8 @@ class ManifestTests(unittest.TestCase):
                 "Emilia Anima LoRA",
                 "Nayuta Anima LoRA v2",
                 "Michinoku Komaro Anima LoRA v2",
+                "Cinderella Glass Courtesy Anima LoRA",
+                "Lillie Anima LoRA",
                 "Flora Anima LoRA",
                 "Red Hood Anima LoRA (trigger: r3dh00d)",
                 "Mint Anima LoRA (trigger: m1nt)",
@@ -192,6 +196,22 @@ class ManifestTests(unittest.TestCase):
                 model["url"],
                 "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_nayuta.safetensors",
             )
+
+    def test_new_cinderella_and_lillie_preserve_existing_variants(self):
+        models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
+        on_demand = json.loads(ON_DEMAND.read_text(encoding="utf-8"))["models"]
+        preserved = {
+            "models/loras/anima/Cinderella - Anima.safetensors",
+            "models/loras/anima/Bikini Cinderella - Anima.safetensors",
+            "models/loras/anima/White Cinderella - Anima.safetensors",
+            "models/loras/anima/Maid Cinderella - Anima.safetensors",
+            "models/loras/anima/LilliePokemon_AnimaBaseV10_byKonan.safetensors",
+        }
+        entries = models + on_demand
+        enabled_paths = {model["path"] for model in entries if model["enabled"]}
+        self.assertTrue(preserved <= enabled_paths)
+        for model in entries:
+            self.assertTrue(preserved.isdisjoint(model.get("legacy_paths", [])))
 
     def test_v2_character_loras_keep_original_on_demand_loras(self):
         models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
