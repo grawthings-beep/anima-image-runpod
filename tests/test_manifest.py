@@ -66,6 +66,9 @@ class ManifestTests(unittest.TestCase):
             "anima_michinokukomaro2.safetensors": "models/loras/anima/Michinoku Komaro - Anima v2.safetensors",
             "anima_cinderella_glass_courtesy.safetensors": "models/loras/anima/Cinderella Glass Courtesy - Anima.safetensors",
             "anima_lillie.safetensors": "models/loras/anima/Lillie - Anima.safetensors",
+            "anima_momo.safetensors": "models/loras/anima/Momo - Anima.safetensors",
+            "anima_red_shoes.safetensors": "models/loras/anima/Red Shoes - Anima.safetensors",
+            "ntrmix_style_anima_b1_v1.safetensors": "models/loras/style/NTRMix Style - Anima b1 v1.safetensors",
             "anima-base-1-flat-color-v3.safetensors": "models/loras/style/anima-base-1-flat-color-v3.safetensors",
         }
 
@@ -123,6 +126,9 @@ class ManifestTests(unittest.TestCase):
                 "Michinoku Komaro Anima LoRA v2",
                 "Cinderella Glass Courtesy Anima LoRA",
                 "Lillie Anima LoRA",
+                "Momo Anima LoRA",
+                "Red Shoes Anima LoRA",
+                "NTRMix Anima style LoRA b1 v1",
                 "Flora Anima LoRA",
                 "Red Hood Anima LoRA (trigger: r3dh00d)",
                 "Mint Anima LoRA (trigger: m1nt)",

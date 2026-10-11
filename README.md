@@ -85,8 +85,9 @@ The default manifest downloads WAI-ANIMA, Nova 3D CGAM, and MeMAX 6 Noob v-pred,
 every bundled NIKKE character LoRA, Kotegawa Yui, Orihime Inoue v2, Riruka,
 Kaguya 2D, Yukino S3, Yui Yuigahama S3, Rangiku TYBW, Kaoruko Waguri,
 Kotobuki Hisako v2, Subaru Hoshina, Yoruichi TYBW, Arisu Terui, Emilia, Nayuta v2,
-Michinoku Komaro v2, Lillie, Qwen Image Union Control, Anima Turbo, Skin Texture Detail,
-3DCGstyle DAAAA, Flat Color v3, and Anima LLLite Regional ControlNet exp v3.
+Michinoku Komaro v2, Lillie, Momo, Qwen Image Union Control, Anima Turbo,
+Skin Texture Detail, 3DCGstyle DAAAA, Flat Color v3, NTRMix Style b1 v1,
+and Anima LLLite Regional ControlNet exp v3.
 The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
 on-demand catalog.
 Civitai-hosted files, including 3D Animated Realistic Style and Pixel Art,
@@ -139,6 +140,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Skin Texture Detail.safetensors
 /workspace/comfyui/models/loras/style/3DCGstyle_DAAAA.safetensors
 /workspace/comfyui/models/loras/style/anima-base-1-flat-color-v3.safetensors
+/workspace/comfyui/models/loras/style/NTRMix Style - Anima b1 v1.safetensors
 /workspace/comfyui/models/loras/anima/Old Maxwell - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Marciana - Anima v3.safetensors
 /workspace/comfyui/models/loras/anima/Marciana Marine Study - Anima.safetensors
@@ -162,6 +164,8 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Nayuta - Anima v2.safetensors
 /workspace/comfyui/models/loras/anima/Michinoku Komaro - Anima v2.safetensors
 /workspace/comfyui/models/loras/anima/Lillie - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Momo - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Red Shoes - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Flora - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Hood - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Mint - Anima.safetensors
@@ -222,6 +226,10 @@ the downloader's file checks. Mast remains an existing startup download.
 Cinderella Glass Courtesy and Lillie are additional startup downloads, not
 replacements. Other Cinderella variants remain available, and the separate
 `LilliePokemon_AnimaBaseV10_byKonan.safetensors` stays in the on-demand catalog.
+
+Momo and Red Shoes are additional character LoRAs. NTRMix Style b1 v1 is
+stored separately under `models/loras/style/`. All three download at startup;
+these additions do not change workflow defaults or remove existing LoRAs.
 
 List the 14 on-demand LoRAs:
 

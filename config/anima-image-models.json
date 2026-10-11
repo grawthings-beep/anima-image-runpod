@@ -967,6 +967,42 @@
         "Authorization": "Bearer ${HF_TOKEN}"
       },
       "min_bytes": 1048576
+    },
+    {
+      "name": "Momo Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_momo.safetensors",
+      "path": "models/loras/anima/Momo - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Red Shoes Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_red_shoes.safetensors",
+      "path": "models/loras/anima/Red Shoes - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "NTRMix Anima style LoRA b1 v1",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/ntrmix_style_anima_b1_v1.safetensors",
+      "path": "models/loras/style/NTRMix Style - Anima b1 v1.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
     }
   ]
 }
