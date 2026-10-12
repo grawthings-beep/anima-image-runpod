@@ -95,7 +95,8 @@ The default manifest downloads WAI-ANIMA, Nova 3D CGAM, and MeMAX 6 Noob v-pred,
 every bundled NIKKE character LoRA, Kotegawa Yui, Orihime Inoue v2, Riruka,
 Kaguya 2D, Yukino S3, Yui Yuigahama S3, Rangiku TYBW, Kaoruko Waguri,
 Kotobuki Hisako v2, Subaru Hoshina, Yoruichi TYBW, Arisu Terui, Emilia, Nayuta v2,
-Michinoku Komaro v2, Lillie, Momo, Elesa, Serena, Qwen Image Union Control, Anima Turbo,
+Michinoku Komaro v2, Lillie, Momo, Elesa, Serena, Chisato, Takina,
+Qwen Image Union Control, Anima Turbo,
 Skin Texture Detail, 3DCGstyle DAAAA, Flat Color v3, NTRMix Style b1 v1,
 and Anima LLLite Regional ControlNet exp v3.
 The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
@@ -179,6 +180,8 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Momo - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Elesa - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Serena - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Chisato - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Takina - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Shoes - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Flora - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Hood - Anima.safetensors
@@ -190,7 +193,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Anis Star - Anima v2.safetensors
 /workspace/comfyui/models/loras/anima/Anis Star 3 - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Anis Star 4 - Anima.safetensors
-/workspace/comfyui/models/loras/anima/Rapi - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Rapi - Anima v2.safetensors
 /workspace/comfyui/models/loras/anima/Prika - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Siren - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Cinderella - Anima.safetensors
@@ -249,6 +252,12 @@ these additions do not change workflow defaults or remove existing LoRAs.
 Anis Star 4, Elesa, and Serena are additional startup downloads under
 `models/loras/anima/`. Anis Star v2 and Anis Star 3 remain enabled and are not
 removed from model storage.
+
+Chisato and Takina are additional startup downloads. Rapi v2 replaces the
+original Rapi using `Rapi - Anima v2.safetensors`; the old readable/raw filenames
+are removed only after the replacement passes the downloader's file checks.
+Swimsuit Rapi remains unchanged. Saved workflows that select the original Rapi
+filename need to select the new v2 filename.
 
 List the 14 on-demand LoRAs:
 

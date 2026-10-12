@@ -71,6 +71,9 @@ class ManifestTests(unittest.TestCase):
             "anima_anisstar4.safetensors": "models/loras/anima/Anis Star 4 - Anima.safetensors",
             "anima_elesa.safetensors": "models/loras/anima/Elesa - Anima.safetensors",
             "anima_serena.safetensors": "models/loras/anima/Serena - Anima.safetensors",
+            "anima_chisato.safetensors": "models/loras/anima/Chisato - Anima.safetensors",
+            "anima_rapi2.safetensors": "models/loras/anima/Rapi - Anima v2.safetensors",
+            "anima_takina.safetensors": "models/loras/anima/Takina - Anima.safetensors",
             "ntrmix_style_anima_b1_v1.safetensors": "models/loras/style/NTRMix Style - Anima b1 v1.safetensors",
             "anima-base-1-flat-color-v3.safetensors": "models/loras/style/anima-base-1-flat-color-v3.safetensors",
         }
@@ -134,6 +137,8 @@ class ManifestTests(unittest.TestCase):
                 "Anis Star 4 Anima LoRA",
                 "Elesa Anima LoRA",
                 "Serena Anima LoRA",
+                "Chisato Anima LoRA",
+                "Takina Anima LoRA",
                 "NTRMix Anima style LoRA b1 v1",
                 "Flora Anima LoRA",
                 "Red Hood Anima LoRA (trigger: r3dh00d)",
@@ -144,7 +149,7 @@ class ManifestTests(unittest.TestCase):
                 "Noir Anima LoRA (trigger: n0ir)",
                 "Anis Star Anima LoRA v2 pruned (trigger: an1sstar)",
                 "Anis Star 3 Anima LoRA (trigger: an1sstar3)",
-                "Rapi Anima LoRA (trigger: r4pi)",
+                "Rapi Anima LoRA v2",
                 "Prika Anima LoRA (trigger: pr1ka)",
                 "Siren Anima LoRA (trigger: s1ren)",
                 "Cinderella Anima LoRA (trigger: c1nde)",
@@ -207,6 +212,32 @@ class ManifestTests(unittest.TestCase):
             self.assertNotEqual(
                 model["url"],
                 "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_nayuta.safetensors",
+            )
+
+    def test_rapi_v2_replaces_original_and_preserves_swimsuit_rapi(self):
+        models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
+        on_demand = json.loads(ON_DEMAND.read_text(encoding="utf-8"))["models"]
+        replacement = next(model for model in models if model["name"] == "Rapi Anima LoRA v2")
+        old_paths = {
+            "models/loras/anima/Rapi - Anima.safetensors",
+            "models/loras/anima/anima_rapi.safetensors",
+        }
+        swimsuit_path = "models/loras/anima/Swimsuit Rapi - Anima.safetensors"
+        swimsuit = next(model for model in models if model["path"] == swimsuit_path)
+
+        self.assertEqual(set(replacement["legacy_paths"]), old_paths)
+        self.assertNotIn(replacement["path"], old_paths)
+        self.assertTrue(swimsuit["enabled"])
+        self.assertEqual(
+            swimsuit["url"],
+            "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_swimsuitrapi.safetensors",
+        )
+        for model in models + on_demand:
+            self.assertNotIn(model["path"], old_paths)
+            self.assertNotIn(swimsuit_path, model.get("legacy_paths", []))
+            self.assertNotEqual(
+                model["url"],
+                "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_rapi.safetensors",
             )
 
     def test_new_cinderella_and_lillie_preserve_existing_variants(self):
