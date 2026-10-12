@@ -68,6 +68,9 @@ class ManifestTests(unittest.TestCase):
             "anima_lillie.safetensors": "models/loras/anima/Lillie - Anima.safetensors",
             "anima_momo.safetensors": "models/loras/anima/Momo - Anima.safetensors",
             "anima_red_shoes.safetensors": "models/loras/anima/Red Shoes - Anima.safetensors",
+            "anima_anisstar4.safetensors": "models/loras/anima/Anis Star 4 - Anima.safetensors",
+            "anima_elesa.safetensors": "models/loras/anima/Elesa - Anima.safetensors",
+            "anima_serena.safetensors": "models/loras/anima/Serena - Anima.safetensors",
             "ntrmix_style_anima_b1_v1.safetensors": "models/loras/style/NTRMix Style - Anima b1 v1.safetensors",
             "anima-base-1-flat-color-v3.safetensors": "models/loras/style/anima-base-1-flat-color-v3.safetensors",
         }
@@ -128,6 +131,9 @@ class ManifestTests(unittest.TestCase):
                 "Lillie Anima LoRA",
                 "Momo Anima LoRA",
                 "Red Shoes Anima LoRA",
+                "Anis Star 4 Anima LoRA",
+                "Elesa Anima LoRA",
+                "Serena Anima LoRA",
                 "NTRMix Anima style LoRA b1 v1",
                 "Flora Anima LoRA",
                 "Red Hood Anima LoRA (trigger: r3dh00d)",
@@ -217,6 +223,19 @@ class ManifestTests(unittest.TestCase):
         enabled_paths = {model["path"] for model in entries if model["enabled"]}
         self.assertTrue(preserved <= enabled_paths)
         for model in entries:
+            self.assertTrue(preserved.isdisjoint(model.get("legacy_paths", [])))
+
+    def test_anis_star_4_preserves_existing_startup_versions(self):
+        models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
+        on_demand = json.loads(ON_DEMAND.read_text(encoding="utf-8"))["models"]
+        preserved = {
+            "models/loras/anima/Anis Star - Anima v2.safetensors",
+            "models/loras/anima/Anis Star 3 - Anima.safetensors",
+            "models/loras/anima/Anis Star 4 - Anima.safetensors",
+        }
+        enabled_paths = {model["path"] for model in models if model["enabled"]}
+        self.assertTrue(preserved <= enabled_paths)
+        for model in models + on_demand:
             self.assertTrue(preserved.isdisjoint(model.get("legacy_paths", [])))
 
     def test_v2_character_loras_keep_original_on_demand_loras(self):
