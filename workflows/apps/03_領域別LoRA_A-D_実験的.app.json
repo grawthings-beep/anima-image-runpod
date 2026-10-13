@@ -1,8 +1,8 @@
 {
   "id": "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe",
   "revision": 0,
-  "last_node_id": 66,
-  "last_link_id": 63,
+  "last_node_id": 67,
+  "last_link_id": 72,
   "nodes": [
     {
       "id": 1,
@@ -35,7 +35,7 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            58
+            71
           ]
         }
       ],
@@ -69,12 +69,7 @@
           "name": "CLIP",
           "type": "CLIP",
           "links": [
-            5,
-            9,
-            13,
-            17,
-            21,
-            23
+            72
           ]
         }
       ],
@@ -382,7 +377,7 @@
         {
           "name": "model",
           "type": "MODEL",
-          "link": 58
+          "link": 70
         },
         {
           "name": "lora_name",
@@ -499,7 +494,7 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 5
+          "link": 64
         },
         {
           "name": "mask",
@@ -601,7 +596,7 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 9
+          "link": 65
         },
         {
           "name": "mask",
@@ -703,7 +698,7 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 13
+          "link": 66
         },
         {
           "name": "mask",
@@ -805,7 +800,7 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 17
+          "link": 67
         },
         {
           "name": "mask",
@@ -907,7 +902,7 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 21
+          "link": 68
         },
         {
           "name": "text",
@@ -954,7 +949,7 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 23
+          "link": 69
         },
         {
           "name": "text",
@@ -1828,6 +1823,72 @@
         4,
         4
       ]
+    },
+    {
+      "id": 67,
+      "type": "AnimaNegPipToggle",
+      "title": "Anima NegPiP (ON/OFF)",
+      "pos": [
+        1520,
+        1700
+      ],
+      "size": [
+        340,
+        200
+      ],
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 71
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 72
+        },
+        {
+          "name": "enabled",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "enabled"
+          },
+          "link": null,
+          "label": "NegPiP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            70
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            64,
+            65,
+            66,
+            67,
+            68,
+            69
+          ],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AnimaNegPipToggle"
+      },
+      "widgets_values": [
+        false
+      ]
     }
   ],
   "links": [
@@ -1846,14 +1907,6 @@
       7,
       1,
       "INT"
-    ],
-    [
-      5,
-      2,
-      0,
-      10,
-      0,
-      "CLIP"
     ],
     [
       6,
@@ -1880,14 +1933,6 @@
       "STRING"
     ],
     [
-      9,
-      2,
-      0,
-      30,
-      0,
-      "CLIP"
-    ],
-    [
       10,
       6,
       1,
@@ -1910,14 +1955,6 @@
       30,
       3,
       "STRING"
-    ],
-    [
-      13,
-      2,
-      0,
-      40,
-      0,
-      "CLIP"
     ],
     [
       14,
@@ -1944,14 +1981,6 @@
       "STRING"
     ],
     [
-      17,
-      2,
-      0,
-      41,
-      0,
-      "CLIP"
-    ],
-    [
       18,
       6,
       3,
@@ -1976,28 +2005,12 @@
       "STRING"
     ],
     [
-      21,
-      2,
-      0,
-      50,
-      0,
-      "CLIP"
-    ],
-    [
       22,
       4,
       0,
       50,
       1,
       "STRING"
-    ],
-    [
-      23,
-      2,
-      0,
-      51,
-      0,
-      "CLIP"
     ],
     [
       24,
@@ -2256,14 +2269,6 @@
       "INT"
     ],
     [
-      58,
-      1,
-      0,
-      8,
-      0,
-      "MODEL"
-    ],
-    [
       59,
       8,
       0,
@@ -2302,6 +2307,78 @@
       6,
       2,
       "STRING"
+    ],
+    [
+      64,
+      67,
+      1,
+      10,
+      0,
+      "CLIP"
+    ],
+    [
+      65,
+      67,
+      1,
+      30,
+      0,
+      "CLIP"
+    ],
+    [
+      66,
+      67,
+      1,
+      40,
+      0,
+      "CLIP"
+    ],
+    [
+      67,
+      67,
+      1,
+      41,
+      0,
+      "CLIP"
+    ],
+    [
+      68,
+      67,
+      1,
+      50,
+      0,
+      "CLIP"
+    ],
+    [
+      69,
+      67,
+      1,
+      51,
+      0,
+      "CLIP"
+    ],
+    [
+      70,
+      67,
+      0,
+      8,
+      0,
+      "MODEL"
+    ],
+    [
+      71,
+      1,
+      0,
+      67,
+      0,
+      "MODEL"
+    ],
+    [
+      72,
+      2,
+      0,
+      67,
+      1,
+      "CLIP"
     ]
   ],
   "groups": [
@@ -2644,6 +2721,13 @@
           "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:57:scale_by",
           "latent拡大倍率",
           {}
+        ],
+        [
+          "9879fc8c-a5d4-5a7e-bed0-8cf4808159fe:67:enabled",
+          "NegPiP",
+          {
+            "description": "ONで正プロンプト内の負の重みを使用。例: (text:-0.5), (watermark:-0.5)。通常ネガティブ欄とは別です。"
+          }
         ]
       ],
       "outputs": [

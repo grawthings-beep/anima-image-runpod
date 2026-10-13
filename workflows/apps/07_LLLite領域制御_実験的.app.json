@@ -1,8 +1,8 @@
 {
   "id": "26b9299a-a099-5d34-8473-2fd3e36e6cff",
   "revision": 0,
-  "last_node_id": 70,
-  "last_link_id": 78,
+  "last_node_id": 71,
+  "last_link_id": 87,
   "nodes": [
     {
       "id": 1,
@@ -35,7 +35,7 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            58
+            71
           ]
         }
       ],
@@ -69,12 +69,7 @@
           "name": "CLIP",
           "type": "CLIP",
           "links": [
-            5,
-            9,
-            13,
-            17,
-            21,
-            23
+            72
           ]
         }
       ],
@@ -262,28 +257,28 @@
           "name": "mask_A",
           "type": "MASK",
           "links": [
-            64
+            73
           ]
         },
         {
           "name": "mask_B",
           "type": "MASK",
           "links": [
-            66
+            75
           ]
         },
         {
           "name": "mask_C",
           "type": "MASK",
           "links": [
-            68
+            77
           ]
         },
         {
           "name": "mask_D",
           "type": "MASK",
           "links": [
-            70
+            79
           ]
         },
         {
@@ -382,7 +377,7 @@
         {
           "name": "model",
           "type": "MODEL",
-          "link": 58
+          "link": 70
         },
         {
           "name": "lora_name",
@@ -466,8 +461,8 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            73,
-            76
+            82,
+            85
           ]
         }
       ],
@@ -499,12 +494,12 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 5
+          "link": 64
         },
         {
           "name": "mask",
           "type": "MASK",
-          "link": 65
+          "link": 74
         },
         {
           "name": "shared_positive",
@@ -601,12 +596,12 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 9
+          "link": 65
         },
         {
           "name": "mask",
           "type": "MASK",
-          "link": 67
+          "link": 76
         },
         {
           "name": "shared_positive",
@@ -703,12 +698,12 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 13
+          "link": 66
         },
         {
           "name": "mask",
           "type": "MASK",
-          "link": 69
+          "link": 78
         },
         {
           "name": "shared_positive",
@@ -805,12 +800,12 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 17
+          "link": 67
         },
         {
           "name": "mask",
           "type": "MASK",
-          "link": 71
+          "link": 80
         },
         {
           "name": "shared_positive",
@@ -907,7 +902,7 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 21
+          "link": 68
         },
         {
           "name": "text",
@@ -954,7 +949,7 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 23
+          "link": 69
         },
         {
           "name": "text",
@@ -1244,7 +1239,7 @@
         {
           "name": "model",
           "type": "MODEL",
-          "link": 75
+          "link": 84
         },
         {
           "name": "positive",
@@ -1479,7 +1474,7 @@
         {
           "name": "model",
           "type": "MODEL",
-          "link": 78
+          "link": 87
         },
         {
           "name": "positive",
@@ -1831,8 +1826,8 @@
     },
     {
       "id": 67,
-      "type": "AnimaAppRegionalMap",
-      "title": "色マップ A赤・B青・C緑・D黄",
+      "type": "AnimaNegPipToggle",
+      "title": "Anima NegPiP (ON/OFF)",
       "pos": [
         1520,
         1700
@@ -1846,24 +1841,90 @@
       "mode": 0,
       "inputs": [
         {
+          "name": "model",
+          "type": "MODEL",
+          "link": 71
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 72
+        },
+        {
+          "name": "enabled",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "enabled"
+          },
+          "link": null,
+          "label": "NegPiP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            70
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            64,
+            65,
+            66,
+            67,
+            68,
+            69
+          ],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AnimaNegPipToggle"
+      },
+      "widgets_values": [
+        false
+      ]
+    },
+    {
+      "id": 68,
+      "type": "AnimaAppRegionalMap",
+      "title": "色マップ A赤・B青・C緑・D黄",
+      "pos": [
+        0,
+        2040
+      ],
+      "size": [
+        340,
+        200
+      ],
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
           "name": "mask_A",
           "type": "MASK",
-          "link": 64
+          "link": 73
         },
         {
           "name": "mask_B",
           "type": "MASK",
-          "link": 66
+          "link": 75
         },
         {
           "name": "mask_C",
           "type": "MASK",
-          "link": 68
+          "link": 77
         },
         {
           "name": "mask_D",
           "type": "MASK",
-          "link": 70
+          "link": 79
         },
         {
           "name": "image",
@@ -1889,9 +1950,9 @@
           "name": "color_map",
           "type": "IMAGE",
           "links": [
-            72,
-            74,
-            77
+            81,
+            83,
+            86
           ],
           "slot_index": 0
         },
@@ -1899,7 +1960,7 @@
           "name": "mask_A",
           "type": "MASK",
           "links": [
-            65
+            74
           ],
           "slot_index": 1
         },
@@ -1907,7 +1968,7 @@
           "name": "mask_B",
           "type": "MASK",
           "links": [
-            67
+            76
           ],
           "slot_index": 2
         },
@@ -1915,7 +1976,7 @@
           "name": "mask_C",
           "type": "MASK",
           "links": [
-            69
+            78
           ],
           "slot_index": 3
         },
@@ -1923,7 +1984,7 @@
           "name": "mask_D",
           "type": "MASK",
           "links": [
-            71
+            80
           ],
           "slot_index": 4
         }
@@ -1937,37 +1998,9 @@
       ]
     },
     {
-      "id": 68,
+      "id": 69,
       "type": "PreviewImage",
       "title": "制御色マップ",
-      "pos": [
-        0,
-        2040
-      ],
-      "size": [
-        340,
-        200
-      ],
-      "flags": {},
-      "order": 30,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 72
-        }
-      ],
-      "outputs": [],
-      "properties": {
-        "Node name for S&R": "PreviewImage"
-      },
-      "widgets_values": []
-    },
-    {
-      "id": 69,
-      "type": "AnimaLLLiteApply_sdscripts",
-      "title": "初回 LLLite Regional",
       "pos": [
         380,
         2040
@@ -1981,14 +2014,42 @@
       "mode": 0,
       "inputs": [
         {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 81
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 70,
+      "type": "AnimaLLLiteApply_sdscripts",
+      "title": "初回 LLLite Regional",
+      "pos": [
+        760,
+        2040
+      ],
+      "size": [
+        340,
+        200
+      ],
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
           "name": "model",
           "type": "MODEL",
-          "link": 73
+          "link": 82
         },
         {
           "name": "image",
           "type": "IMAGE",
-          "link": 74
+          "link": 83
         },
         {
           "name": "strength",
@@ -2023,7 +2084,7 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            75
+            84
           ],
           "slot_index": 0
         }
@@ -2040,11 +2101,11 @@
       ]
     },
     {
-      "id": 70,
+      "id": 71,
       "type": "AnimaLLLiteApply_sdscripts",
       "title": "高解像度化 LLLite Regional",
       "pos": [
-        760,
+        1140,
         2040
       ],
       "size": [
@@ -2052,18 +2113,18 @@
         200
       ],
       "flags": {},
-      "order": 32,
+      "order": 33,
       "mode": 0,
       "inputs": [
         {
           "name": "model",
           "type": "MODEL",
-          "link": 76
+          "link": 85
         },
         {
           "name": "image",
           "type": "IMAGE",
-          "link": 77
+          "link": 86
         },
         {
           "name": "strength",
@@ -2098,7 +2159,7 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            78
+            87
           ],
           "slot_index": 0
         }
@@ -2133,14 +2194,6 @@
       "INT"
     ],
     [
-      5,
-      2,
-      0,
-      10,
-      0,
-      "CLIP"
-    ],
-    [
       7,
       4,
       0,
@@ -2155,14 +2208,6 @@
       10,
       3,
       "STRING"
-    ],
-    [
-      9,
-      2,
-      0,
-      30,
-      0,
-      "CLIP"
     ],
     [
       11,
@@ -2181,14 +2226,6 @@
       "STRING"
     ],
     [
-      13,
-      2,
-      0,
-      40,
-      0,
-      "CLIP"
-    ],
-    [
       15,
       4,
       0,
@@ -2203,14 +2240,6 @@
       40,
       3,
       "STRING"
-    ],
-    [
-      17,
-      2,
-      0,
-      41,
-      0,
-      "CLIP"
     ],
     [
       19,
@@ -2229,28 +2258,12 @@
       "STRING"
     ],
     [
-      21,
-      2,
-      0,
-      50,
-      0,
-      "CLIP"
-    ],
-    [
       22,
       4,
       0,
       50,
       1,
       "STRING"
-    ],
-    [
-      23,
-      2,
-      0,
-      51,
-      0,
-      "CLIP"
     ],
     [
       24,
@@ -2509,14 +2522,6 @@
       "INT"
     ],
     [
-      58,
-      1,
-      0,
-      8,
-      0,
-      "MODEL"
-    ],
-    [
       59,
       8,
       0,
@@ -2542,119 +2547,191 @@
     ],
     [
       64,
-      6,
-      0,
       67,
+      1,
+      10,
       0,
-      "MASK"
+      "CLIP"
     ],
     [
       65,
       67,
+      1,
+      30,
+      0,
+      "CLIP"
+    ],
+    [
+      66,
+      67,
+      1,
+      40,
+      0,
+      "CLIP"
+    ],
+    [
+      67,
+      67,
+      1,
+      41,
+      0,
+      "CLIP"
+    ],
+    [
+      68,
+      67,
+      1,
+      50,
+      0,
+      "CLIP"
+    ],
+    [
+      69,
+      67,
+      1,
+      51,
+      0,
+      "CLIP"
+    ],
+    [
+      70,
+      67,
+      0,
+      8,
+      0,
+      "MODEL"
+    ],
+    [
+      71,
+      1,
+      0,
+      67,
+      0,
+      "MODEL"
+    ],
+    [
+      72,
+      2,
+      0,
+      67,
+      1,
+      "CLIP"
+    ],
+    [
+      73,
+      6,
+      0,
+      68,
+      0,
+      "MASK"
+    ],
+    [
+      74,
+      68,
       1,
       10,
       1,
       "MASK"
     ],
     [
-      66,
+      75,
       6,
       1,
-      67,
+      68,
       1,
       "MASK"
     ],
     [
-      67,
-      67,
+      76,
+      68,
       2,
       30,
       1,
       "MASK"
     ],
     [
-      68,
+      77,
       6,
       2,
-      67,
+      68,
       2,
       "MASK"
     ],
     [
-      69,
-      67,
+      78,
+      68,
       3,
       40,
       1,
       "MASK"
     ],
     [
-      70,
+      79,
       6,
       3,
-      67,
+      68,
       3,
       "MASK"
     ],
     [
-      71,
-      67,
+      80,
+      68,
       4,
       41,
       1,
       "MASK"
     ],
     [
-      72,
-      67,
-      0,
+      81,
       68,
+      0,
+      69,
       0,
       "IMAGE"
     ],
     [
-      73,
+      82,
       9,
       0,
-      69,
+      70,
       0,
       "MODEL"
     ],
     [
-      74,
-      67,
+      83,
+      68,
       0,
-      69,
+      70,
       1,
       "IMAGE"
     ],
     [
-      75,
-      69,
+      84,
+      70,
       0,
       54,
       0,
       "MODEL"
     ],
     [
-      76,
+      85,
       9,
       0,
-      70,
+      71,
       0,
       "MODEL"
     ],
     [
-      77,
-      67,
+      86,
+      68,
       0,
-      70,
+      71,
       1,
       "IMAGE"
     ],
     [
-      78,
-      70,
+      87,
+      71,
       0,
       61,
       0,
@@ -2993,48 +3070,55 @@
           {}
         ],
         [
-          "26b9299a-a099-5d34-8473-2fd3e36e6cff:67:image",
+          "26b9299a-a099-5d34-8473-2fd3e36e6cff:67:enabled",
+          "NegPiP",
+          {
+            "description": "ONで正プロンプト内の負の重みを使用。例: (text:-0.5), (watermark:-0.5)。通常ネガティブ欄とは別です。"
+          }
+        ],
+        [
+          "26b9299a-a099-5d34-8473-2fd3e36e6cff:68:image",
           "色マップ（(layout)で配置プリセット）",
           {}
         ],
         [
-          "26b9299a-a099-5d34-8473-2fd3e36e6cff:67:feather_percent",
+          "26b9299a-a099-5d34-8473-2fd3e36e6cff:68:feather_percent",
           "プロンプト境界のぼかし（%）",
           {}
         ],
         [
-          "26b9299a-a099-5d34-8473-2fd3e36e6cff:69:strength",
+          "26b9299a-a099-5d34-8473-2fd3e36e6cff:70:strength",
           "初回 ControlNet 強度",
           {}
         ],
         [
-          "26b9299a-a099-5d34-8473-2fd3e36e6cff:69:start_percent",
+          "26b9299a-a099-5d34-8473-2fd3e36e6cff:70:start_percent",
           "初回 ControlNet 開始",
           {}
         ],
         [
-          "26b9299a-a099-5d34-8473-2fd3e36e6cff:69:end_percent",
+          "26b9299a-a099-5d34-8473-2fd3e36e6cff:70:end_percent",
           "初回 ControlNet 終了",
           {}
         ],
         [
-          "26b9299a-a099-5d34-8473-2fd3e36e6cff:70:strength",
+          "26b9299a-a099-5d34-8473-2fd3e36e6cff:71:strength",
           "高解像度化 ControlNet 強度",
           {}
         ],
         [
-          "26b9299a-a099-5d34-8473-2fd3e36e6cff:70:start_percent",
+          "26b9299a-a099-5d34-8473-2fd3e36e6cff:71:start_percent",
           "高解像度化 ControlNet 開始",
           {}
         ],
         [
-          "26b9299a-a099-5d34-8473-2fd3e36e6cff:70:end_percent",
+          "26b9299a-a099-5d34-8473-2fd3e36e6cff:71:end_percent",
           "高解像度化 ControlNet 終了",
           {}
         ]
       ],
       "outputs": [
-        "68",
+        "69",
         "56",
         "63"
       ]

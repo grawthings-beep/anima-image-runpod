@@ -28,6 +28,9 @@ def install(source, workflow_dir, custom_nodes_dir, input_dir):
         state[graph.name] = digest(graph)
         print(f"Installed graph: {dest.name}")
     state_path.write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8")
+    for name in ("ComfyUI-AnimaNegPip", "ComfyUI-AnimaApp"):
+        shutil.copytree(source / "custom_nodes" / name, custom_nodes_dir / name,
+                        dirs_exist_ok=True, ignore=shutil.ignore_patterns("__pycache__"))
     for asset in sorted((source / "workflows/assets").glob("*.png")):
         dest = input_dir / asset.name
         if not dest.exists():

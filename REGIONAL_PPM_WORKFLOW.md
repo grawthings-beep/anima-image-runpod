@@ -16,7 +16,8 @@ LoadImage -> ImageScale -> PreviewBridge -> GetImageSizeAndCount
                                           +-> AnimaLLLiteApply_sdscripts.image
                                           +-> ColorToMask x3 -> AttentionCouplePPM.mask_1..3
 
-WAI-ANIMA -> Turbo -> Skin Texture -> LLLite -> AttentionCouplePPM -> KSampler -> VAE -> SaveImage
+WAI-ANIMA -> NegPiP -> Turbo -> Skin Texture -> LLLite -> AttentionCouplePPM -> KSampler -> VAE -> SaveImage
+Qwen CLIP -> NegPiP -> Global / Red / Blue / Green text encoders
 Global prompt -----------------------------> base_cond -----------> positive
 Global full-frame mask --------------------> base_mask
 Red / Blue / Green prompts -----------------> cond_1 / cond_2 / cond_3
@@ -25,6 +26,10 @@ Red / Blue / Green prompts -----------------> cond_1 / cond_2 / cond_3
 PPMはLLLiteの後に置きます。AnimaではPPMがcross-attentionへ領域別テキストを適用し、
 LLLiteは同じ色マップから空間的な制御を加えます。**1つのKSamplerで1枚を生成**します。
 この版は記事方式を比較するための1パス版です。既存の高解像度化ワークフローは別に残っています。
+
+NegPiPは初期値OFFです。ONにすると正プロンプト内の `(text:-0.5)` などを使用できます。
+通常ネガティブ欄を有効にする機能ではありません。NegPiPはAttentionCouplePPMより前に置き、
+MODEL/CLIP両方の出力を使います。比較方法と検証範囲は[NEGPIP.md](NEGPIP.md)を参照してください。
 
 ## 導入
 

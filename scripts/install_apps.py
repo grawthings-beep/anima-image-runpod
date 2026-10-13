@@ -41,6 +41,12 @@ def install(source, workflow_dir, custom_nodes_dir):
         print(f"Installed app: {dest.name}")
     state_path.write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8")
     shutil.copytree(source / "custom_nodes" / "ComfyUI-AnimaApp", custom_nodes_dir / "ComfyUI-AnimaApp", dirs_exist_ok=True)
+    shutil.copytree(source / "custom_nodes" / "ComfyUI-AnimaNegPip", custom_nodes_dir / "ComfyUI-AnimaNegPip", dirs_exist_ok=True)
+    ppm = source / "vendor" / "ComfyUI-ppm"
+    if not (ppm / "__init__.py").is_file():
+        raise FileNotFoundError(f"Missing bundled NegPiP node pack: {ppm}")
+    shutil.copytree(ppm, custom_nodes_dir / "ComfyUI-ppm", dirs_exist_ok=True,
+                    ignore=shutil.ignore_patterns(".git", "__pycache__"))
     lllite = source / "vendor" / "ComfyUI-Anima-LLLite"
     if lllite.is_dir():
         shutil.copytree(lllite, custom_nodes_dir / "ComfyUI-Anima-LLLite",

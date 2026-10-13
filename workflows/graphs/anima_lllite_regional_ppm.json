@@ -21,7 +21,7 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            1
+            48
           ],
           "slot_index": 0
         }
@@ -55,10 +55,7 @@
           "name": "CLIP",
           "type": "CLIP",
           "links": [
-            7,
-            10,
-            14,
-            18
+            49
           ],
           "slot_index": 0
         }
@@ -124,7 +121,7 @@
         {
           "name": "model",
           "type": "MODEL",
-          "link": 1
+          "link": 43
         }
       ],
       "outputs": [
@@ -428,7 +425,7 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 7
+          "link": 44
         }
       ],
       "outputs": [
@@ -553,7 +550,7 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 10
+          "link": 45
         }
       ],
       "outputs": [
@@ -710,7 +707,7 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 14
+          "link": 46
         }
       ],
       "outputs": [
@@ -867,7 +864,7 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 18
+          "link": 47
         }
       ],
       "outputs": [
@@ -1328,17 +1325,64 @@
       "widgets_values": [
         "Anima/LLLite_PPM"
       ]
+    },
+    {
+      "id": 32,
+      "type": "AnimaNegPipToggle",
+      "title": "Anima NegPiP (ON/OFF)",
+      "pos": [
+        40,
+        830
+      ],
+      "size": [
+        340,
+        110
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 48
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 49
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            43
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            44,
+            45,
+            46,
+            47
+          ],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AnimaNegPipToggle"
+      },
+      "widgets_values": [
+        false
+      ]
     }
   ],
   "links": [
-    [
-      1,
-      1,
-      0,
-      4,
-      0,
-      "MODEL"
-    ],
     [
       2,
       4,
@@ -1380,14 +1424,6 @@
       "IMAGE"
     ],
     [
-      7,
-      2,
-      0,
-      11,
-      0,
-      "CLIP"
-    ],
-    [
       8,
       11,
       0,
@@ -1402,14 +1438,6 @@
       13,
       0,
       "IMAGE"
-    ],
-    [
-      10,
-      2,
-      0,
-      14,
-      0,
-      "CLIP"
     ],
     [
       11,
@@ -1434,14 +1462,6 @@
       17,
       0,
       "IMAGE"
-    ],
-    [
-      14,
-      2,
-      0,
-      18,
-      0,
-      "CLIP"
     ],
     [
       15,
@@ -1466,14 +1486,6 @@
       21,
       0,
       "IMAGE"
-    ],
-    [
-      18,
-      2,
-      0,
-      22,
-      0,
-      "CLIP"
     ],
     [
       19,
@@ -1666,17 +1678,73 @@
       31,
       0,
       "IMAGE"
+    ],
+    [
+      43,
+      32,
+      0,
+      4,
+      0,
+      "MODEL"
+    ],
+    [
+      44,
+      32,
+      1,
+      11,
+      0,
+      "CLIP"
+    ],
+    [
+      45,
+      32,
+      1,
+      14,
+      0,
+      "CLIP"
+    ],
+    [
+      46,
+      32,
+      1,
+      18,
+      0,
+      "CLIP"
+    ],
+    [
+      47,
+      32,
+      1,
+      22,
+      0,
+      "CLIP"
+    ],
+    [
+      48,
+      1,
+      0,
+      32,
+      0,
+      "MODEL"
+    ],
+    [
+      49,
+      2,
+      0,
+      32,
+      1,
+      "CLIP"
     ]
   ],
   "groups": [
     {
       "id": 1,
-      "title": "1. Models / global LoRAs",
+      "title": "1. Models / global LoRAs / NegPiP",
       "bounding": [
         10,
         10,
         400,
-        780
+        985
       ],
       "color": "#546777",
       "font_size": 24,
@@ -1756,6 +1824,6 @@
   "version": 0.4,
   "id": "9d097e4a-6a9b-5750-856f-ac18c560fe89",
   "revision": 0,
-  "last_node_id": 31,
-  "last_link_id": 42
+  "last_node_id": 32,
+  "last_link_id": 49
 }

@@ -79,7 +79,7 @@ class Graph:
             integer = {"long_edge", "seed", "steps", "scene_limit", "start_in_range", "base_seed"}
             decimal = {"strength", "cfg", "denoise", "scale_by", "overlap_percent", "feather_percent", "start_percent", "end_percent"}
             text = {"text", "value", "scene_prompts", "positive", "negative"}
-            boolean = {"auto_download"}
+            boolean = {"auto_download", "enabled"}
             type_ = "INT" if name in integer else "FLOAT" if name in decimal else "STRING" if name in text else "BOOLEAN" if name in boolean else "COMBO"
             slot = {"name": name, "type": type_, "widget": {"name": name}, "link": None}
             n.setdefault("inputs", []).append(slot)
@@ -95,6 +95,9 @@ class Graph:
                 input_["link"] = next((link[0] for link in self.w["links"] if link[3:5] == [n["id"], i]), None)
 
     def finish(self, filename, outputs):
+        negpip = add_negpip(self)
+        if not any(item[:2] == (negpip, "enabled") for item in self.inputs):
+            self.expose(negpip, "enabled", "NegPiP", "ONで正プロンプト内の負の重みを使用。例: (text:-0.5), (watermark:-0.5)。通常ネガティブ欄とは別です。")
         filename = filename.removesuffix(".json") + ".app.json"
         self.rebuild()
         graph_id = str(uuid.uuid5(NAMESPACE, filename))
@@ -114,6 +117,54 @@ class Graph:
 
 def load(name):
     return json.loads((SOURCE / name).read_text(encoding="utf-8"))
+
+
+def add_negpip(g):
+    existing = next((n for n in g.w["nodes"] if n["type"] == "AnimaNegPipToggle"), None)
+    if existing:
+        return existing["id"]
+    model, = [n for n in g.w["nodes"] if n["type"] == "UNETLoader"]
+    clip, = [n for n in g.w["nodes"] if n["type"] == "CLIPLoader"]
+    outgoing = [link[:] for link in g.w["links"] if link[1] in (model["id"], clip["id"])]
+    node = g.add("AnimaNegPipToggle", "Anima NegPiP (ON/OFF)", [False],
+                 (("model", "MODEL"), ("clip", "CLIP")), (("MODEL", "MODEL"), ("CLIP", "CLIP")))
+    # Patch both roots once, before LoRA clones, regional attention, and every pass.
+    for _, source, _, target, input_, type_ in outgoing:
+        field = g.node(target)["inputs"][input_]["name"]
+        g.connect(node, 0 if source == model["id"] else 1, target, field, type_)
+    g.connect(model["id"], 0, node, "model")
+    g.connect(clip["id"], 0, node, "clip")
+    return node
+
+
+def save_ordinary_negpip(g, filename):
+    """Reuse the app's settings/links, with no App Mode and a readable DAG layout."""
+    workflow = copy.deepcopy(g.w)
+    workflow.update(id=str(uuid.uuid5(NAMESPACE, filename)), groups=[])
+    workflow["extra"] = {"linearMode": False, "frontendVersion": "1.54.8"}
+    nodes = {n["id"]: n for n in workflow["nodes"]}
+    levels = {}
+    while len(levels) < len(nodes):
+        ready = [key for key in nodes if key not in levels and
+                 all(link[1] in levels for link in workflow["links"] if link[3] == key)]
+        if not ready:
+            raise ValueError("Workflow contains a cycle")
+        for key in ready:
+            levels[key] = max((levels[link[1]] + 1 for link in workflow["links"] if link[3] == key), default=0)
+    x = 0
+    for level in range(max(levels.values()) + 1):
+        column = [nodes[key] for key in nodes if levels[key] == level]
+        y = 60
+        for node in column:
+            node["pos"] = [x, y]
+            node["size"] = [max(340, node["size"][0]), max(140, node["size"][1])]
+            if node["type"] in ("SaveImage", "PreviewImage"):
+                node["size"][1] = max(380, node["size"][1])
+            y += node["size"][1] + 80
+        x += max(n["size"][0] for n in column) + 100
+    dest = ROOT / "workflows/graphs"
+    dest.mkdir(parents=True, exist_ok=True)
+    (dest / filename).write_text(json.dumps(workflow, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
 def resolution(g, target, width="width", height="height", long_edge=1536):
@@ -193,6 +244,7 @@ def build():
     loras(g, 1, [7])
     sampler(g, 7, "生成", ("res_multistep", "sgm_uniform"))
     g.finish("01_通常生成.json", [9])
+    save_ordinary_negpip(g, "anima_negpip_basic.json")
 
     g = Graph(load("anima_hiresfix_latent_2pass.json"))
     g.remove([16, 17, 18])  # Retired pose LoRA is no longer downloaded by the RunPod manifest.
@@ -213,6 +265,7 @@ def build():
     g.connect(12, 0, save, "images")
     g.connect(15, 3, save, "filename_prefix", "STRING", True)
     g.finish("02_プロンプト一括_latent高解像度.json", [save])
+    save_ordinary_negpip(g, "anima_negpip_latent_2pass.json")
 
     g = Graph(load("anima_two_character_hooks_hiresfix.json"))
     g.expose(4, "value", "共通プロンプト", height=160)

@@ -11,6 +11,16 @@ and small controls for aspect ratios, optional LoRAs, and region layouts. Large
 model files are downloaded into `/workspace/comfyui/models` at Pod startup so a
 persistent RunPod volume can reuse them.
 
+## NegPiP at CFG 1
+
+`anima_negpip_basic.json` and `anima_negpip_latent_2pass.json` are ordinary
+node workflows, not Apps. The LLLite/PPM graph and Apps 01-07 also have an
+**Anima NegPiP (ON/OFF)** toggle, initially OFF. Turn it on and put negative
+weights in the **positive** prompt, e.g. `(text:-0.5), (watermark:-0.5)`.
+The normal negative field still has no effect at CFG 1. No extra model download
+or sampler/LoRA default changes are required. See [NEGPIP.md](NEGPIP.md) for
+wiring, old-ComfyUI compatibility, comparison steps, and unverified GPU behavior.
+
 ## Anima LLLite Regional ControlNet
 
 **Ordinary graph, matching the article's inference architecture:** open
@@ -24,10 +34,11 @@ including the article author's unpublished PreviewBridge patch.
 **Existing App 07, retained separately:**
 Open **Anima Apps / 07 LLLite領域制御（実験的）** to try colored layout control
 alongside the existing A-D regional LoRA hooks and latent hires pass.
-The original six apps remain unchanged. The pinned official LLLite node is
+The original six apps retain their generation settings. The pinned official LLLite node is
 bundled in the image; the 51.1 MB public `anima-lllite-regional-exp-v3.safetensors`
 is downloaded to `models/controlnet/` at startup with SHA-256 verification.
-App 07 itself does not use Impact Pack, KJNodes, or PPM; the ordinary graph above does.
+App 07 uses PPM only when NegPiP is enabled; its regional path does not use
+PPM Attention Couple, Impact Pack or KJNodes. The ordinary graph above does.
 
 `(layout)` automatically makes the control image from the region preset.
 Alternatively upload a white-background color map: A = red, B = blue,

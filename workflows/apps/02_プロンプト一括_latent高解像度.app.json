@@ -1,8 +1,8 @@
 {
   "id": "09ef7031-118b-5071-af28-e6da28adff98",
   "revision": 0,
-  "last_node_id": 20,
-  "last_link_id": 31,
+  "last_node_id": 21,
+  "last_link_id": 36,
   "nodes": [
     {
       "id": 1,
@@ -34,7 +34,7 @@
           "name": "MODEL",
           "type": "MODEL",
           "links": [
-            25
+            35
           ]
         }
       ],
@@ -67,8 +67,7 @@
           "name": "CLIP",
           "type": "CLIP",
           "links": [
-            1,
-            2
+            36
           ]
         }
       ],
@@ -133,7 +132,7 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 1
+          "link": 32
         },
         {
           "name": "text",
@@ -183,7 +182,7 @@
         {
           "name": "clip",
           "type": "CLIP",
-          "link": 2
+          "link": 33
         },
         {
           "name": "text",
@@ -905,7 +904,7 @@
         {
           "name": "model",
           "type": "MODEL",
-          "link": 25
+          "link": 34
         },
         {
           "name": "lora_name",
@@ -1098,25 +1097,71 @@
       "widgets_values": [
         "Anima_App/queue"
       ]
+    },
+    {
+      "id": 21,
+      "type": "AnimaNegPipToggle",
+      "title": "Anima NegPiP (ON/OFF)",
+      "pos": [
+        1520,
+        1020
+      ],
+      "size": [
+        340,
+        200
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 35
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 36
+        },
+        {
+          "name": "enabled",
+          "type": "BOOLEAN",
+          "widget": {
+            "name": "enabled"
+          },
+          "link": null,
+          "label": "NegPiP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            34
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            32,
+            33
+          ],
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AnimaNegPipToggle"
+      },
+      "widgets_values": [
+        false
+      ]
     }
   ],
   "links": [
-    [
-      1,
-      2,
-      0,
-      4,
-      0,
-      "CLIP"
-    ],
-    [
-      2,
-      2,
-      0,
-      5,
-      0,
-      "CLIP"
-    ],
     [
       4,
       4,
@@ -1278,14 +1323,6 @@
       "INT"
     ],
     [
-      25,
-      1,
-      0,
-      17,
-      0,
-      "MODEL"
-    ],
-    [
       26,
       17,
       0,
@@ -1332,6 +1369,46 @@
       20,
       1,
       "STRING"
+    ],
+    [
+      32,
+      21,
+      1,
+      4,
+      0,
+      "CLIP"
+    ],
+    [
+      33,
+      21,
+      1,
+      5,
+      0,
+      "CLIP"
+    ],
+    [
+      34,
+      21,
+      0,
+      17,
+      0,
+      "MODEL"
+    ],
+    [
+      35,
+      1,
+      0,
+      21,
+      0,
+      "MODEL"
+    ],
+    [
+      36,
+      2,
+      0,
+      21,
+      1,
+      "CLIP"
     ]
   ],
   "groups": [],
@@ -1488,6 +1565,13 @@
           "ZIP自動ダウンロード",
           {
             "description": "ONで全シーンの二段階目が完了した後にダウンロードします。OFFでもZIPはPodに保存されます。"
+          }
+        ],
+        [
+          "09ef7031-118b-5071-af28-e6da28adff98:21:enabled",
+          "NegPiP",
+          {
+            "description": "ONで正プロンプト内の負の重みを使用。例: (text:-0.5), (watermark:-0.5)。通常ネガティブ欄とは別です。"
           }
         ]
       ],

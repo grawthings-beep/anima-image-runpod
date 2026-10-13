@@ -184,6 +184,9 @@ class AppTests(unittest.TestCase):
             bundle = root / "bundle"
             shutil.copytree(ROOT / "workflows/apps", bundle / "workflows/apps")
             shutil.copytree(ROOT / "custom_nodes", bundle / "custom_nodes")
+            ppm = bundle / "vendor/ComfyUI-ppm"
+            ppm.mkdir(parents=True)
+            (ppm / "__init__.py").write_text("# test node")
             installer.install(bundle, workflows, nodes)
             edited = workflows / "Anima Apps/01_通常生成.app.json"
             edited.write_text("user change")
@@ -193,6 +196,8 @@ class AppTests(unittest.TestCase):
             self.assertEqual(edited.read_text(), "user change")
             self.assertEqual((workflows / "Anima Apps" / updated).read_text(), "bundled update")
             self.assertTrue((nodes / "ComfyUI-AnimaApp/__init__.py").exists())
+            self.assertTrue((nodes / "ComfyUI-AnimaNegPip/__init__.py").exists())
+            self.assertTrue((nodes / "ComfyUI-ppm/__init__.py").exists())
 
     def test_user_migration_copies_saved_workflows_without_overwriting_settings(self):
         with tempfile.TemporaryDirectory() as temp:

@@ -105,6 +105,7 @@ class RegionalGraphTests(unittest.TestCase):
             source, output, nodes, inputs = (root / p for p in ("source", "workflows", "nodes", "input"))
             shutil.copytree(ROOT / "workflows/graphs", source / "workflows/graphs")
             shutil.copytree(ROOT / "workflows/assets", source / "workflows/assets")
+            shutil.copytree(ROOT / "custom_nodes", source / "custom_nodes")
             for name in installer.VENDORS:
                 vendor = source / "vendor" / name
                 (vendor / ".git").mkdir(parents=True)
@@ -112,6 +113,8 @@ class RegionalGraphTests(unittest.TestCase):
                 (vendor / "LICENSE").write_text("license")
             installer.install(source, output, nodes, inputs)
             self.assertFalse((output / "Anima Apps").exists())
+            self.assertTrue((nodes / "ComfyUI-AnimaNegPip/__init__.py").is_file())
+            self.assertTrue((nodes / "ComfyUI-AnimaApp/__init__.py").is_file())
             graph = output / builder.FILENAME
             self.assertEqual(graph.read_bytes(), (source / "workflows/graphs" / builder.FILENAME).read_bytes())
             for name in installer.VENDORS:

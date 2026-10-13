@@ -7,7 +7,7 @@ import uuid
 
 from PIL import Image, ImageDraw
 
-from build_app_workflows import Graph
+from build_app_workflows import Graph, add_negpip
 
 ROOT = Path(__file__).resolve().parents[1]
 FILENAME = "anima_lllite_regional_ppm.json"
@@ -122,6 +122,8 @@ def build():
     g.connect(sampler, 0, decode, "samples")
     g.connect(vae, 0, decode, "vae")
     g.connect(decode, 0, save, "images")
+    negpip = add_negpip(g)
+    g.node(negpip).update(pos=[40, 830], size=[340, 110])
     g.rebuild()
     g.w.update(id=str(uuid.uuid5(uuid.NAMESPACE_URL, FILENAME)), revision=0,
                last_node_id=max(n["id"] for n in g.w["nodes"]),
@@ -130,7 +132,7 @@ def build():
     g.w["groups"] = [
         {"id": i, "title": title, "bounding": bounds, "color": color, "font_size": 24, "flags": {}}
         for i, (title, bounds, color) in enumerate((
-            ("1. Models / global LoRAs", [10, 10, 400, 780], "#546777"),
+            ("1. Models / global LoRAs / NegPiP", [10, 10, 400, 985], "#546777"),
             ("2. Color map", [430, 10, 900, 1160], "#59685c"),
             ("3. Regional masks and prompts", [1345, 10, 960, 1375], "#675e71"),
             ("4. LLLite + Attention Couple", [2320, 10, 440, 1065], "#7a6450"),

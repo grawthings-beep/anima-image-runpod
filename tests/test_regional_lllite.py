@@ -134,6 +134,10 @@ class RegionalLLLiteTests(unittest.TestCase):
             root = Path(temp)
             (root / "workflows/apps").mkdir(parents=True)
             (root / "custom_nodes/ComfyUI-AnimaApp").mkdir(parents=True)
+            (root / "custom_nodes/ComfyUI-AnimaNegPip").mkdir(parents=True)
+            ppm = root / "vendor/ComfyUI-ppm"
+            ppm.mkdir(parents=True)
+            (ppm / "__init__.py").write_text("# test node")
             vendor = root / "vendor/ComfyUI-Anima-LLLite"
             (vendor / ".git").mkdir(parents=True)
             (vendor / "__init__.py").write_text("# test node")
