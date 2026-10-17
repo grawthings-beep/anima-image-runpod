@@ -1054,6 +1054,18 @@
       "min_bytes": 1048576
     },
     {
+      "name": "Marin Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_marin.safetensors",
+      "path": "models/loras/anima/Marin - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
       "name": "NTRMix Anima style LoRA b1 v1",
       "enabled": true,
       "required": false,

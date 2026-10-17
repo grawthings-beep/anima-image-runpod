@@ -106,7 +106,7 @@ The default manifest downloads WAI-ANIMA, Nova 3D CGAM, and MeMAX 6 Noob v-pred,
 every bundled NIKKE character LoRA, Kotegawa Yui, Orihime Inoue v2, Riruka,
 Kaguya 2D, Yukino S3, Yui Yuigahama S3, Rangiku TYBW, Kaoruko Waguri,
 Kotobuki Hisako v2, Subaru Hoshina, Yoruichi TYBW, Arisu Terui, Emilia, Nayuta v2,
-Michinoku Komaro v2, Lillie, Momo, Elesa, Serena, Chisato, Takina,
+Michinoku Komaro v2, Lillie, Momo, Elesa, Serena, Chisato, Takina, Marin,
 Qwen Image Union Control, Anima Turbo,
 Skin Texture Detail, 3DCGstyle DAAAA, Flat Color v3, NTRMix Style b1 v1,
 and Anima LLLite Regional ControlNet exp v3.
@@ -193,6 +193,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Serena - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Chisato - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Takina - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Marin - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Shoes - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Flora - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Hood - Anima.safetensors
