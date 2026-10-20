@@ -1090,6 +1090,30 @@
       "min_bytes": 1048576
     },
     {
+      "name": "Ram Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_ram.safetensors",
+      "path": "models/loras/anima/Ram - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Sajuna Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_sajuna.safetensors",
+      "path": "models/loras/anima/Sajuna - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
       "name": "NTRMix Anima style LoRA b1 v1",
       "enabled": true,
       "required": false,

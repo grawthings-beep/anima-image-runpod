@@ -77,6 +77,8 @@ class ManifestTests(unittest.TestCase):
             "anima_marin.safetensors": "models/loras/anima/Marin - Anima.safetensors",
             "anima_marin_cosplay.safetensors": "models/loras/anima/Marin Cosplay - Anima.safetensors",
             "anima_penkun.safetensors": "models/loras/anima/Penkun - Anima.safetensors",
+            "anima_ram.safetensors": "models/loras/anima/Ram - Anima.safetensors",
+            "anima_sajuna.safetensors": "models/loras/anima/Sajuna - Anima.safetensors",
             "ntrmix_style_anima_b1_v1.safetensors": "models/loras/style/NTRMix Style - Anima b1 v1.safetensors",
             "anima-base-1-flat-color-v3.safetensors": "models/loras/style/anima-base-1-flat-color-v3.safetensors",
         }
@@ -145,6 +147,8 @@ class ManifestTests(unittest.TestCase):
                 "Marin Anima LoRA",
                 "Marin Cosplay Anima LoRA",
                 "Penkun Anima LoRA",
+                "Ram Anima LoRA",
+                "Sajuna Anima LoRA",
                 "NTRMix Anima style LoRA b1 v1",
                 "Flora Anima LoRA",
                 "Red Hood Anima LoRA (trigger: r3dh00d)",

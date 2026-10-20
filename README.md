@@ -107,7 +107,7 @@ every bundled NIKKE character LoRA, Kotegawa Yui, Orihime Inoue v2, Riruka,
 Kaguya 2D, Yukino S3, Yui Yuigahama S3, Rangiku TYBW, Kaoruko Waguri,
 Kotobuki Hisako v2, Subaru Hoshina, Yoruichi TYBW, Arisu Terui, Emilia, Nayuta v2,
 Michinoku Komaro v2, Lillie, Momo, Elesa, Serena, Chisato, Takina, Marin, Marin Cosplay, Penkun,
-Qwen Image Union Control, Anima Turbo,
+Ram, Sajuna, Qwen Image Union Control, Anima Turbo,
 Skin Texture Detail, 3DCGstyle DAAAA, Flat Color v3, NTRMix Style b1 v1,
 and Anima LLLite Regional ControlNet exp v3.
 The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
@@ -196,6 +196,8 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Marin - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Marin Cosplay - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Penkun - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Ram - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Sajuna - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Shoes - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Flora - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Hood - Anima.safetensors
