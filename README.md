@@ -221,7 +221,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Maid Cinderella - Anima.safetensors
 /workspace/comfyui/models/loras/anima/White Cinderella - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Cinderella Glass Courtesy - Anima.safetensors
-/workspace/comfyui/models/loras/anima/Mast - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Mast Romantic Maid - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Maxwell - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Moran - Anima v1.safetensors
 /workspace/comfyui/models/loras/anima/Laplace - Anima.safetensors
@@ -260,7 +260,13 @@ from model storage.
 
 Nayuta v2 replaces the original Nayuta. It uses a separate versioned filename;
 the old readable/raw filenames are removed only after the replacement passes
-the downloader's file checks. Mast remains an existing startup download.
+the downloader's file checks.
+
+Mast Romantic Maid replaces the original Mast startup LoRA. It uses a distinct
+filename so a cached original cannot skip the new download. The old readable
+and original filenames are removed only after the replacement passes the
+downloader's file checks. Existing workflows using the old Mast filename must
+select `anima/Mast Romantic Maid - Anima.safetensors`.
 
 Cinderella Glass Courtesy and Lillie are additional startup downloads, not
 replacements. Other Cinderella variants remain available, and the separate

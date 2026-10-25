@@ -62,7 +62,7 @@ class ManifestTests(unittest.TestCase):
             "anima_arisu_terui.safetensors": "models/loras/anima/Arisu Terui - Anima.safetensors",
             "anima_emilia.safetensors": "models/loras/anima/Emilia - Anima.safetensors",
             "anima_nayuta2.safetensors": "models/loras/anima/Nayuta - Anima v2.safetensors",
-            "anima_mast.safetensors": "models/loras/anima/Mast - Anima.safetensors",
+            "anima_mast_romantic_maid.safetensors": "models/loras/anima/Mast Romantic Maid - Anima.safetensors",
             "anima_michinokukomaro2.safetensors": "models/loras/anima/Michinoku Komaro - Anima v2.safetensors",
             "anima_cinderella_glass_courtesy.safetensors": "models/loras/anima/Cinderella Glass Courtesy - Anima.safetensors",
             "anima_lillie.safetensors": "models/loras/anima/Lillie - Anima.safetensors",
@@ -172,7 +172,7 @@ class ManifestTests(unittest.TestCase):
                 "Siren Anima LoRA (trigger: s1ren)",
                 "Cinderella Anima LoRA (trigger: c1nde)",
                 "White Cinderella Anima LoRA (trigger: whitecinderella)",
-                "Mast Anima LoRA (trigger: m4st)",
+                "Mast Romantic Maid Anima LoRA",
                 "Maxwell Anima LoRA (trigger: m4xwell)",
                 "Moran Anima LoRA (trigger: m0ran)",
                 "Laplace Anima LoRA (trigger: l4place)",
@@ -195,6 +195,24 @@ class ManifestTests(unittest.TestCase):
                 "Sin Anima LoRA",
             },
         )
+
+    def test_mast_romantic_maid_replaces_original_without_reusing_its_cached_path(self):
+        models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
+        on_demand = json.loads(ON_DEMAND.read_text(encoding="utf-8"))["models"]
+        replacement = next(model for model in models if model["name"] == "Mast Romantic Maid Anima LoRA")
+        old_paths = {
+            "models/loras/anima/Mast - Anima.safetensors",
+            "models/loras/anima/anima_mast.safetensors",
+        }
+
+        self.assertEqual(set(replacement["legacy_paths"]), old_paths)
+        self.assertNotIn(replacement["path"], old_paths)
+        for model in models + on_demand:
+            self.assertNotIn(model["path"], old_paths)
+            self.assertNotEqual(
+                model["url"],
+                "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_mast.safetensors",
+            )
 
     def test_orihime_v2_replaces_v1_without_reusing_its_cached_path(self):
         models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
