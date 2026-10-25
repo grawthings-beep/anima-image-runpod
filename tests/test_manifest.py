@@ -81,6 +81,8 @@ class ManifestTests(unittest.TestCase):
             "anima_sajuna.safetensors": "models/loras/anima/Sajuna - Anima.safetensors",
             "anima_eris_s3.safetensors": "models/loras/anima/Eris S3 - Anima.safetensors",
             "anima_marian_queen.safetensors": "models/loras/anima/Marian Queen - Anima.safetensors",
+            "anima_marian_last_affection.safetensors": "models/loras/anima/Marian Last Affection - Anima.safetensors",
+            "anima_marian_queen2.safetensors": "models/loras/anima/Marian Queen 2 - Anima.safetensors",
             "ntrmix_style_anima_b1_v1.safetensors": "models/loras/style/NTRMix Style - Anima b1 v1.safetensors",
             "anima-base-1-flat-color-v3.safetensors": "models/loras/style/anima-base-1-flat-color-v3.safetensors",
         }
@@ -153,6 +155,8 @@ class ManifestTests(unittest.TestCase):
                 "Sajuna Anima LoRA",
                 "Eris S3 Anima LoRA",
                 "Marian Queen Anima LoRA",
+                "Marian Last Affection Anima LoRA",
+                "Marian Queen 2 Anima LoRA",
                 "NTRMix Anima style LoRA b1 v1",
                 "Flora Anima LoRA",
                 "Red Hood Anima LoRA (trigger: r3dh00d)",

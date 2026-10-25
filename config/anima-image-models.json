@@ -1138,6 +1138,30 @@
       "min_bytes": 1048576
     },
     {
+      "name": "Marian Last Affection Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_marian_last_affection.safetensors",
+      "path": "models/loras/anima/Marian Last Affection - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Marian Queen 2 Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_marian_queen2.safetensors",
+      "path": "models/loras/anima/Marian Queen 2 - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
       "name": "NTRMix Anima style LoRA b1 v1",
       "enabled": true,
       "required": false,
