@@ -46,6 +46,7 @@ class ManifestTests(unittest.TestCase):
         expected = {
             "anima_rapunzel2.safetensors": "models/loras/anima/Rapunzel 2 - Anima.safetensors",
             "anima_scarlet_black_shadow.safetensors": "models/loras/anima/Scarlet Black Shadow - Anima.safetensors",
+            "anima_scarlet_goddeath.safetensors": "models/loras/anima/Scarlet Goddeath - Anima.safetensors",
             "anima_liberalio.safetensors": "models/loras/anima/Liberalio - Anima.safetensors",
             "anima_kotegawayui.safetensors": "models/loras/anima/Kotegawa Yui - Anima.safetensors",
             "anima_inoueorihime2.safetensors": "models/loras/anima/Orihime Inoue - Anima v2.safetensors",
@@ -122,6 +123,7 @@ class ManifestTests(unittest.TestCase):
                 "Rapunzel Anima LoRA (trigger: r4punz3l)",
                 "Rapunzel 2 Anima LoRA",
                 "Scarlet Black Shadow Anima LoRA",
+                "Scarlet Goddeath Anima LoRA",
                 "Liberalio Anima LoRA",
                 "Kotegawa Yui Anima LoRA",
                 "Orihime Inoue Anima LoRA v2",

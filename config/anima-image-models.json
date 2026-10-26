@@ -225,6 +225,18 @@
       "min_bytes": 1048576
     },
     {
+      "name": "Scarlet Goddeath Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_scarlet_goddeath.safetensors",
+      "path": "models/loras/anima/Scarlet Goddeath - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
       "name": "Liberalio Anima LoRA",
       "enabled": true,
       "required": false,

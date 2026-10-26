@@ -108,7 +108,7 @@ Kaguya 2D, Yukino S3, Yui Yuigahama S3, Rangiku TYBW, Kaoruko Waguri,
 Kotobuki Hisako v2, Subaru Hoshina, Yoruichi TYBW, Arisu Terui, Emilia, Nayuta v2,
 Michinoku Komaro v2, Lillie, Momo, Elesa, Serena, Chisato, Takina, Marin, Marin Cosplay, Penkun,
 Ram, Sajuna, Eris S3, Marian Queen, Marian Last Affection, Marian Queen 2,
-Qwen Image Union Control, Anima Turbo,
+Scarlet Goddeath, Qwen Image Union Control, Anima Turbo,
 Skin Texture Detail, 3DCGstyle DAAAA, Flat Color v3, NTRMix Style b1 v1,
 and Anima LLLite Regional ControlNet exp v3.
 The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
@@ -172,6 +172,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Rapunzel - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Rapunzel 2 - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Scarlet Black Shadow - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Scarlet Goddeath - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Liberalio - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Kotegawa Yui - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Orihime Inoue - Anima v2.safetensors
