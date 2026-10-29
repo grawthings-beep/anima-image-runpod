@@ -84,6 +84,7 @@ class ManifestTests(unittest.TestCase):
             "anima_marian_queen.safetensors": "models/loras/anima/Marian Queen - Anima.safetensors",
             "anima_marian_last_affection.safetensors": "models/loras/anima/Marian Last Affection - Anima.safetensors",
             "anima_marian_queen2.safetensors": "models/loras/anima/Marian Queen 2 - Anima.safetensors",
+            "anima_kisaki.safetensors": "models/loras/anima/Kisaki - Anima.safetensors",
             "ntrmix_style_anima_b1_v1.safetensors": "models/loras/style/NTRMix Style - Anima b1 v1.safetensors",
             "anima-base-1-flat-color-v3.safetensors": "models/loras/style/anima-base-1-flat-color-v3.safetensors",
         }
@@ -159,6 +160,7 @@ class ManifestTests(unittest.TestCase):
                 "Marian Queen Anima LoRA",
                 "Marian Last Affection Anima LoRA",
                 "Marian Queen 2 Anima LoRA",
+                "Kisaki Anima LoRA",
                 "NTRMix Anima style LoRA b1 v1",
                 "Flora Anima LoRA",
                 "Red Hood Anima LoRA (trigger: r3dh00d)",
