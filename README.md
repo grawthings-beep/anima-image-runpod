@@ -107,7 +107,7 @@ every bundled NIKKE character LoRA, Kotegawa Yui, Orihime Inoue v2, Riruka,
 Kaguya 2D, Yukino S3, Yui Yuigahama S3, Rangiku TYBW, Kaoruko Waguri,
 Kotobuki Hisako v2, Subaru Hoshina, Yoruichi TYBW, Arisu Terui, Emilia, Nayuta v2,
 Michinoku Komaro v2, Lillie, Momo, Elesa, Serena, Chisato, Takina, Marin, Marin Cosplay, Penkun,
-Ram, Sajuna, Eris S3, Marian Queen, Marian Last Affection, Marian Queen 2,
+Ram, Sajuna, Eris S3, Marian Queen, Marian Last Affection, Marian Queen 2, Marian Queen 3,
 Scarlet Goddeath, Kisaki, Qwen Image Union Control, Anima Turbo,
 Skin Texture Detail, 3DCGstyle DAAAA, Flat Color v3, NTRMix Style b1 v1,
 and Anima LLLite Regional ControlNet exp v3.
@@ -204,6 +204,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Marian Queen - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Marian Last Affection - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Marian Queen 2 - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Marian Queen 3 - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Kisaki - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Shoes - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Flora - Anima.safetensors

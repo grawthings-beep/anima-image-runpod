@@ -1175,6 +1175,18 @@
       "min_bytes": 1048576
     },
     {
+      "name": "Marian Queen 3 Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_marian_queen3.safetensors",
+      "path": "models/loras/anima/Marian Queen 3 - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
       "name": "Kisaki Anima LoRA",
       "enabled": true,
       "required": false,
