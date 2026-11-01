@@ -1199,6 +1199,30 @@
       "min_bytes": 1048576
     },
     {
+      "name": "Lion Alleyway Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_lion_alleyway.safetensors",
+      "path": "models/loras/anima/Lion Alleyway - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Sora Spring Flight Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_sora_spring_flight.safetensors",
+      "path": "models/loras/anima/Sora Spring Flight - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
       "name": "NTRMix Anima style LoRA b1 v1",
       "enabled": true,
       "required": false,
