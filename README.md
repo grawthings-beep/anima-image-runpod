@@ -110,12 +110,13 @@ Michinoku Komaro v2, Lillie, Momo, Elesa, Serena, Chisato, Takina, Marin, Marin 
 Ram, Sajuna, Eris S3, Marian Queen, Marian Last Affection, Marian Queen 2, Marian Queen 3,
 Scarlet Goddeath, Kisaki, Lion Alleyway, Sora Spring Flight,
 Qwen Image Union Control, Anima Turbo,
-Skin Texture Detail, 3DCGstyle DAAAA, Flat Color v3, NTRMix Style b1 v1,
+Skin Texture Detail, Pixel Art v2.1, 3DCGstyle DAAAA, Flat Color v3, NTRMix Style b1 v1,
 and Anima LLLite Regional ControlNet exp v3.
 The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
 on-demand catalog.
-Civitai-hosted files, including 3D Animated Realistic Style and Pixel Art,
-are downloaded only on request so a slow transfer cannot delay startup.
+Pixel Art v2.1 downloads at startup and requires `CIVITAI_TOKEN`.
+Other Civitai-hosted files, including 3D Animated Realistic Style, are downloaded
+only on request so their transfers cannot delay startup.
 Downloads run in parallel. aria2 is preferred when available, using
 `ARIA2_CONNECTIONS` and `ARIA2_SPLITS` per file, while
 `MODEL_DOWNLOAD_JOBS` controls how many files download at once. Existing
@@ -164,6 +165,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/qwen_image_union_diffsynth_lora.safetensors
 /workspace/comfyui/models/loras/anima-turbo-lora-v0.2.safetensors
 /workspace/comfyui/models/loras/anima/Skin Texture Detail.safetensors
+/workspace/comfyui/models/loras/anima_style/Pixel Art - Anima v2.1.safetensors
 /workspace/comfyui/models/loras/style/3DCGstyle_DAAAA.safetensors
 /workspace/comfyui/models/loras/style/anima-base-1-flat-color-v3.safetensors
 /workspace/comfyui/models/loras/style/NTRMix Style - Anima b1 v1.safetensors

@@ -119,6 +119,7 @@ class ManifestTests(unittest.TestCase):
                 "Qwen Image Union Control LoRA (Canny / depth / pose)",
                 "Anima Turbo LoRA v0.2 (speed / step-reduction)",
                 "Skin Texture Detail LoRA",
+                "Pixel Art Anima LoRA v2.1 (triggers: pixel art, pix_merge)",
                 "3DCGstyle DAAAA style LoRA",
                 "Flat Color Anima LoRA v3",
                 "Old Maxwell Anima LoRA (trigger: oldmaxwell)",
@@ -340,13 +341,14 @@ class ManifestTests(unittest.TestCase):
         base_paths = {model["path"] for model in base}
         on_demand_paths = {model["path"] for model in on_demand}
 
-        self.assertEqual(len(on_demand), 14)
+        self.assertEqual(len(on_demand), 13)
         self.assertTrue(all(path.startswith("models/loras/") for path in on_demand_paths))
         self.assertTrue(base_paths.isdisjoint(on_demand_paths))
         for moved_path in (
             "models/loras/anima/Mint - Anima.safetensors",
             "models/loras/anima/Swimsuit Rapi - Anima.safetensors",
             "models/loras/anima/Swimsuit Elegg - Anima.safetensors",
+            "models/loras/anima_style/Pixel Art - Anima v2.1.safetensors",
         ):
             self.assertIn(moved_path, base_paths)
             self.assertNotIn(moved_path, on_demand_paths)
@@ -366,12 +368,14 @@ class ManifestTests(unittest.TestCase):
                 "models/loras/anima/LilliePokemon_AnimaBaseV10_byKonan.safetensors",
                 "models/loras/anima/Tsurumaki Mizuka and Kawasumi Ouka - Anima v1.safetensors",
                 "models/loras/anima_style/3D Animated Realistic Style - Anima.safetensors",
-                "models/loras/anima_style/Pixel Art - Anima v2.1.safetensors",
             },
         )
 
     def test_civitai_style_loras_use_authenticated_signed_url_resolution(self):
-        models = json.loads(ON_DEMAND.read_text(encoding="utf-8"))["models"]
+        models = (
+            json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
+            + json.loads(ON_DEMAND.read_text(encoding="utf-8"))["models"]
+        )
         by_path = {model["path"]: model for model in models}
 
         for path in (
@@ -386,11 +390,19 @@ class ManifestTests(unittest.TestCase):
             self.assertEqual(model["requires_env"], ["CIVITAI_TOKEN"])
             self.assertEqual(len(model["sha256"]), 64)
 
-    def test_startup_never_waits_for_civitai_downloads(self):
+    def test_pixel_art_is_the_only_civitai_startup_download(self):
         models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
-        for model in models:
-            if model.get("enabled", True):
-                self.assertNotIn(urlsplit(model["url"]).hostname, ("civitai.com", "civitai.red"))
+        civitai = [
+            model for model in models
+            if model.get("enabled", True)
+            and urlsplit(model["url"]).hostname in ("civitai.com", "civitai.red")
+        ]
+        self.assertEqual(len(civitai), 1)
+        pixel = civitai[0]
+        self.assertEqual(pixel["path"], "models/loras/anima_style/Pixel Art - Anima v2.1.safetensors")
+        self.assertEqual(pixel["url"], "https://civitai.red/api/download/models/2952565?fileId=2831870")
+        self.assertFalse(pixel["required"])
+        self.assertEqual(pixel["sha256"], "6736b6f754a8b50d6e3c867c6f76c63873cda0ba5457ef40b01f4260ffe40d82")
 
     def test_retired_checkpoints_are_cleaned_from_existing_storage(self):
         models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
