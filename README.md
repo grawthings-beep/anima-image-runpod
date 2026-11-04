@@ -108,7 +108,7 @@ Kaguya 2D, Yukino S3, Yui Yuigahama S3, Rangiku TYBW, Kaoruko Waguri,
 Kotobuki Hisako v2, Subaru Hoshina, Yoruichi TYBW, Arisu Terui, Emilia, Nayuta v2,
 Michinoku Komaro v2, Lillie, Momo, Elesa, Serena, Chisato, Takina, Marin, Marin Cosplay, Penkun,
 Ram, Sajuna, Eris S3, Marian Queen, Marian Last Affection, Marian Queen 2, Marian Queen 3,
-Scarlet Goddeath, Kisaki, Lion Alleyway, Sora Spring Flight, Alice ZZZ,
+Scarlet Goddeath, Kisaki, Lion Alleyway, Sora Spring Flight, Alice ZZZ, Remielle, Fionie,
 Qwen Image Union Control, Anima Turbo,
 Skin Texture Detail, Pixel Art v2.1, 3DCGstyle DAAAA, Flat Color v3, NTRMix Style b1 v1,
 and Anima LLLite Regional ControlNet exp v3.
@@ -212,6 +212,8 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Lion Alleyway - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Sora Spring Flight - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Alice ZZZ - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Remielle - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Fionie - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Shoes - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Flora - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Hood - Anima.safetensors
