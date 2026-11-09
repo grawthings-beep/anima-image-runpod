@@ -143,6 +143,18 @@
       ]
     },
     {
+      "name": "Pixel Art r9e3 c4 Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/illustrious/resolve/main/Pixel%20Art%20r9e3%20c4.safetensors",
+      "path": "models/loras/anima_style/Pixel Art r9e3 c4 - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
       "name": "3DCGstyle DAAAA style LoRA",
       "enabled": true,
       "required": false,

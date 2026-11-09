@@ -124,6 +124,7 @@ class ManifestTests(unittest.TestCase):
                 "Anima Turbo LoRA v0.2 (speed / step-reduction)",
                 "Skin Texture Detail LoRA",
                 "Pixel Art Anima LoRA v2.1 (triggers: pixel art, pix_merge)",
+                "Pixel Art r9e3 c4 Anima LoRA",
                 "3DCGstyle DAAAA style LoRA",
                 "Flat Color Anima LoRA v3",
                 "Old Maxwell Anima LoRA (trigger: oldmaxwell)",
@@ -397,6 +398,21 @@ class ManifestTests(unittest.TestCase):
             )
             self.assertEqual(model["requires_env"], ["CIVITAI_TOKEN"])
             self.assertEqual(len(model["sha256"]), 64)
+
+    def test_pixel_art_r9e3_c4_downloads_from_hugging_face(self):
+        models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
+        path = "models/loras/anima_style/Pixel Art r9e3 c4 - Anima.safetensors"
+        matches = [model for model in models if model["path"] == path]
+
+        self.assertEqual(len(matches), 1)
+        model = matches[0]
+        self.assertTrue(model["enabled"])
+        self.assertFalse(model["required"])
+        self.assertEqual(
+            model["url"],
+            "https://huggingface.co/uwgm/illustrious/resolve/main/Pixel%20Art%20r9e3%20c4.safetensors",
+        )
+        self.assertEqual(model["headers"]["Authorization"], "Bearer ${HF_TOKEN}")
 
     def test_pixel_art_is_the_only_civitai_startup_download(self):
         models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
