@@ -107,9 +107,9 @@ every bundled NIKKE character LoRA, Kotegawa Yui, Orihime Inoue v2, Riruka,
 Kaguya 2D, Yukino S3, Yui Yuigahama S3, Rangiku TYBW, Kaoruko Waguri,
 Kotobuki Hisako v2, Subaru Hoshina, Yoruichi TYBW, Arisu Terui, Emilia, Nayuta v2,
 Michinoku Komaro v2, Lillie, Momo, Elesa, Serena, Chisato, Takina, Marin, Marin Cosplay, Penkun,
-Ram, Sajuna, Eris S3, Marian Queen, Marian Last Affection, Marian Queen 2, Marian Queen 3,
+Ram, Sajuna, Eris S3, Marian Queen, Marian Last Affection 2, Marian Queen 2, Marian Queen 3,
 Scarlet Goddeath, Kisaki, Lion Alleyway, Sora Spring Flight, Alice ZZZ, Remielle, Fionie,
-Miyabi, Qwen Image Union Control, Anima Turbo,
+Miyabi, Sylphie S3, Qwen Image Union Control, Anima Turbo,
 Skin Texture Detail, Pixel Art v2.1, Pixel Art r9e3 c4, 3DCGstyle DAAAA,
 Flat Color v3, NTRMix Style b1 v1, and Anima LLLite Regional ControlNet exp v3.
 The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
@@ -208,7 +208,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Sajuna - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Eris S3 - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Marian Queen - Anima.safetensors
-/workspace/comfyui/models/loras/anima/Marian Last Affection - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Marian Last Affection 2 - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Marian Queen 2 - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Marian Queen 3 - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Kisaki - Anima.safetensors
@@ -218,6 +218,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Remielle - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Fionie - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Miyabi - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Sylphie S3 - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Shoes - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Flora - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Hood - Anima.safetensors
@@ -282,6 +283,13 @@ filename so a cached original cannot skip the new download. The old readable
 and original filenames are removed only after the replacement passes the
 downloader's file checks. Existing workflows using the old Mast filename must
 select `anima/Mast Romantic Maid - Anima.safetensors`.
+
+Marian Last Affection 2 replaces the original Last Affection LoRA using a
+distinct filename. The old readable/raw filenames are removed only after
+the replacement passes the downloader's file checks. Marian Queen, Queen 2,
+and Queen 3 remain unchanged. Saved workflows using the old filename must
+select `anima/Marian Last Affection 2 - Anima.safetensors`.
+Sylphie S3 is an additional startup download.
 
 Cinderella Glass Courtesy, Glass Courtesy 2, and Lillie are additional startup downloads, not
 replacements. Other Cinderella variants remain available, and the separate

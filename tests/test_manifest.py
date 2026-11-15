@@ -84,7 +84,8 @@ class ManifestTests(unittest.TestCase):
             "anima_sajuna.safetensors": "models/loras/anima/Sajuna - Anima.safetensors",
             "anima_eris_s3.safetensors": "models/loras/anima/Eris S3 - Anima.safetensors",
             "anima_marian_queen.safetensors": "models/loras/anima/Marian Queen - Anima.safetensors",
-            "anima_marian_last_affection.safetensors": "models/loras/anima/Marian Last Affection - Anima.safetensors",
+            "anima_marian_last_affection2.safetensors": "models/loras/anima/Marian Last Affection 2 - Anima.safetensors",
+            "anima_sylphie_s3.safetensors": "models/loras/anima/Sylphie S3 - Anima.safetensors",
             "anima_marian_queen2.safetensors": "models/loras/anima/Marian Queen 2 - Anima.safetensors",
             "anima_marian_queen3.safetensors": "models/loras/anima/Marian Queen 3 - Anima.safetensors",
             "anima_kisaki.safetensors": "models/loras/anima/Kisaki - Anima.safetensors",
@@ -171,7 +172,8 @@ class ManifestTests(unittest.TestCase):
                 "Sajuna Anima LoRA",
                 "Eris S3 Anima LoRA",
                 "Marian Queen Anima LoRA",
-                "Marian Last Affection Anima LoRA",
+                "Marian Last Affection 2 Anima LoRA",
+                "Sylphie S3 Anima LoRA",
                 "Marian Queen 2 Anima LoRA",
                 "Marian Queen 3 Anima LoRA",
                 "Kisaki Anima LoRA",
@@ -217,6 +219,31 @@ class ManifestTests(unittest.TestCase):
                 "Sin Anima LoRA",
             },
         )
+
+    def test_marian_last_affection_2_replaces_original_and_preserves_queen_variants(self):
+        models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
+        on_demand = json.loads(ON_DEMAND.read_text(encoding="utf-8"))["models"]
+        replacement = next(model for model in models if model["name"] == "Marian Last Affection 2 Anima LoRA")
+        old_paths = {
+            "models/loras/anima/Marian Last Affection - Anima.safetensors",
+            "models/loras/anima/anima_marian_last_affection.safetensors",
+        }
+        preserved = {
+            "models/loras/anima/Marian Queen - Anima.safetensors",
+            "models/loras/anima/Marian Queen 2 - Anima.safetensors",
+            "models/loras/anima/Marian Queen 3 - Anima.safetensors",
+        }
+
+        self.assertEqual(set(replacement["legacy_paths"]), old_paths)
+        self.assertNotIn(replacement["path"], old_paths)
+        self.assertTrue(preserved <= {model["path"] for model in models if model["enabled"]})
+        for model in models + on_demand:
+            self.assertNotIn(model["path"], old_paths)
+            self.assertNotEqual(
+                model["url"],
+                "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_marian_last_affection.safetensors",
+            )
+            self.assertTrue(preserved.isdisjoint(model.get("legacy_paths", [])))
 
     def test_mast_romantic_maid_replaces_original_without_reusing_its_cached_path(self):
         models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
