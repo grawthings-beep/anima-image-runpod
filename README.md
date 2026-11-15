@@ -226,9 +226,9 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Swimsuit Elegg - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Elegg - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Noir - Anima.safetensors
-/workspace/comfyui/models/loras/anima/Anis Star - Anima v2.safetensors
 /workspace/comfyui/models/loras/anima/Anis Star 3 - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Anis Star 4 - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Anis Star 5 - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Rapi - Anima v2.safetensors
 /workspace/comfyui/models/loras/anima/Prika - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Siren - Anima.safetensors
@@ -236,6 +236,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Maid Cinderella - Anima.safetensors
 /workspace/comfyui/models/loras/anima/White Cinderella - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Cinderella Glass Courtesy - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Cinderella Glass Courtesy 2 - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Mast Romantic Maid - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Maxwell - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Moran - Anima v1.safetensors
@@ -250,7 +251,6 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Arcana Fortune Mate - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Dorothy - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Little Mermaid Shell Princess - Anima.safetensors
-/workspace/comfyui/models/loras/anima/Anis - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Ain - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Bikini Cinderella - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Laplace 2 - Anima.safetensors
@@ -283,7 +283,7 @@ and original filenames are removed only after the replacement passes the
 downloader's file checks. Existing workflows using the old Mast filename must
 select `anima/Mast Romantic Maid - Anima.safetensors`.
 
-Cinderella Glass Courtesy and Lillie are additional startup downloads, not
+Cinderella Glass Courtesy, Glass Courtesy 2, and Lillie are additional startup downloads, not
 replacements. Other Cinderella variants remain available, and the separate
 `LilliePokemon_AnimaBaseV10_byKonan.safetensors` stays in the on-demand catalog.
 
@@ -291,9 +291,11 @@ Momo and Red Shoes are additional character LoRAs. NTRMix Style b1 v1 is
 stored separately under `models/loras/style/`. All three download at startup;
 these additions do not change workflow defaults or remove existing LoRAs.
 
-Anis Star 4, Elesa, and Serena are additional startup downloads under
-`models/loras/anima/`. Anis Star v2 and Anis Star 3 remain enabled and are not
-removed from model storage.
+Only Anis Star 3, 4, and 5 remain in the startup catalog. The original Anis and
+Anis Star v2 entries are retired; their readable/raw filenames are removed only
+after Anis Star 5 passes the downloader's file checks. Anis Star 3 and 4 are
+preserved. Saved workflows using a retired Anis filename must select one of
+the retained versions. Elesa and Serena remain unchanged.
 
 Chisato and Takina are additional startup downloads. Rapi v2 replaces the
 original Rapi using `Rapi - Anima v2.safetensors`; the old readable/raw filenames

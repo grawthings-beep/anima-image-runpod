@@ -66,10 +66,12 @@ class ManifestTests(unittest.TestCase):
             "anima_mast_romantic_maid.safetensors": "models/loras/anima/Mast Romantic Maid - Anima.safetensors",
             "anima_michinokukomaro2.safetensors": "models/loras/anima/Michinoku Komaro - Anima v2.safetensors",
             "anima_cinderella_glass_courtesy.safetensors": "models/loras/anima/Cinderella Glass Courtesy - Anima.safetensors",
+            "anima_cinderella_glass_courtesy2.safetensors": "models/loras/anima/Cinderella Glass Courtesy 2 - Anima.safetensors",
             "anima_lillie.safetensors": "models/loras/anima/Lillie - Anima.safetensors",
             "anima_momo.safetensors": "models/loras/anima/Momo - Anima.safetensors",
             "anima_red_shoes.safetensors": "models/loras/anima/Red Shoes - Anima.safetensors",
             "anima_anisstar4.safetensors": "models/loras/anima/Anis Star 4 - Anima.safetensors",
+            "anima_anisstar5.safetensors": "models/loras/anima/Anis Star 5 - Anima.safetensors",
             "anima_elesa.safetensors": "models/loras/anima/Elesa - Anima.safetensors",
             "anima_serena.safetensors": "models/loras/anima/Serena - Anima.safetensors",
             "anima_chisato.safetensors": "models/loras/anima/Chisato - Anima.safetensors",
@@ -152,10 +154,12 @@ class ManifestTests(unittest.TestCase):
                 "Nayuta Anima LoRA v2",
                 "Michinoku Komaro Anima LoRA v2",
                 "Cinderella Glass Courtesy Anima LoRA",
+                "Cinderella Glass Courtesy 2 Anima LoRA",
                 "Lillie Anima LoRA",
                 "Momo Anima LoRA",
                 "Red Shoes Anima LoRA",
                 "Anis Star 4 Anima LoRA",
+                "Anis Star 5 Anima LoRA",
                 "Elesa Anima LoRA",
                 "Serena Anima LoRA",
                 "Chisato Anima LoRA",
@@ -185,7 +189,6 @@ class ManifestTests(unittest.TestCase):
                 "Swimsuit Elegg Anima LoRA (trigger: swimsuitelegg)",
                 "Elegg Anima LoRA (trigger: elegg)",
                 "Noir Anima LoRA (trigger: n0ir)",
-                "Anis Star Anima LoRA v2 pruned (trigger: an1sstar)",
                 "Anis Star 3 Anima LoRA (trigger: an1sstar3)",
                 "Rapi Anima LoRA v2",
                 "Prika Anima LoRA (trigger: pr1ka)",
@@ -206,7 +209,6 @@ class ManifestTests(unittest.TestCase):
                 "Arcana Fortune Mate Anima LoRA",
                 "Dorothy Anima LoRA",
                 "Little Mermaid Shell Princess Anima LoRA",
-                "Anis Anima LoRA (trigger: 4n1s)",
                 "Ain Anima LoRA (trigger: 41n)",
                 "Bikini Cinderella Anima LoRA (trigger: b1k1c1nde)",
                 "Laplace 2 Anima LoRA (trigger: l4pl4ce2)",
@@ -304,6 +306,8 @@ class ManifestTests(unittest.TestCase):
             "models/loras/anima/Bikini Cinderella - Anima.safetensors",
             "models/loras/anima/White Cinderella - Anima.safetensors",
             "models/loras/anima/Maid Cinderella - Anima.safetensors",
+            "models/loras/anima/Cinderella Glass Courtesy - Anima.safetensors",
+            "models/loras/anima/Cinderella Glass Courtesy 2 - Anima.safetensors",
             "models/loras/anima/LilliePokemon_AnimaBaseV10_byKonan.safetensors",
         }
         entries = models + on_demand
@@ -312,18 +316,38 @@ class ManifestTests(unittest.TestCase):
         for model in entries:
             self.assertTrue(preserved.isdisjoint(model.get("legacy_paths", [])))
 
-    def test_anis_star_4_preserves_existing_startup_versions(self):
+    def test_anis_keeps_only_star_3_4_5_and_cleans_retired_versions_after_download(self):
         models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
         on_demand = json.loads(ON_DEMAND.read_text(encoding="utf-8"))["models"]
         preserved = {
-            "models/loras/anima/Anis Star - Anima v2.safetensors",
             "models/loras/anima/Anis Star 3 - Anima.safetensors",
             "models/loras/anima/Anis Star 4 - Anima.safetensors",
+            "models/loras/anima/Anis Star 5 - Anima.safetensors",
         }
-        enabled_paths = {model["path"] for model in models if model["enabled"]}
-        self.assertTrue(preserved <= enabled_paths)
+        anis_paths = {
+            model["path"] for model in models
+            if model["enabled"] and model["name"].startswith("Anis ")
+        }
+        self.assertEqual(anis_paths, preserved)
+        retired = {
+            "models/loras/anima/Anis - Anima.safetensors",
+            "models/loras/anima/anima_anis.safetensors",
+            "models/loras/anima/Anis Star - Anima v2.safetensors",
+            "models/loras/anima/anima_anisstar_v2.safetensors",
+            "models/loras/anima/anima_anisstar (2).safetensors",
+        }
+        replacement = next(model for model in models if model["name"] == "Anis Star 5 Anima LoRA")
+        self.assertEqual(set(replacement["legacy_paths"]), retired)
         for model in models + on_demand:
             self.assertTrue(preserved.isdisjoint(model.get("legacy_paths", [])))
+            self.assertNotIn(model["path"], retired)
+            self.assertNotIn(
+                model["url"],
+                {
+                    "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_anis.safetensors",
+                    "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_anisstar%20(2).safetensors",
+                },
+            )
 
     def test_v2_character_loras_keep_original_on_demand_loras(self):
         models = json.loads(MANIFEST.read_text(encoding="utf-8"))["models"]
