@@ -222,6 +222,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Red Shoes - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Flora - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Red Hood - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Red Hood Nonsense Red - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Mint - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Swimsuit Rapi - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Swimsuit Elegg - Anima.safetensors

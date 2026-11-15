@@ -323,6 +323,18 @@
       ]
     },
     {
+      "name": "Red Hood Nonsense Red Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_redhood_nonsense_red.safetensors",
+      "path": "models/loras/anima/Red Hood Nonsense Red - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
       "name": "Mint Anima LoRA (trigger: m1nt)",
       "enabled": true,
       "required": false,
