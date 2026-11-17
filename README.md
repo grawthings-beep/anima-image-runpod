@@ -247,6 +247,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Snow White - Anima v1.safetensors
 /workspace/comfyui/models/loras/anima/Blanc - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Privaty - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Privaty Maid - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Label - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Ark Ranger Black - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Little Mermaid - Anima.safetensors

@@ -704,6 +704,18 @@
       ]
     },
     {
+      "name": "Privaty Maid Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_privaty_maid.safetensors",
+      "path": "models/loras/anima/Privaty Maid - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
       "name": "Label Anima LoRA (trigger: l4bel)",
       "enabled": true,
       "required": false,
