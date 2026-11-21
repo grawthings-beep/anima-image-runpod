@@ -109,9 +109,9 @@ Kotobuki Hisako v2, Subaru Hoshina, Yoruichi TYBW, Arisu Terui, Emilia, Nayuta v
 Michinoku Komaro v2, Lillie, Momo, Elesa, Serena, Chisato, Takina, Marin, Marin Cosplay, Penkun,
 Ram, Sajuna, Eris S3, Marian Queen, Marian Last Affection 2, Marian Queen 2, Marian Queen 3,
 Scarlet Goddeath, Kisaki, Lion Alleyway, Sora Spring Flight, Alice ZZZ, Remielle, Fionie,
-Miyabi, Sylphie S3, Qwen Image Union Control, Anima Turbo,
+Miyabi, Sylphie S3, Alice Marchen Dream, Snow White 2, Qwen Image Union Control, Anima Turbo,
 Skin Texture Detail, Pixel Art v2.1, Pixel Art r9e3 c4, 3DCGstyle DAAAA,
-Flat Color v3, NTRMix Style b1 v1, and Anima LLLite Regional ControlNet exp v3.
+Flat Color v3, NTRMix Style b1 v1, Xipa Early 2026 AnimaB v01-1, and Anima LLLite Regional ControlNet exp v3.
 The remaining non-NIKKE character, style, and pose LoRAs stay in the bundled
 on-demand catalog.
 Pixel Art v2.1 downloads at startup and requires `CIVITAI_TOKEN`.
@@ -169,6 +169,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Skin Texture Detail.safetensors
 /workspace/comfyui/models/loras/anima_style/Pixel Art - Anima v2.1.safetensors
 /workspace/comfyui/models/loras/anima_style/Pixel Art r9e3 c4 - Anima.safetensors
+/workspace/comfyui/models/loras/anima_style/Xipa Early 2026 - AnimaB v01-1.safetensors
 /workspace/comfyui/models/loras/style/3DCGstyle_DAAAA.safetensors
 /workspace/comfyui/models/loras/style/anima-base-1-flat-color-v3.safetensors
 /workspace/comfyui/models/loras/style/NTRMix Style - Anima b1 v1.safetensors
@@ -215,6 +216,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Lion Alleyway - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Sora Spring Flight - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Alice ZZZ - Anima.safetensors
+/workspace/comfyui/models/loras/anima/Alice Marchen Dream - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Remielle - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Fionie - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Miyabi - Anima.safetensors
@@ -245,6 +247,7 @@ Startup downloads:
 /workspace/comfyui/models/loras/anima/Laplace - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Marciana - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Snow White - Anima v1.safetensors
+/workspace/comfyui/models/loras/anima/Snow White 2 - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Blanc - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Privaty - Anima.safetensors
 /workspace/comfyui/models/loras/anima/Privaty Maid - Anima.safetensors

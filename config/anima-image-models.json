@@ -143,6 +143,18 @@
       ]
     },
     {
+      "name": "Xipa Early 2026 AnimaB v01-1 LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/xipaearly2026_AnimaB_v01-1.safetensors",
+      "path": "models/loras/anima_style/Xipa Early 2026 - AnimaB v01-1.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
       "name": "Pixel Art r9e3 c4 Anima LoRA",
       "enabled": true,
       "required": false,
@@ -657,6 +669,18 @@
       "legacy_paths": [
         "models/loras/anima/anima_marciana.safetensors"
       ]
+    },
+    {
+      "name": "Snow White 2 Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_snowwhite2.safetensors",
+      "path": "models/loras/anima/Snow White 2 - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
     },
     {
       "name": "Snow White Anima LoRA (trigger: sn0white)",
@@ -1278,6 +1302,18 @@
       "method": "curl",
       "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_sora_spring_flight.safetensors",
       "path": "models/loras/anima/Sora Spring Flight - Anima.safetensors",
+      "headers": {
+        "Authorization": "Bearer ${HF_TOKEN}"
+      },
+      "min_bytes": 1048576
+    },
+    {
+      "name": "Alice Marchen Dream Anima LoRA",
+      "enabled": true,
+      "required": false,
+      "method": "curl",
+      "url": "https://huggingface.co/uwgm/nikke-loras/resolve/main/anima_alice_marchen_dream.safetensors",
+      "path": "models/loras/anima/Alice Marchen Dream - Anima.safetensors",
       "headers": {
         "Authorization": "Bearer ${HF_TOKEN}"
       },
